@@ -10,6 +10,7 @@ class Customer {
 	private $fax;
 	private $newsletter;
 	private $address_id;
+    private $is_open_shop;
 
 	public function __construct($registry) {
 		$this->config = $registry->get('config');
@@ -30,6 +31,7 @@ class Customer {
 				$this->fax = $customer_query->row['fax'];
 				$this->newsletter = $customer_query->row['newsletter'];
 				$this->address_id = $customer_query->row['address_id'];
+                $this->is_open_shop = $customer_query->row['is_open_shop'];;
 
 				$this->db->query("UPDATE " . DB_PREFIX . "customer SET language_id = '" . (int)$this->config->get('config_language_id') . "', ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE customer_id = '" . (int)$this->customer_id . "'");
 
@@ -63,6 +65,7 @@ class Customer {
 			$this->fax = $customer_query->row['fax'];
 			$this->newsletter = $customer_query->row['newsletter'];
 			$this->address_id = $customer_query->row['address_id'];
+            $this->is_open_shop = $customer_query->row['is_open_shop'];
 
 			$this->db->query("UPDATE " . DB_PREFIX . "customer SET language_id = '" . (int)$this->config->get('config_language_id') . "', ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE customer_id = '" . (int)$this->customer_id . "'");
 
@@ -84,6 +87,7 @@ class Customer {
 		$this->fax = '';
 		$this->newsletter = '';
 		$this->address_id = '';
+        $this->is_open_shop = 0;
 	}
 
 	public function isLogged() {
@@ -125,6 +129,14 @@ class Customer {
 	public function getAddressId() {
 		return $this->address_id;
 	}
+
+    public function getIsOpenShop() {
+        return $this->is_open_shop;
+    }
+
+    public function setIsOpenShop($num) {
+        $this->is_open_shop = $num;
+    }
 
 	public function getBalance() {
 		$query = $this->db->query("SELECT SUM(amount) AS total FROM " . DB_PREFIX . "customer_transaction WHERE customer_id = '" . (int)$this->customer_id . "'");

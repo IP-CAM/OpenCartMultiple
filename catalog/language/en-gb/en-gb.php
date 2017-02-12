@@ -69,3 +69,31 @@ $_['error_upload_7']        = 'Warning: Failed to write file to disk!';
 $_['error_upload_8']        = 'Warning: File upload stopped by extension!';
 $_['error_upload_999']      = 'Warning: No error code available!';
 $_['error_curl']            = 'CURL: Error Code(%s): %s';
+
+
+//Shop Panel
+$_['button_enable']                 = 'Enable';
+$_['button_disable']                = 'Disable';
+$_['button_filter']                 = 'Filter';
+$_['text_enabled']                  = 'Enabled';
+$_['text_disabled']                 = 'Disabled';
+$_['button_add']                    = 'Add New';
+$_['button_delete']                 = 'Delete';
+$_['button_save']                   = 'Save';
+$_['button_cancel']                 = 'Cancel';
+$_['button_edit']                   = 'Edit';
+$_['button_copy']                   = 'Copy';
+
+$_['tab_data']                      = 'Data';
+$_['tab_general']                   = 'General';
+$_['tab_links']                     = 'Links';
+$_['tab_option']                    = 'Option';
+$_['tab_attribute']                 = 'Attribute';
+$_['tab_recurring']                 = 'Recurring';
+$_['tab_design']                    = 'Design';
+$_['tab_image']                     = 'Image';
+$_['tab_special']                   = 'Special';
+$_['tab_reward']                    = 'Reward Points';
+$_['tab_discount']                  = 'Discount';
+
+$_['text_confirm']                  = 'Are you sure?';

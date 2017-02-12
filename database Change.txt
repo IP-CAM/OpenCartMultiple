@@ -1,0 +1,13 @@
+
+
+CREATE TABLE IF NOT EXISTS `oc_shop` (
+  `shop_id` int(11) NOT NULL,
+  `shop_name` varchar(100) NOT NULL,
+  `created_time` int(11) NOT NULL,
+  PRIMARY KEY (`customer_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+
+ALTER TABLE `oc_customer` ADD `is_open_shop` TINYINT NOT NULL COMMENT '0-no 1-yes' AFTER `customer_group_id`;

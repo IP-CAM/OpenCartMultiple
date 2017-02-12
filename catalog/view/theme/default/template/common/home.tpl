@@ -1,5 +1,6 @@
 <?php echo $header; ?>
 <div class="container">
+  <a href="<?php echo $shop_create_link;?>">Open Store</a>
   <div class="row"><?php echo $column_left; ?>
     <?php if ($column_left && $column_right) { ?>
     <?php $class = 'col-sm-6'; ?>

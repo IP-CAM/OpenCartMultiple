@@ -30,7 +30,7 @@ class ControllerShopLayoutleft extends Controller {
                 'id'       => 'menu-extension',
                 'icon'	   => 'fa-puzzle-piece',
                 'name'	   => $this->language->get('text_extension'),
-                'href'     => '',
+                'href'     => $this->url->link('shop/order', '', true),
                 'children' => array()
             );
 			

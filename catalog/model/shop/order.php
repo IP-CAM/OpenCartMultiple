@@ -69,9 +69,9 @@ class ModelShopOrder extends Model {
 				$affiliate_id = 0;
 			}
 
-			$this->load->model('marketing/affiliate');
+			$this->load->model('shop/affiliate');
 
-			$affiliate_info = $this->model_marketing_affiliate->getAffiliate($affiliate_id);
+			$affiliate_info = $this->model_shop_affiliate->getAffiliate($affiliate_id);
 
 			if ($affiliate_info) {
 				$affiliate_firstname = $affiliate_info['firstname'];

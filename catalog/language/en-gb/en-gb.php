@@ -95,5 +95,7 @@ $_['tab_image']                     = 'Image';
 $_['tab_special']                   = 'Special';
 $_['tab_reward']                    = 'Reward Points';
 $_['tab_discount']                  = 'Discount';
+$_['tab_history']                   = 'History';
+$_['tab_additional']                = 'Additional';
 
 $_['text_confirm']                  = 'Are you sure?';

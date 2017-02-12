@@ -1,9 +1,11 @@
 <?php
 // HTTP
 define('HTTP_SERVER', 'http://localhost/opencart/');
+define('HTTP_CATALOG', 'http://localhost/opencart/');
 
 // HTTPS
 define('HTTPS_SERVER', 'http://localhost/opencart/');
+define('HTTPS_CATALOG', 'http://localhost/opencart/');
 
 // DIR
 define('DIR_APPLICATION', 'D:/wamp/www/opencart/catalog/');

@@ -11,5 +11,18 @@ class ModelShopShop extends Model {
         }
     }
 
+    public function getShopInfo($shop_id){
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "shop  WHERE shop_id = " . $shop_id );
+        return $query->row;
+    }
+
+    public function editShopInfo($shop_id, $data){
+        $this->db->query("UPDATE " . DB_PREFIX . "shop SET shop_name = '" . $this->db->escape($data['shop_name']) . "',
+                                                        owner_name = '" . $this->db->escape($data['owner_name']) . "',
+                                                        owner_about = '" . $this->db->escape($data['owner_about']) . "',
+                                                        owner_facebook = '" . $this->db->escape($data['owner_facebook']) . "',
+                                                        owner_twitter = '" . $this->db->escape($data['owner_twitter']) . "'
+                                                        WHERE shop_id = " . $shop_id);
+    }
 
 }

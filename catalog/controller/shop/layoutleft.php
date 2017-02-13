@@ -39,7 +39,7 @@ class ControllerShopLayoutleft extends Controller {
                 'id'       => 'menu-design',
                 'icon'	   => 'fa-television',
                 'name'	   => $this->language->get('text_design'),
-                'href'     => '',
+                'href'     => $this->url->link('shop/info', '', true),
                 'children' => array()
             );
 
@@ -48,7 +48,7 @@ class ControllerShopLayoutleft extends Controller {
                 'id'       => 'menu-sale',
                 'icon'	   => 'fa-shopping-cart',
                 'name'	   => $this->language->get('text_sale'),
-                'href'     => '',
+                'href'     => $this->url->link('shop/review', '', true),
                 'children' => array()
             );
 
@@ -57,7 +57,7 @@ class ControllerShopLayoutleft extends Controller {
                 'id'       => 'menu-customer',
                 'icon'	   => 'fa-user',
                 'name'	   => $this->language->get('text_customer'),
-                'href'     => '',
+                'href'     => $this->url->link('shop/return', '', true),
                 'children' => array()
             );
 

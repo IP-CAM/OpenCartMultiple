@@ -11,3 +11,53 @@ CREATE TABLE IF NOT EXISTS `oc_shop` (
 
 
 ALTER TABLE `oc_customer` ADD `is_open_shop` TINYINT NOT NULL COMMENT '0-no 1-yes' AFTER `customer_group_id`;
+
+-- phpMyAdmin SQL Dump
+-- version 4.1.14
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: 2017-02-13 11:33:14
+-- 服务器版本： 5.6.17
+-- PHP Version: 5.5.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `opencart`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `oc_shop`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_shop` (
+  `shop_id` int(11) NOT NULL,
+  `shop_name` varchar(100) NOT NULL,
+  `owner_name` varchar(50) NOT NULL,
+  `owner_about` text NOT NULL,
+  `owner_facebook` varchar(100) NOT NULL,
+  `owner_twitter` varchar(100) NOT NULL,
+  `created_time` int(11) NOT NULL,
+  PRIMARY KEY (`shop_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `oc_shop`
+--
+
+INSERT INTO `oc_shop` (`shop_id`, `shop_name`, `owner_name`, `owner_about`, `owner_facebook`, `owner_twitter`, `created_time`) VALUES
+(1, 'My Shop', 'Owner Name', 'This is About me\r\nMy Name is Jackson', '', '', 1486887099);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

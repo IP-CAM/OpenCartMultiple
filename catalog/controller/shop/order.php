@@ -253,7 +253,6 @@ class ControllerShopOrder extends Controller {
 		$data['button_view'] = $this->language->get('button_view');
 		$data['button_ip_add'] = $this->language->get('button_ip_add');
 
-		$data['token'] = $this->session->data['token'];
 
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
@@ -512,8 +511,6 @@ class ControllerShopOrder extends Controller {
 		);
 
 		$data['cancel'] = $this->url->link('shop/order', '' . $url, true);
-
-		$data['token'] = $this->session->data['token'];
 
 		if (isset($this->request->get['order_id'])) {
 			$order_info = $this->model_shop_order->getOrder($this->request->get['order_id']);
@@ -888,8 +885,6 @@ class ControllerShopOrder extends Controller {
 			$data['invoice'] = $this->url->link('shop/order/invoice', '' . '&order_id=' . (int)$this->request->get['order_id'], true);
 			$data['edit'] = $this->url->link('shop/order/edit', '' . '&order_id=' . (int)$this->request->get['order_id'], true);
 			$data['cancel'] = $this->url->link('shop/order', '' . $url, true);
-
-			$data['token'] = $this->session->data['token'];
 
 			$data['order_id'] = $this->request->get['order_id'];
 

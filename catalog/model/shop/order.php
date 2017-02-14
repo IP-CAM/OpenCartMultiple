@@ -5,6 +5,7 @@ class ModelShopOrder extends Model {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "order_product` WHERE order_id = '" . (int)$order_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "order_option` WHERE order_id = '" . (int)$order_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "order_voucher` WHERE order_id = '" . (int)$order_id . "'");
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "order_shop` WHERE order_id = '" . (int)$order_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "order_total` WHERE order_id = '" . (int)$order_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "order_history` WHERE order_id = '" . (int)$order_id . "'");
 		$this->db->query("DELETE `or`, ort FROM `" . DB_PREFIX . "order_recurring` `or`, `" . DB_PREFIX . "order_recurring_transaction` `ort` WHERE order_id = '" . (int)$order_id . "' AND ort.order_recurring_id = `or`.order_recurring_id");
@@ -170,7 +171,9 @@ class ModelShopOrder extends Model {
 	}
 
 	public function getOrders($data = array()) {
-		$sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS order_status, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+		$sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS order_status,
+		o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "order_shop op ON (o.order_id = op.order_id)
+		 WHERE op.shop_id = ".$this->customer->getId();
 
 		if (isset($data['filter_order_status'])) {
 			$implode = array();
@@ -182,10 +185,10 @@ class ModelShopOrder extends Model {
 			}
 
 			if ($implode) {
-				$sql .= " WHERE (" . implode(" OR ", $implode) . ")";
+				$sql .= " AND (" . implode(" OR ", $implode) . ")";
 			}
 		} else {
-			$sql .= " WHERE o.order_status_id > '0'";
+			$sql .= " AND o.order_status_id > '0'";
 		}
 
 		if (!empty($data['filter_order_id'])) {
@@ -247,7 +250,7 @@ class ModelShopOrder extends Model {
 	}
 
 	public function getOrderProducts($order_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "' and shop_id = ".$this->customer->getId());
 
 		return $query->rows;
 	}
@@ -277,7 +280,8 @@ class ModelShopOrder extends Model {
 	}
 
 	public function getTotalOrders($data = array()) {
-		$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order`";
+		$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "order_shop op ON (o.order_id = op.order_id)
+		 WHERE op.shop_id = ".$this->customer->getId();
 
 		if (isset($data['filter_order_status'])) {
 			$implode = array();
@@ -289,10 +293,10 @@ class ModelShopOrder extends Model {
 			}
 
 			if ($implode) {
-				$sql .= " WHERE (" . implode(" OR ", $implode) . ")";
+				$sql .= " AND (" . implode(" OR ", $implode) . ")";
 			}
 		} else {
-			$sql .= " WHERE order_status_id > '0'";
+			$sql .= " AND order_status_id > '0'";
 		}
 
 		if (!empty($data['filter_order_id'])) {

@@ -20,6 +20,7 @@ class ControllerShopProduct extends Controller {
 		$this->load->model('shop/product');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+			$this->request->post['shop_id'] = $this->customer->getId();
 			$this->model_shop_product->addProduct($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -1370,7 +1371,7 @@ class ControllerShopProduct extends Controller {
 
 		if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_model'])) {
 			$this->load->model('shop/product');
-			$this->load->model('catalog/option');
+			$this->load->model('shop/option');
 
 			if (isset($this->request->get['filter_name'])) {
 				$filter_name = $this->request->get['filter_name'];

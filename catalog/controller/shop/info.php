@@ -23,6 +23,16 @@ class ControllerShopInfo extends Controller {
             $data['entry_facebook_des'] =  $this->language->get('facebook_link_des');
             $data['entry_twitter'] =  $this->language->get('twitter_link');
             $data['entry_twitter_des'] =  $this->language->get('twitter_link_des');
+            $data['entry_image'] =  $this->language->get('owner_image');
+
+            //image
+            $this->load->model('tool/image');
+            if (!empty($data) && is_file(DIR_IMAGE . $data['owner_image'])) {
+                    $data['thumb'] = $this->model_tool_image->resize($data['owner_image'], 100, 100);
+            } else {
+                    $data['thumb'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+            }
+            $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 
             $data['action'] = $this->url->link('shop/info', '', true);
 

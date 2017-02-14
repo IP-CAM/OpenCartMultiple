@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="02665710-9a17-4ff6-90d8-2f13252f83e3" name="Default" comment="" />
+    <list default="true" id="02665710-9a17-4ff6-90d8-2f13252f83e3" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/catalog/controller/common/filemanager.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/catalog/language/en-gb/common/filemanager.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/catalog/view/theme/default/template/common/filemanager.tpl" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/system/storage/cache/cache.currency.1486985534" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/system/storage/cache/cache.language.1486985534" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/controller/shop/info.php" afterPath="$PROJECT_DIR$/catalog/controller/shop/info.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/controller/shop/return.php" afterPath="$PROJECT_DIR$/catalog/controller/shop/return.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/controller/shop/review.php" afterPath="$PROJECT_DIR$/catalog/controller/shop/review.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/language/en-gb/shop/info.php" afterPath="$PROJECT_DIR$/catalog/language/en-gb/shop/info.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/model/shop/shop.php" afterPath="$PROJECT_DIR$/catalog/model/shop/shop.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/view/theme/default/template/shop/info.tpl" afterPath="$PROJECT_DIR$/catalog/view/theme/default/template/shop/info.tpl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/database Change.txt" afterPath="$PROJECT_DIR$/database/database Change.txt" />
+    </list>
     <ignored path="opencart.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -22,71 +37,56 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="en-gb.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/language/en-gb/en-gb.php">
+      <file leaf-file-name="info.tpl" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/catalog/view/theme/default/template/shop/info.tpl">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.18965517">
-              <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="en-gb.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog/language/en-gb/en-gb.php">
+      <file leaf-file-name="shop.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog/model/shop/shop.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-23.714285">
-              <caret line="100" column="54" selection-start-line="100" selection-start-column="54" selection-end-line="100" selection-end-column="54" />
+            <state vertical-scroll-proportion="-15.607142">
+              <caret line="23" column="124" selection-start-line="23" selection-start-column="124" selection-end-line="23" selection-end-column="124" />
+              <folding>
+                <marker date="1487046656006" expanded="true" signature="141:198" placeholder="SELECT * FRO..${DB_PREFIX}shop..." />
+                <marker date="1487046656006" expanded="true" signature="288:475" placeholder="INSERT INTO ${DB_PREFIX}shop..." />
+                <marker date="1487046656006" expanded="true" signature="668:721" placeholder="SELECT DISTI..${DB_PREFIX}shop..." />
+                <marker date="1487046656006" expanded="true" signature="668:734" placeholder="SELECT DISTI..${DB_PREFIX}shop..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="info.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog/language/en-gb/shop/info.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.178572">
+              <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="review.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog/controller/shop/review.php">
+      <file leaf-file-name="location.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/controller/localisation/location.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.785715">
-              <caret line="603" column="5" selection-start-line="603" selection-start-column="5" selection-end-line="603" selection-end-column="5" />
+            <state vertical-scroll-proportion="-10.964286">
+              <caret line="409" column="0" selection-start-line="409" selection-start-column="0" selection-end-line="409" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="return.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/controller/sale/return.php">
+      <file leaf-file-name="info.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog/controller/shop/info.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="355.82144">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="return.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog/controller/shop/return.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.0172415">
-              <caret line="357" column="62" selection-start-line="357" selection-start-column="62" selection-end-line="357" selection-end-column="62" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="return_list.tpl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog/view/theme/default/template/shop/return_list.tpl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.0">
-              <caret line="180" column="38" selection-start-line="180" selection-start-column="38" selection-end-line="180" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="layoutleft.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/catalog/controller/shop/layoutleft.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39155748">
-              <caret line="59" column="59" selection-start-line="59" selection-start-column="59" selection-end-line="59" selection-end-column="59" />
+            <state vertical-scroll-proportion="-5.767857">
+              <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -94,10 +94,12 @@
       </file>
     </leaf>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/catalog/controller/seller/create.php" />
         <option value="$PROJECT_DIR$/catalog/controller/common/home.php" />
         <option value="$PROJECT_DIR$/catalog/view/theme/default/template/common/home.tpl" />
         <option value="$PROJECT_DIR$/catalog/view/theme/default/template/shop/create.tpl" />
@@ -138,15 +140,17 @@
         <option value="$PROJECT_DIR$/catalog/view/theme/default/template/shop/order_info.tpl" />
         <option value="$PROJECT_DIR$/catalog/controller/shop/order.php" />
         <option value="$PROJECT_DIR$/admin/config.php" />
-        <option value="$PROJECT_DIR$/catalog/language/en-gb/shop/info.php" />
-        <option value="$PROJECT_DIR$/catalog/view/theme/default/template/shop/info.tpl" />
-        <option value="$PROJECT_DIR$/catalog/controller/shop/info.php" />
-        <option value="$PROJECT_DIR$/catalog/model/shop/shop.php" />
         <option value="$PROJECT_DIR$/catalog/view/theme/default/template/shop/review_list.tpl" />
-        <option value="$PROJECT_DIR$/catalog/controller/shop/review.php" />
-        <option value="$PROJECT_DIR$/catalog/controller/shop/return.php" />
         <option value="$PROJECT_DIR$/catalog/controller/shop/layoutleft.php" />
         <option value="$PROJECT_DIR$/catalog/view/theme/default/template/shop/return_list.tpl" />
+        <option value="$PROJECT_DIR$/catalog/controller/shop/review.php" />
+        <option value="$PROJECT_DIR$/catalog/controller/shop/return.php" />
+        <option value="$PROJECT_DIR$/catalog/language/en-gb/shop/info.php" />
+        <option value="$PROJECT_DIR$/database/database Change.txt" />
+        <option value="$PROJECT_DIR$/catalog/controller/shop/info.php" />
+        <option value="$PROJECT_DIR$/catalog/view/theme/default/template/shop/info.tpl" />
+        <option value="$PROJECT_DIR$/catalog/controller/common/filemanager.php" />
+        <option value="$PROJECT_DIR$/catalog/model/shop/shop.php" />
       </list>
     </option>
   </component>
@@ -187,6 +191,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -215,6 +220,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="database" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opencart" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opencart" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="catalog" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -222,16 +241,40 @@
               <option name="myItemId" value="view" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="theme" />
+              <option name="myItemId" value="opencart" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opencart" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="default" />
+              <option name="myItemId" value="catalog" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="template" />
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opencart" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="opencart" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="catalog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -252,22 +295,6 @@
               <option name="myItemId" value="catalog" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="theme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="default" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="template" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -283,47 +310,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="theme" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="default" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opencart" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opencart" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="catalog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opencart" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opencart" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="catalog" />
+              <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -344,7 +331,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -353,11 +339,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp\www\opencart\catalog\view\theme\default\template\common" />
+      <recent name="C:\wamp\www\opencart\catalog\language\en-gb\common" />
+      <recent name="C:\wamp\www\opencart\catalog\controller\common" />
       <recent name="C:\wamp\www\opencart\catalog\view\theme\default\template\shop" />
       <recent name="C:\wamp\www\opencart\catalog\model\localisation" />
-      <recent name="C:\wamp\www\opencart\catalog\language\en-gb\shop" />
-      <recent name="C:\wamp\www\opencart\catalog\controller\shop" />
-      <recent name="D:\wamp\www\opencart\catalog\view\theme\default\template\shop" />
     </key>
   </component>
   <component name="RunManager">
@@ -411,7 +397,6 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.07692308" sideWeight="0.50249374" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.063275434" sideWeight="0.49750623" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -424,6 +409,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.063275434" sideWeight="0.49750623" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -474,34 +460,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/admin/model/localisation/tax_class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.7281022">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/model/localisation/stock_status.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/model/localisation/weight_class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/model/localisation/length_class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catalog/model/shop/filter.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.034671534">
@@ -597,7 +555,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -605,7 +562,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.31784385">
           <caret line="9" column="50" selection-start-line="9" selection-start-column="50" selection-end-line="9" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -658,27 +614,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5549374">
-          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14652957">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catalog/view/theme/default/template/shop/order_history.tpl">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -694,7 +633,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.49100256">
           <caret line="575" column="40" selection-start-line="575" selection-start-column="40" selection-end-line="575" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -702,7 +640,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.73264784">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -710,7 +647,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3174807">
           <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="71" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -718,56 +654,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.571428">
           <caret line="32" column="27" selection-start-line="30" selection-start-column="8" selection-end-line="32" selection-end-column="27" />
-          <folding>
-            <marker date="1486956457562" expanded="true" signature="107:277" placeholder="INSERT INTO ${DB_PREFIX}download..." />
-            <marker date="1486956457562" expanded="true" signature="415:605" placeholder="INSERT INTO ${DB_PREFIX}download_description..." />
-            <marker date="1486956457562" expanded="true" signature="932:1029" placeholder="DELETE FROM ..." />
-            <marker date="1486956457562" expanded="true" signature="1125:1315" placeholder="INSERT INTO ${DB_PREFIX}download_description..." />
-            <marker date="1486956457562" expanded="true" signature="1395:1480" placeholder="DELETE FROM ..." />
-            <marker date="1486956457562" expanded="true" signature="1504:1601" placeholder="DELETE FROM ..." />
-            <marker date="1486956457562" expanded="true" signature="1683:1947" placeholder="SELECT DISTI..${DB_PREFIX}download..." />
-            <marker date="1486956457562" expanded="true" signature="2037:2244" placeholder="SELECT * FRO..${DB_PREFIX}download..." />
-            <marker date="1486956457562" expanded="true" signature="3150:3249" placeholder="SELECT * FRO..${DB_PREFIX}download_description..." />
-            <marker date="1486956457562" expanded="true" signature="3496:3551" placeholder="SELECT COUNT..${DB_PREFIX}download..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/language/en-gb/en-gb.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18965517">
-          <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/model/shop/shop.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6914119">
-          <caret line="25" column="5" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
-          <folding>
-            <marker date="1486966630128" expanded="true" signature="141:198" placeholder="SELECT * FRO..${DB_PREFIX}shop..." />
-            <marker date="1486966630128" expanded="true" signature="288:475" placeholder="INSERT INTO ${DB_PREFIX}shop..." />
-            <marker date="1486966630128" expanded="true" signature="668:721" placeholder="SELECT DISTI..${DB_PREFIX}shop..." />
-            <marker date="1486966630128" expanded="true" signature="668:734" placeholder="SELECT DISTI..${DB_PREFIX}shop..." />
-            <marker date="1486966630128" expanded="true" signature="668:1529" placeholder="SELECT DISTI..${DB_PREFIX}shop..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/language/en-gb/shop/info.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38719067">
-          <caret line="14" column="16" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/controller/localisation/location.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10502283">
-          <caret line="53" column="64" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="64" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -775,59 +661,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.27656478">
           <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
-          <folding>
-            <marker date="1486956457615" expanded="true" signature="112:588" placeholder="INSERT INTO ${DB_PREFIX}location..." />
-            <marker date="1486956457615" expanded="true" signature="1299:1357" placeholder="DELETE FROM ..." />
-            <marker date="1486956457615" expanded="true" signature="1459:1555" placeholder="SELECT DISTI..${DB_PREFIX}location..." />
-            <marker date="1486956457615" expanded="true" signature="1645:1709" placeholder="SELECT locat..${DB_PREFIX}location..." />
-            <marker date="1486956457615" expanded="true" signature="2420:2475" placeholder="SELECT COUNT..${DB_PREFIX}location..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/view/theme/default/template/shop/info.tpl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4992412">
-          <caret line="66" column="54" selection-start-line="66" selection-start-column="54" selection-end-line="66" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/controller/shop/info.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28831562">
-          <caret line="10" column="104" selection-start-line="10" selection-start-column="104" selection-end-line="10" selection-end-column="104" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/language/en-gb/en-gb.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-23.714285">
-          <caret line="100" column="54" selection-start-line="100" selection-start-column="54" selection-end-line="100" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/catalog/language/en-gb/shop/review.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/controller/shop/review.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.785715">
-          <caret line="603" column="5" selection-start-line="603" selection-start-column="5" selection-end-line="603" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/controller/sale/return.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="355.82144">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -845,26 +684,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1486956457617" expanded="true" signature="220:413" placeholder="INSERT INTO ${DB_PREFIX}return_status..." />
-            <marker date="1486956457617" expanded="true" signature="451:591" placeholder="INSERT INTO ${DB_PREFIX}return_status..." />
-            <marker date="1486956457617" expanded="true" signature="812:912" placeholder="DELETE FROM ..." />
-            <marker date="1486956457617" expanded="true" signature="1001:1194" placeholder="INSERT INTO ${DB_PREFIX}return_status..." />
-            <marker date="1486956457617" expanded="true" signature="1325:1425" placeholder="DELETE FROM ..." />
-            <marker date="1486956457617" expanded="true" signature="1558:1734" placeholder="SELECT * FRO..${DB_PREFIX}return_status..." />
-            <marker date="1486956457617" expanded="true" signature="1845:1965" placeholder="SELECT * FRO..${DB_PREFIX}return_status..." />
-            <marker date="1486956457617" expanded="true" signature="2626:2781" placeholder="SELECT retur..${DB_PREFIX}return_status..." />
-            <marker date="1486956457617" expanded="true" signature="3111:3213" placeholder="SELECT * FRO..${DB_PREFIX}return_status..." />
-            <marker date="1486956457617" expanded="true" signature="3451:3587" placeholder="SELECT COUNT..${DB_PREFIX}return_status..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/controller/shop/return.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.0172415">
-          <caret line="357" column="62" selection-start-line="357" selection-start-column="62" selection-end-line="357" selection-end-column="62" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -872,13 +691,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6404658">
           <caret line="141" column="31" selection-start-line="141" selection-start-column="27" selection-end-line="141" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/catalog/view/theme/default/template/shop/return_list.tpl">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.0">
+        <state vertical-scroll-proportion="0.027656477">
           <caret line="180" column="38" selection-start-line="180" selection-start-column="38" selection-end-line="180" selection-end-column="38" />
           <folding />
         </state>
@@ -886,8 +704,143 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/catalog/controller/shop/layoutleft.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39155748">
+        <state vertical-scroll-proportion="0.4279476">
           <caret line="59" column="59" selection-start-line="59" selection-start-column="59" selection-end-line="59" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/controller/sale/return.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.7379913">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog/controller/shop/review.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.0727801">
+          <caret line="507" column="110" selection-start-line="507" selection-start-column="110" selection-end-line="507" selection-end-column="110" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog/language/en-gb/en-gb.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.83406115">
+          <caret line="100" column="54" selection-start-line="100" selection-start-column="54" selection-end-line="100" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/language/en-gb/en-gb.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog/controller/shop/return.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.633758">
+          <caret line="54" column="38" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/database Change.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8937063">
+          <caret line="65" column="84" selection-start-line="65" selection-start-column="84" selection-end-line="65" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33187774">
+          <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33187774">
+          <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog/language/en-gb/common/filemanager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog/model/shop/shop.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.607142">
+          <caret line="23" column="124" selection-start-line="23" selection-start-column="124" selection-end-line="23" selection-end-column="124" />
+          <folding>
+            <marker date="1487046656006" expanded="true" signature="141:198" placeholder="SELECT * FRO..${DB_PREFIX}shop..." />
+            <marker date="1487046656006" expanded="true" signature="288:475" placeholder="INSERT INTO ${DB_PREFIX}shop..." />
+            <marker date="1487046656006" expanded="true" signature="668:721" placeholder="SELECT DISTI..${DB_PREFIX}shop..." />
+            <marker date="1487046656006" expanded="true" signature="668:734" placeholder="SELECT DISTI..${DB_PREFIX}shop..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog/view/theme/default/template/common/filemanager.tpl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1486956457873" expanded="true" signature="4607:4621" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog/language/en-gb/shop/info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.178572">
+          <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog/controller/shop/info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.767857">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/controller/localisation/location.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.964286">
+          <caret line="409" column="0" selection-start-line="409" selection-start-column="0" selection-end-line="409" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog/controller/common/filemanager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5138282">
+          <caret line="301" column="74" selection-start-line="301" selection-start-column="74" selection-end-line="301" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog/view/theme/default/template/shop/info.tpl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
         </state>
       </provider>

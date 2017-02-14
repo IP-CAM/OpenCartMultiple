@@ -21,7 +21,8 @@ class ModelShopShop extends Model {
                                                         owner_name = '" . $this->db->escape($data['owner_name']) . "',
                                                         owner_about = '" . $this->db->escape($data['owner_about']) . "',
                                                         owner_facebook = '" . $this->db->escape($data['owner_facebook']) . "',
-                                                        owner_twitter = '" . $this->db->escape($data['owner_twitter']) . "'
+                                                        owner_twitter = '" . $this->db->escape($data['owner_twitter']) . "',
+                                                        owner_image = '" . $this->db->escape($data['image']) . "'
                                                         WHERE shop_id = " . $shop_id);
     }
 

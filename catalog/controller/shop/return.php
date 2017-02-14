@@ -129,16 +129,16 @@ class ControllerShopReturn extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
+			'href' => $this->url->link('common/dashboard', '', true)
 		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('shop/return', 'token=' . $this->session->data['token'] . $url, true)
+			'href' => $this->url->link('shop/return', '' . $url, true)
 		);
 
-		$data['add'] = $this->url->link('shop/return/add', 'token=' . $this->session->data['token'] . $url, true);
-		$data['delete'] = $this->url->link('shop/return/delete', 'token=' . $this->session->data['token'] . $url, true);
+		$data['add'] = $this->url->link('shop/return/add', '' . $url, true);
+		$data['delete'] = $this->url->link('shop/return/delete', '' . $url, true);
 
 		$data['returns'] = array();
 
@@ -171,7 +171,7 @@ class ControllerShopReturn extends Controller {
 				'status'        => $result['status'],
 				'date_added'    => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'date_modified' => date($this->language->get('date_format_short'), strtotime($result['date_modified'])),
-				'edit'          => $this->url->link('shop/return/edit', 'token=' . $this->session->data['token'] . '&return_id=' . $result['return_id'] . $url, true)
+				'edit'          => $this->url->link('shop/return/edit', '' . '&return_id=' . $result['return_id'] . $url, true)
 			);
 		}
 
@@ -206,7 +206,6 @@ class ControllerShopReturn extends Controller {
 		$data['button_delete'] = $this->language->get('button_delete');
 		$data['button_filter'] = $this->language->get('button_filter');
 
-		$data['token'] = $this->session->data['token'];
 
 		if (isset($this->session->data['error'])) {
 			$data['error_warning'] = $this->session->data['error'];
@@ -276,14 +275,14 @@ class ControllerShopReturn extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['sort_return_id'] = $this->url->link('shop/return', 'token=' . $this->session->data['token'] . '&sort=r.return_id' . $url, true);
-		$data['sort_order_id'] = $this->url->link('shop/return', 'token=' . $this->session->data['token'] . '&sort=r.order_id' . $url, true);
-		$data['sort_customer'] = $this->url->link('shop/return', 'token=' . $this->session->data['token'] . '&sort=customer' . $url, true);
-		$data['sort_product'] = $this->url->link('shop/return', 'token=' . $this->session->data['token'] . '&sort=r.product' . $url, true);
-		$data['sort_model'] = $this->url->link('shop/return', 'token=' . $this->session->data['token'] . '&sort=r.model' . $url, true);
-		$data['sort_status'] = $this->url->link('shop/return', 'token=' . $this->session->data['token'] . '&sort=status' . $url, true);
-		$data['sort_date_added'] = $this->url->link('shop/return', 'token=' . $this->session->data['token'] . '&sort=r.date_added' . $url, true);
-		$data['sort_date_modified'] = $this->url->link('shop/return', 'token=' . $this->session->data['token'] . '&sort=r.date_modified' . $url, true);
+		$data['sort_return_id'] = $this->url->link('shop/return', '' . '&sort=r.return_id' . $url, true);
+		$data['sort_order_id'] = $this->url->link('shop/return', '' . '&sort=r.order_id' . $url, true);
+		$data['sort_customer'] = $this->url->link('shop/return', '' . '&sort=customer' . $url, true);
+		$data['sort_product'] = $this->url->link('shop/return', '' . '&sort=r.product' . $url, true);
+		$data['sort_model'] = $this->url->link('shop/return', '' . '&sort=r.model' . $url, true);
+		$data['sort_status'] = $this->url->link('shop/return', '' . '&sort=status' . $url, true);
+		$data['sort_date_added'] = $this->url->link('shop/return', '' . '&sort=r.date_added' . $url, true);
+		$data['sort_date_modified'] = $this->url->link('shop/return', '' . '&sort=r.date_modified' . $url, true);
 
 		$url = '';
 
@@ -331,7 +330,7 @@ class ControllerShopReturn extends Controller {
 		$pagination->total = $return_total;
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_limit_admin');
-		$pagination->url = $this->url->link('shop/return', 'token=' . $this->session->data['token'] . $url . '&page={page}', true);
+		$pagination->url = $this->url->link('shop/return', '' . $url . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
 

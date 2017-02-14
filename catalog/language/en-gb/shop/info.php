@@ -13,4 +13,5 @@ $_['owner_name_des']       = 'Your Name';
 $_['facebook_link']       = 'Facebook Link';
 $_['facebook_link_des']       = 'Your Facebook HomePage Link';
 $_['twitter_link']       = 'Twitter Link';
+$_['owner_image']          = 'Your Image';
 $_['twitter_link_des']       = 'Your Twitter HomePage Link';

@@ -301,8 +301,6 @@ class ControllerShopReview extends Controller {
 		$data['button_delete'] = $this->language->get('button_delete');
 		$data['button_filter'] = $this->language->get('button_filter');
 
-		$data['token'] = $this->session->data['token'];
-
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
 		} else {
@@ -511,7 +509,6 @@ class ControllerShopReview extends Controller {
 			$review_info = $this->model_shop_review->getReview($this->request->get['review_id']);
 		}
 
-		$data['token'] = $this->session->data['token'];
 
 		$this->load->model('catalog/product');
 

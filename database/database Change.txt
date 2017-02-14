@@ -18,7 +18,7 @@ ALTER TABLE `oc_customer` ADD `is_open_shop` TINYINT NOT NULL COMMENT '0-no 1-ye
 --
 -- Host: 127.0.0.1
 -- Generation Time: 2017-02-13 11:33:14
--- ·þÎñÆ÷°æ±¾£º 5.6.17
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ±¾ï¿½ï¿½ 5.6.17
 -- PHP Version: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -37,7 +37,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- ±íµÄ½á¹¹ `oc_shop`
+-- ï¿½ï¿½Ä½á¹¹ `oc_shop`
 --
 
 CREATE TABLE IF NOT EXISTS `oc_shop` (
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `oc_shop` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- ×ª´æ±íÖÐµÄÊý¾Ý `oc_shop`
+-- ×ªï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ `oc_shop`
 --
 
 INSERT INTO `oc_shop` (`shop_id`, `shop_name`, `owner_name`, `owner_about`, `owner_facebook`, `owner_twitter`, `created_time`) VALUES
@@ -61,3 +61,6 @@ INSERT INTO `oc_shop` (`shop_id`, `shop_name`, `owner_name`, `owner_about`, `own
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+ALTER TABLE `oc_shop` ADD `owner_image` VARCHAR(100) NOT NULL AFTER `owner_twitter`;

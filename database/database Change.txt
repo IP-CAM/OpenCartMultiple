@@ -46,3 +46,5 @@ ALTER TABLE `oc_order_shop` ADD `total` DECIMAL NOT NULL DEFAULT '0.0000' ;
 ALTER TABLE `oc_order_shop` CHANGE `total` `total` DECIMAL(15,4) NOT NULL DEFAULT '0.0000';
 
 ALTER TABLE `oc_review` ADD `shop_id` INT NOT NULL AFTER `review_id`, ADD INDEX (`shop_id`) ;
+
+ALTER TABLE `oc_address` ADD `telephone` VARCHAR(50) NOT NULL AFTER `lastname`;

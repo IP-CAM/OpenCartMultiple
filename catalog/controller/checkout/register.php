@@ -11,6 +11,8 @@ class ControllerCheckoutRegister extends Controller {
 		$data['text_none'] = $this->language->get('text_none');
 		$data['text_loading'] = $this->language->get('text_loading');
 
+		$data['entry_name'] = $this->language->get('entry_name');
+		$data['entry_name_des'] = $this->language->get('entry_name_des');
 		$data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$data['entry_firstname'] = $this->language->get('entry_firstname');
 		$data['entry_lastname'] = $this->language->get('entry_lastname');
@@ -138,6 +140,10 @@ class ControllerCheckoutRegister extends Controller {
 		if (!$json) {
 			$this->load->model('account/customer');
 
+			if ((utf8_strlen(trim($this->request->post['name'])) < 1) || (utf8_strlen(trim($this->request->post['name'])) > 32)) {
+				$json['error']['name'] = $this->language->get('error_name');
+			}
+
 			if ((utf8_strlen(trim($this->request->post['firstname'])) < 1) || (utf8_strlen(trim($this->request->post['firstname'])) > 32)) {
 				$json['error']['firstname'] = $this->language->get('error_firstname');
 			}
@@ -231,7 +237,7 @@ class ControllerCheckoutRegister extends Controller {
 		}
 
 		if (!$json) {
-			$customer_id = $this->model_account_customer->addCustomer($this->request->post);
+			$customer_id = $this->model_account_customer->addCustomerAndAddress($this->request->post);
 
 			// Clear any previous login attempts for unregistered accounts.
 			$this->model_account_customer->deleteLoginAttempts($this->request->post['email']);

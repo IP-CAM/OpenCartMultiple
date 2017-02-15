@@ -9,6 +9,7 @@ class ControllerCheckoutPaymentAddress extends Controller {
 		$data['text_none'] = $this->language->get('text_none');
 		$data['text_loading'] = $this->language->get('text_loading');
 
+		$data['entry_telephone'] = $this->language->get('entry_telephone');
 		$data['entry_firstname'] = $this->language->get('entry_firstname');
 		$data['entry_lastname'] = $this->language->get('entry_lastname');
 		$data['entry_company'] = $this->language->get('entry_company');
@@ -122,6 +123,10 @@ class ControllerCheckoutPaymentAddress extends Controller {
 
 				if ((utf8_strlen(trim($this->request->post['lastname'])) < 1) || (utf8_strlen(trim($this->request->post['lastname'])) > 32)) {
 					$json['error']['lastname'] = $this->language->get('error_lastname');
+				}
+
+				if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
+					$json['error']['telephone'] = $this->language->get('error_telephone');
 				}
 
 				if ((utf8_strlen(trim($this->request->post['address_1'])) < 3) || (utf8_strlen(trim($this->request->post['address_1'])) > 128)) {

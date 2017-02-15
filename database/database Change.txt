@@ -48,3 +48,32 @@ ALTER TABLE `oc_order_shop` CHANGE `total` `total` DECIMAL(15,4) NOT NULL DEFAUL
 ALTER TABLE `oc_review` ADD `shop_id` INT NOT NULL AFTER `review_id`, ADD INDEX (`shop_id`) ;
 
 ALTER TABLE `oc_address` ADD `telephone` VARCHAR(50) NOT NULL AFTER `lastname`;
+
+
+CREATE TABLE IF NOT EXISTS `oc_artheme` (
+  `theme_id` int(11) NOT NULL AUTO_INCREMENT,
+  `theme_name` varchar(50) NOT NULL,
+  `product_number` mediumint(9) NOT NULL,
+  `is_hot` tinyint(4) NOT NULL COMMENT '1 hot',
+  `created_uid` int(11) NOT NULL,
+  `created_time` int(11) NOT NULL,
+  PRIMARY KEY (`theme_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+--
+-- 表的结构 `oc_product_theme`
+--
+
+CREATE TABLE IF NOT EXISTS `oc_product_theme` (
+  `product_theme_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `theme_id` int(11) NOT NULL,
+  `shop_id` int(11) NOT NULL,
+  PRIMARY KEY (`product_theme_id`),
+  KEY `theme_id` (`theme_id`),
+  KEY `shop_id` (`shop_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+

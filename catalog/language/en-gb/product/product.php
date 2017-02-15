@@ -11,6 +11,7 @@ $_['text_instock']             = 'In Stock';
 $_['text_tax']                 = 'Ex Tax:';
 $_['text_discount']            = ' or more ';
 $_['text_option']              = 'Available Options';
+
 $_['text_minimum']             = 'This product has a minimum quantity of %s';
 $_['text_reviews']             = '%s reviews';
 $_['text_write']               = 'Write a review';
@@ -43,6 +44,7 @@ $_['entry_bad']                = 'Bad';
 $_['tab_description']          = 'Description';
 $_['tab_attribute']            = 'Specification';
 $_['tab_review']               = 'Reviews (%s)';
+
 
 // Error
 $_['error_name']               = 'Warning: Review Name must be between 3 and 25 characters!';

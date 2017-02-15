@@ -37,6 +37,7 @@
             <li><a href="#tab-image" data-toggle="tab"><?php echo $tab_image; ?></a></li>
             <li><a href="#tab-reward" data-toggle="tab"><?php echo $tab_reward; ?></a></li>
             <li><a href="#tab-design" data-toggle="tab"><?php echo $tab_design; ?></a></li>
+            <li><a href="#tab-theme" data-toggle="tab"><?php echo $tab_theme; ?></a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab-general">
@@ -917,6 +918,30 @@
                 </table>
               </div>
             </div>
+
+
+            <div class="tab-pane" id="tab-theme">
+
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <td class="text-center"><?php echo $entry_theme; ?></td>
+                    <td class="text-center"></td>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <?php foreach ($theme_selected as $theme_sel) { ?>
+                  <tr>
+                    <td class="text-center"><?php echo $theme_sel['theme_name']; ?></td>
+                    <td class="text-center"><button type="button" onclick="" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+                  </tr>
+                  <?php } ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
           </div>
         </form>
       </div>

@@ -612,6 +612,7 @@ class ControllerShopProduct extends Controller {
 		$data['entry_reward'] = $this->language->get('entry_reward');
 		$data['entry_layout'] = $this->language->get('entry_layout');
 		$data['entry_recurring'] = $this->language->get('entry_recurring');
+		$data['entry_theme'] = $this->language->get('entry_theme');
 
 		$data['help_keyword'] = $this->language->get('help_keyword');
 		$data['help_sku'] = $this->language->get('help_sku');
@@ -653,6 +654,7 @@ class ControllerShopProduct extends Controller {
 		$data['tab_reward'] = $this->language->get('tab_reward');
 		$data['tab_design'] = $this->language->get('tab_design');
 		$data['tab_openbay'] = $this->language->get('tab_openbay');
+		$data['tab_theme'] = $this->language->get('tab_theme');
 
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
@@ -1310,6 +1312,11 @@ class ControllerShopProduct extends Controller {
 		//$this->load->model('design/layout');
 
 		//$data['layouts'] = $this->model_design_layout->getLayouts();
+		//Theme
+		$data['theme_selected'] = array(array('theme_name'=> 'Anti-Trump','theme_id'=>14));
+		//get Hot Thme List
+
+		//getUsed Theme List
 
         $data['footer'] = $this->load->controller('shop/layoutfooter');
         $data['header'] = $this->load->controller('shop/layoutheader');

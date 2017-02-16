@@ -52,6 +52,12 @@ class ModelShopProduct extends Model {
 			}
 		}
 
+		if(isset($data['theme_id'])){
+			foreach ($data['theme_id'] as $theme_id) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_theme SET product_id = '" . (int)$product_id . "', theme_id = " . $theme_id . ", shop_id = " . $this->customer->getId() );
+			}
+		}
+
 		if (isset($data['product_discount'])) {
 			foreach ($data['product_discount'] as $product_discount) {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "product_discount SET product_id = '" . (int)$product_id . "', customer_group_id = '" . (int)$product_discount['customer_group_id'] . "', quantity = '" . (int)$product_discount['quantity'] . "', priority = '" . (int)$product_discount['priority'] . "', price = '" . (float)$product_discount['price'] . "', date_start = '" . $this->db->escape($product_discount['date_start']) . "', date_end = '" . $this->db->escape($product_discount['date_end']) . "'");
@@ -144,6 +150,14 @@ class ModelShopProduct extends Model {
 		if (isset($data['product_store'])) {
 			foreach ($data['product_store'] as $store_id) {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_store SET product_id = '" . (int)$product_id . "', store_id = '" . (int)$store_id . "'");
+			}
+		}
+
+		//Theme
+		$this->db->query("DELETE FROM " . DB_PREFIX . "product_theme WHERE product_id = '" . (int)$product_id . "'");
+		if(isset($data['theme_id'])){
+			foreach ($data['theme_id'] as $theme_id) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_theme SET product_id = '" . (int)$product_id . "', theme_id = " . $theme_id . ", shop_id = " . $this->customer->getId() );
 			}
 		}
 
@@ -556,6 +570,17 @@ class ModelShopProduct extends Model {
 		}
 
 		return $product_reward_data;
+	}
+
+	public function getProductThemes($product_id){
+		$product_theme_data = array();
+
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_theme pt LEFT JOIN `" . DB_PREFIX . "artheme` a ON (pt.theme_id = a.theme_id) WHERE product_id = '" . (int)$product_id . "'");
+
+		foreach ($query->rows as $result) {
+			$product_theme_data[] = array('theme_id' => $result['theme_id'], 'theme_name' => $result['theme_name']);
+		}
+		return $product_theme_data;
 	}
 
 	public function getProductDownloads($product_id) {

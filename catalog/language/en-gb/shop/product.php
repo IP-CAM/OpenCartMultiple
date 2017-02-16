@@ -80,7 +80,11 @@ $_['entry_tag']          	 = 'Product Tags';
 $_['entry_reward']           = 'Reward Points';
 $_['entry_layout']           = 'Layout Override';
 $_['entry_recurring']        = 'Recurring Profile';
-$_['entry_theme']                = 'Theme Name';
+$_['entry_theme']             = 'Theme Name';
+$_['entry_theme_hot']        = 'Theme Hot';
+$_['entry_theme_used']       = 'Theme You Used';
+$_['entry_theme_type']       = 'Input Your Theme';
+$_['entry_theme_add']       = 'Add Theme';
 
 // Help
 $_['help_keyword']           = 'Do not use spaces, instead replace spaces with - and make sure the SEO URL is globally unique.';

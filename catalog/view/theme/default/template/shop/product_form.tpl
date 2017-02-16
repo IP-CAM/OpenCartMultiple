@@ -1,4 +1,17 @@
 <?php echo $header; ?><?php echo $column_left; ?>
+<style>
+.theme_list li{
+  list-style: none;
+  float: left;
+  margin: 10px;
+  padding:10px;
+  background: #00a8c6;
+  border-radius:30px;
+}
+.theme_list li a{
+  color:#FFFFFF;
+}
+</style>
 <div id="content">
   <div class="page-header">
     <div class="container-fluid">
@@ -930,13 +943,68 @@
                     <td class="text-center"></td>
                   </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="product-theme-id">
                   <?php foreach ($theme_selected as $theme_sel) { ?>
-                  <tr>
-                    <td class="text-center"><?php echo $theme_sel['theme_name']; ?></td>
-                    <td class="text-center"><button type="button" onclick="" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+                  <tr id="product-theme<?php echo $theme_sel['theme_id']?>">
+                    <td class="text-center"><?php echo $theme_sel['theme_name']; ?><input type="hidden" name="theme_id[]" value="<?php echo $theme_sel['theme_id']?>"></td>
+                    <td class="text-center"><button type="button" onclick="$('#product-theme<?php echo $theme_sel["theme_id"]; ?>').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
                   </tr>
                   <?php } ?>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <td class="text-center" colspan="2"><?php echo $entry_theme_type; ?></td>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <tr>
+                      <td class="text-left" style="padding-left: 20px"><input type="text" name="theme_new" class="form-control" />
+                        </td>
+                        <td class="text-center"><button type="button" class="btn btn-primary" id="btn_theme_add"><?php echo $entry_theme_add;?></button></td>
+                    </tr>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <td class="text-center"><?php echo $entry_theme_used; ?></td>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td class="text-center">
+                      <ul class="theme_list">
+                      <?php foreach ($theme_usedlist as $theme) { ?>
+                        <li data-id="<?php echo $theme['theme_id'];?>" data-name="<?php echo $theme['theme_name'];?>"><a href="javascript::void(0)"><?php echo $theme['theme_name']; ?></a></li>
+                      <?php } ?>
+                      </ul>
+                    </td>
+                  </tr>
+                  </tbody>
+                  <thead>
+                  <tr>
+                    <td class="text-center"><?php echo $entry_theme_hot; ?></td>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td class="text-center">
+                      <ul class="theme_list">
+                        <?php foreach ($theme_hotlist as $theme) { ?>
+                        <li data-id="<?php echo $theme['theme_id'];?>" data-name="<?php echo $theme['theme_name'];?>"><a href="javascript::void(0)"><?php echo $theme['theme_name']; ?></a></li>
+                        <?php } ?>
+                      </ul>
+                    </td>
+                  </tr>
                   </tbody>
                 </table>
               </div>
@@ -951,31 +1019,86 @@
   <link href="view/javascript/summernote/summernote.css" rel="stylesheet" />
   <script type="text/javascript" src="view/javascript/summernote/opencart.js"></script>
   <script type="text/javascript"><!--
-// Manufacturer
-$('input[name=\'manufacturer\']').autocomplete({
+// Theme
+$('input[name=\'theme_new\']').autocomplete({
 	'source': function(request, response) {
 		$.ajax({
-			url: 'index.php?route=catalog/manufacturer/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request),
+			url: 'index.php?route=shop/theme/autocomplete&filter_name=' +  encodeURIComponent(request),
 			dataType: 'json',
 			success: function(json) {
-				json.unshift({
-					manufacturer_id: 0,
-					name: '<?php echo $text_none; ?>'
-				});
-
 				response($.map(json, function(item) {
 					return {
-						label: item['name'],
-						value: item['manufacturer_id']
+						label: item['theme_name'],
+						value: item['theme_id']
 					}
 				}));
 			}
 		});
 	},
 	'select': function(item) {
-		$('input[name=\'manufacturer\']').val(item['label']);
-		$('input[name=\'manufacturer_id\']').val(item['value']);
+       addTheme(item['value'],item['label']);
 	}
+});
+
+$('#btn_theme_add').click(function(){
+  var name = $('input[name=\'theme_new\']').val();
+  if( name == ''){
+    alert("Can not be empty");
+    return;
+  }
+  $.ajax({
+    url: 'index.php?route=shop/theme/autocreate&theme_name=' + name ,
+    dataType: 'json',
+    success: function(json) {
+      addTheme(json['theme_id'],name);
+      $('input[name=\'theme_new\']').val('');
+    }
+  });
+});
+
+$('.theme_list li').click(function(){
+  addTheme($(this).data('id'),$(this).data('name'));
+});
+
+function addTheme(theme_id, theme_name){
+  var isAdded = false;
+  $("input[name='theme_id[]']").each(function(){
+    if($(this).val() == theme_id){
+       alert("Already Added");
+      isAdded = true;
+    }
+  });
+  if(!isAdded){
+    $('#product-theme-id').append('<tr id="product-theme' + theme_id + '"><td class="text-center">'+theme_name+'<input type="hidden" name="theme_id[]" value="' + theme_id + '"></td>' +
+            '<td class="text-center"><button type="button" onclick="$(\'#product-theme' + theme_id + '\').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td></tr>');
+  }
+}
+
+$('input[name=\'manufacturer\']').autocomplete({
+  'source': function(request, response) {
+    $.ajax({
+      url: 'index.php?route=catalog/manufacturer/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request),
+      dataType: 'json',
+      success: function(json) {
+        json.unshift({
+          manufacturer_id: 0,
+          name: '<?php echo $text_none; ?>'
+        });
+
+        response($.map(json, function(item) {
+          return {
+            label: item['name'],
+            value: item['manufacturer_id']
+          }
+        }));
+      }
+    });
+  },
+  'select': function(item) {
+
+    $('input[name=\'manufacturer\']').val(item['label']);
+    $('input[name=\'manufacturer_id\']').val(item['value']);
+  }
 });
 
 // Category

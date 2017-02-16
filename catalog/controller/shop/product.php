@@ -613,6 +613,10 @@ class ControllerShopProduct extends Controller {
 		$data['entry_layout'] = $this->language->get('entry_layout');
 		$data['entry_recurring'] = $this->language->get('entry_recurring');
 		$data['entry_theme'] = $this->language->get('entry_theme');
+		$data['entry_theme_used'] = $this->language->get('entry_theme_used');
+		$data['entry_theme_hot'] = $this->language->get('entry_theme_hot');
+		$data['entry_theme_add'] = $this->language->get('entry_theme_add');
+		$data['entry_theme_type'] = $this->language->get('entry_theme_type');
 
 		$data['help_keyword'] = $this->language->get('help_keyword');
 		$data['help_sku'] = $this->language->get('help_sku');
@@ -1310,13 +1314,39 @@ class ControllerShopProduct extends Controller {
 		}
 
 		//$this->load->model('design/layout');
-
 		//$data['layouts'] = $this->model_design_layout->getLayouts();
+
 		//Theme
-		$data['theme_selected'] = array(array('theme_name'=> 'Anti-Trump','theme_id'=>14));
+		$this->load->model('shop/theme');
+		if (isset($this->request->get['product_id'])) {
+			$data['theme_selected'] = $this->model_shop_product->getProductThemes($this->request->get['product_id']);
+		} else if(isset($this->request->get['theme_id']) && isset($this->request->get['theme_name'])){
+			$data['theme_selected'] = array(array('theme_name'=> $this->request->get['theme_name'],'theme_id'=>$this->request->get['theme_id']));
+		}else{
+			$data['theme_selected'] = array();
+		}
+
 		//get Hot Thme List
+		$results = $this->model_shop_theme->getThemeUsed();
+		$result_id = array();
+		foreach($results as $result){
+			if(!in_array($result['theme_id'],$result_id)){
+				$data['theme_usedlist'][] = array(
+						'theme_id' => $result['theme_id'],
+						'theme_name' => $result['theme_name'],
+				);
+				$result_id[] = $result['theme_id'];
+			}
+		}
 
 		//getUsed Theme List
+		$results = $this->model_shop_theme->getThemeHot();
+		foreach($results as $result){
+			$data['theme_hotlist'][] = array(
+				'theme_id' => $result['theme_id'],
+				'theme_name' => $result['theme_name'],
+			);
+		}
 
         $data['footer'] = $this->load->controller('shop/layoutfooter');
         $data['header'] = $this->load->controller('shop/layoutheader');

@@ -83,21 +83,21 @@
   $("#btn_follow").click(function(){
 
     $.ajax({
-      url: 'index.php?route=artist/home/follow&shop_id=<?php echo $shop_id;?>' ,
+      url: 'index.php?route=theme/detail/follow&theme_id=<?php echo $theme_id;?>' ,
       dataType: 'json',
       success: function(json) {
-        $("#btn_follow").css("display","none");
-        $("#btn_unfollow").css("display","block");
+         $("#btn_follow").css("display","none");
+         $("#btn_unfollow").css("display","block");
       }
     });
   });
   $("#btn_unfollow").click(function(){
     $.ajax({
-      url: 'index.php?route=artist/home/unfollow&shop_id=<?php echo $shop_id;?>',
+      url: 'index.php?route=theme/detail/unfollow&theme_id=<?php echo $theme_id;?>',
       dataType: 'json',
       success: function(json) {
-        $("#btn_follow").css("display","block");
-        $("#btn_unfollow").css("display","none");
+         $("#btn_follow").css("display","block");
+         $("#btn_unfollow").css("display","none");
       }
     });
   });

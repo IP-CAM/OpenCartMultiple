@@ -1,34 +1,34 @@
 <?php
-class ModelArtistHome extends Model {
+class ModelThemeDetail extends Model {
 
-	public function followArtist($shop_id){
+	public function followTheme($theme_id){
 		//查询是否已经有
-		$theme = $this->db->query("SELECT *  FROM " . DB_PREFIX . "shop_follow WHERE shop_id = ".$shop_id." and customer_id = ".$this->customer->getId());
+		$theme = $this->db->query("SELECT *  FROM " . DB_PREFIX . "artheme_follow WHERE theme_id = ".$theme_id." and customer_id = ".$this->customer->getId());
 
 		if($theme->num_rows == 0){
 
-			$this->db->query("INSERT INTO " . DB_PREFIX . "shop_follow SET shop_id = " .$shop_id. ",
+			$this->db->query("INSERT INTO " . DB_PREFIX . "artheme_follow SET theme_id = " .$theme_id. ",
              customer_id = " .$this->customer->getId());
 
-			$this->db->query("UPDATE " . DB_PREFIX . "shop SET follower_number = follower_number+1 WHERE shop_id = '" . (int)$shop_id . "'");
+			$this->db->query("UPDATE " . DB_PREFIX . "artheme SET follower_number = follower_number+1 WHERE theme_id = '" . (int)$theme_id . "'");
 		}
 
 	}
 
-	public function unfollowArtist($shop_id){
+	public function unfollowTheme($theme_id){
 		//查询是否已经有
-		$query = $this->db->query("SELECT *  FROM " . DB_PREFIX . "shop_follow WHERE shop_id = ".$shop_id." and customer_id = ".$this->customer->getId());
+		$theme = $this->db->query("SELECT *  FROM " . DB_PREFIX . "artheme_follow WHERE theme_id = ".$theme_id." and customer_id = ".$this->customer->getId());
 
-		if($query->num_rows == 1){
+		if($theme->num_rows == 1){
 
-			$this->db->query("DELETE FROM " . DB_PREFIX . "shop_follow WHERE shop_follow_id = " .$query->row['shop_follow_id']);
+			$this->db->query("DELETE FROM " . DB_PREFIX . "artheme_follow WHERE theme_follow_id = " .$theme->row['theme_follow_id']);
 
-			$this->db->query("UPDATE " . DB_PREFIX . "shop SET follower_number = follower_number-1 WHERE shop_id = '" . (int)$shop_id . "'");
+			$this->db->query("UPDATE " . DB_PREFIX . "artheme SET follower_number = follower_number-1 WHERE theme_id = '" . (int)$theme_id . "'");
 		}
 	}
 
-	public function getIsFollow($shop_id){
-		$theme = $this->db->query("SELECT *  FROM " . DB_PREFIX . "shop_follow WHERE shop_id = ".$shop_id." and customer_id = ".$this->customer->getId());
+	public function getIsFollow($theme_id){
+		$theme = $this->db->query("SELECT *  FROM " . DB_PREFIX . "artheme_follow WHERE theme_id = ".$theme_id." and customer_id = ".$this->customer->getId());
 		return $theme->num_rows;
 	}
 
@@ -37,47 +37,47 @@ class ModelArtistHome extends Model {
 
 		if ($query->num_rows) {
 			return array(
-				'product_id'       => $query->row['product_id'],
-				'name'             => $query->row['name'],
-				'description'      => $query->row['description'],
-				'meta_title'       => $query->row['meta_title'],
-				'meta_description' => $query->row['meta_description'],
-				'meta_keyword'     => $query->row['meta_keyword'],
-				'tag'              => $query->row['tag'],
-				'model'            => $query->row['model'],
-				'sku'              => $query->row['sku'],
-				'upc'              => $query->row['upc'],
-				'ean'              => $query->row['ean'],
-				'jan'              => $query->row['jan'],
-				'isbn'             => $query->row['isbn'],
-				'mpn'              => $query->row['mpn'],
-				'location'         => $query->row['location'],
-				'quantity'         => $query->row['quantity'],
-				'stock_status'     => $query->row['stock_status'],
-				'image'            => $query->row['image'],
-				'manufacturer_id'  => $query->row['manufacturer_id'],
-				'manufacturer'     => $query->row['manufacturer'],
-				'price'            => ($query->row['discount'] ? $query->row['discount'] : $query->row['price']),
-				'special'          => $query->row['special'],
-				'reward'           => $query->row['reward'],
-				'points'           => $query->row['points'],
-				'tax_class_id'     => $query->row['tax_class_id'],
-				'date_available'   => $query->row['date_available'],
-				'weight'           => $query->row['weight'],
-				'weight_class_id'  => $query->row['weight_class_id'],
-				'length'           => $query->row['length'],
-				'width'            => $query->row['width'],
-				'height'           => $query->row['height'],
-				'length_class_id'  => $query->row['length_class_id'],
-				'subtract'         => $query->row['subtract'],
-				'rating'           => round($query->row['rating']),
-				'reviews'          => $query->row['reviews'] ? $query->row['reviews'] : 0,
-				'minimum'          => $query->row['minimum'],
-				'sort_order'       => $query->row['sort_order'],
-				'status'           => $query->row['status'],
-				'date_added'       => $query->row['date_added'],
-				'date_modified'    => $query->row['date_modified'],
-				'viewed'           => $query->row['viewed']
+					'product_id'       => $query->row['product_id'],
+					'name'             => $query->row['name'],
+					'description'      => $query->row['description'],
+					'meta_title'       => $query->row['meta_title'],
+					'meta_description' => $query->row['meta_description'],
+					'meta_keyword'     => $query->row['meta_keyword'],
+					'tag'              => $query->row['tag'],
+					'model'            => $query->row['model'],
+					'sku'              => $query->row['sku'],
+					'upc'              => $query->row['upc'],
+					'ean'              => $query->row['ean'],
+					'jan'              => $query->row['jan'],
+					'isbn'             => $query->row['isbn'],
+					'mpn'              => $query->row['mpn'],
+					'location'         => $query->row['location'],
+					'quantity'         => $query->row['quantity'],
+					'stock_status'     => $query->row['stock_status'],
+					'image'            => $query->row['image'],
+					'manufacturer_id'  => $query->row['manufacturer_id'],
+					'manufacturer'     => $query->row['manufacturer'],
+					'price'            => ($query->row['discount'] ? $query->row['discount'] : $query->row['price']),
+					'special'          => $query->row['special'],
+					'reward'           => $query->row['reward'],
+					'points'           => $query->row['points'],
+					'tax_class_id'     => $query->row['tax_class_id'],
+					'date_available'   => $query->row['date_available'],
+					'weight'           => $query->row['weight'],
+					'weight_class_id'  => $query->row['weight_class_id'],
+					'length'           => $query->row['length'],
+					'width'            => $query->row['width'],
+					'height'           => $query->row['height'],
+					'length_class_id'  => $query->row['length_class_id'],
+					'subtract'         => $query->row['subtract'],
+					'rating'           => round($query->row['rating']),
+					'reviews'          => $query->row['reviews'] ? $query->row['reviews'] : 0,
+					'minimum'          => $query->row['minimum'],
+					'sort_order'       => $query->row['sort_order'],
+					'status'           => $query->row['status'],
+					'date_added'       => $query->row['date_added'],
+					'date_modified'    => $query->row['date_modified'],
+					'viewed'           => $query->row['viewed']
 			);
 		} else {
 			return false;
@@ -184,13 +184,13 @@ class ModelArtistHome extends Model {
 		$sql .= " GROUP BY p.product_id";
 
 		$sort_data = array(
-			'pd.name',
-			'p.model',
-			'p.quantity',
-			'p.price',
-			'rating',
-			'p.sort_order',
-			'p.date_added'
+				'pd.name',
+				'p.model',
+				'p.quantity',
+				'p.price',
+				'rating',
+				'p.sort_order',
+				'p.date_added'
 		);
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
@@ -335,6 +335,5 @@ class ModelArtistHome extends Model {
 
 		return $query->row['total'];
 	}
-
 
 }

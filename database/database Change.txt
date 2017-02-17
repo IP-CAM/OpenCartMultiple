@@ -76,4 +76,26 @@ CREATE TABLE IF NOT EXISTS `oc_product_theme` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
+CREATE TABLE IF NOT EXISTS `oc_artheme_follow` (
+  `theme_follow_id` int(11) NOT NULL AUTO_INCREMENT,
+  `theme_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  PRIMARY KEY (`theme_follow_id`),
+  KEY `customer_id` (`customer_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+ALTER TABLE `oc_artheme` ADD `follower_number` MEDIUMINT NOT NULL AFTER `created_uid`;
+
+
+CREATE TABLE IF NOT EXISTS `oc_shop_follow` (
+  `shop_follow_id` int(11) NOT NULL AUTO_INCREMENT,
+  `shop_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  PRIMARY KEY (`shop_follow_id`),
+  KEY `customer_id` (`customer_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+ALTER TABLE `oc_shop` ADD `follower_number` MEDIUMINT NOT NULL AFTER `owner_image`;
+
 

@@ -21,6 +21,8 @@ class ControllerExtensionModuleAccount extends Controller {
 		$data['text_transaction'] = $this->language->get('text_transaction');
 		$data['text_newsletter'] = $this->language->get('text_newsletter');
 		$data['text_recurring'] = $this->language->get('text_recurring');
+		$data['text_follow_theme'] = $this->language->get('text_follow_theme');
+		$data['text_follow_artist'] = $this->language->get('text_follow_artist');
 
 		$data['logged'] = $this->customer->isLogged();
 		$data['register'] = $this->url->link('account/register', '', true);
@@ -39,7 +41,8 @@ class ControllerExtensionModuleAccount extends Controller {
 		$data['transaction'] = $this->url->link('account/transaction', '', true);
 		$data['newsletter'] = $this->url->link('account/newsletter', '', true);
 		$data['recurring'] = $this->url->link('account/recurring', '', true);
-
+		$data['follow_theme'] = $this->url->link('account/ftheme', '', true);
+		$data['follow_artist'] = $this->url->link('account/fartist', '', true);
 		return $this->load->view('extension/module/account', $data);
 	}
 }

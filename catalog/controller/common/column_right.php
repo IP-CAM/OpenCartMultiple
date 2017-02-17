@@ -50,7 +50,6 @@ class ControllerCommonColumnRight extends Controller {
 
 			if (isset($part[0]) && $this->config->get($part[0] . '_status')) {
 				$module_data = $this->load->controller('extension/module/' . $part[0]);
-
 				if ($module_data) {
 					$data['modules'][] = $module_data;
 				}

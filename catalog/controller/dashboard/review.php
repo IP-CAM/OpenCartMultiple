@@ -1,26 +1,26 @@
 <?php
-class ControllerShopReview extends Controller {
+class ControllerDashboardReview extends Controller {
 	private $error = array();
 
 	public function index() {
-		$this->load->language('shop/review');
+		$this->load->language('dashboard/review');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('shop/review');
+		$this->load->model('dashboard/review');
 
 		$this->getList();
 	}
 
 	public function add() {
-		$this->load->language('shop/review');
+		$this->load->language('dashboard/review');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('shop/review');
+		$this->load->model('dashboard/review');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_shop_review->addReview($this->request->post);
+			$this->model_dashboard_review->addReview($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -54,21 +54,21 @@ class ControllerShopReview extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('shop/review', '' . $url, true));
+			$this->response->redirect($this->url->link('dashboard/review', '' . $url, true));
 		}
 
 		$this->getForm();
 	}
 
 	public function edit() {
-		$this->load->language('shop/review');
+		$this->load->language('dashboard/review');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('shop/review');
+		$this->load->model('dashboard/review');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_shop_review->editReview($this->request->get['review_id'], $this->request->post);
+			$this->model_dashboard_review->editReview($this->request->get['review_id'], $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -102,22 +102,22 @@ class ControllerShopReview extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('shop/review', '' . $url, true));
+			$this->response->redirect($this->url->link('dashboard/review', '' . $url, true));
 		}
 
 		$this->getForm();
 	}
 
 	public function delete() {
-		$this->load->language('shop/review');
+		$this->load->language('dashboard/review');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('shop/review');
+		$this->load->model('dashboard/review');
 
 		if (isset($this->request->post['selected']) && $this->validateDelete()) {
 			foreach ($this->request->post['selected'] as $review_id) {
-				$this->model_shop_review->deleteReview($review_id);
+				$this->model_dashboard_review->deleteReview($review_id);
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -152,7 +152,7 @@ class ControllerShopReview extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('shop/review', '' . $url, true));
+			$this->response->redirect($this->url->link('dashboard/review', '' . $url, true));
 		}
 
 		$this->getList();
@@ -235,16 +235,16 @@ class ControllerShopReview extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('shop/dashboard', '', true)
+			'href' => $this->url->link('dashboard/home', '', true)
 		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('shop/review', '' . $url, true)
+			'href' => $this->url->link('dashboard/review', '' . $url, true)
 		);
 
-		$data['add'] = $this->url->link('shop/review/add', '' . $url, true);
-		$data['delete'] = $this->url->link('shop/review/delete', '' . $url, true);
+		$data['add'] = $this->url->link('dashboard/review/add', '' . $url, true);
+		$data['delete'] = $this->url->link('dashboard/review/delete', '' . $url, true);
 
 		$data['reviews'] = array();
 
@@ -259,9 +259,9 @@ class ControllerShopReview extends Controller {
 			'limit'             => $this->config->get('config_limit_admin')
 		);
 
-		$review_total = $this->model_shop_review->getTotalReviews($filter_data);
+		$review_total = $this->model_dashboard_review->getTotalReviews($filter_data);
 
-		$results = $this->model_shop_review->getReviews($filter_data);
+		$results = $this->model_dashboard_review->getReviews($filter_data);
 
 		foreach ($results as $result) {
 			$data['reviews'][] = array(
@@ -271,7 +271,7 @@ class ControllerShopReview extends Controller {
 				'rating'     => $result['rating'],
 				'status'     => ($result['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
-				'edit'       => $this->url->link('shop/review/edit', '' . '&review_id=' . $result['review_id'] . $url, true)
+				'edit'       => $this->url->link('dashboard/review/edit', '' . '&review_id=' . $result['review_id'] . $url, true)
 			);
 		}
 
@@ -349,11 +349,11 @@ class ControllerShopReview extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['sort_product'] = $this->url->link('shop/review', '' . '&sort=pd.name' . $url, true);
-		$data['sort_author'] = $this->url->link('shop/review', '' . '&sort=r.author' . $url, true);
-		$data['sort_rating'] = $this->url->link('shop/review', '' . '&sort=r.rating' . $url, true);
-		$data['sort_status'] = $this->url->link('shop/review', '' . '&sort=r.status' . $url, true);
-		$data['sort_date_added'] = $this->url->link('shop/review', '' . '&sort=r.date_added' . $url, true);
+		$data['sort_product'] = $this->url->link('dashboard/review', '' . '&sort=pd.name' . $url, true);
+		$data['sort_author'] = $this->url->link('dashboard/review', '' . '&sort=r.author' . $url, true);
+		$data['sort_rating'] = $this->url->link('dashboard/review', '' . '&sort=r.rating' . $url, true);
+		$data['sort_status'] = $this->url->link('dashboard/review', '' . '&sort=r.status' . $url, true);
+		$data['sort_date_added'] = $this->url->link('dashboard/review', '' . '&sort=r.date_added' . $url, true);
 
 		$url = '';
 
@@ -385,7 +385,7 @@ class ControllerShopReview extends Controller {
 		$pagination->total = $review_total;
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_limit_admin');
-		$pagination->url = $this->url->link('shop/review', '' . $url . '&page={page}', true);
+		$pagination->url = $this->url->link('dashboard/review', '' . $url . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
 
@@ -399,11 +399,11 @@ class ControllerShopReview extends Controller {
 		$data['sort'] = $sort;
 		$data['order'] = $order;
 
-		$data['header'] = $this->load->controller('shop/layoutheader');
-		$data['column_left'] = $this->load->controller('shop/layoutleft');
-		$data['footer'] = $this->load->controller('shop/layoutfooter');
+		$data['header'] = $this->load->controller('dashboard/layoutheader');
+		$data['column_left'] = $this->load->controller('dashboard/layoutleft');
+		$data['footer'] = $this->load->controller('dashboard/layoutfooter');
 
-		$this->response->setOutput($this->load->view('shop/review_list', $data));
+		$this->response->setOutput($this->load->view('dashboard/review_list', $data));
 	}
 
 	protected function getForm() {
@@ -494,19 +494,19 @@ class ControllerShopReview extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('shop/review', '' . $url, true)
+			'href' => $this->url->link('dashboard/review', '' . $url, true)
 		);
 
 		if (!isset($this->request->get['review_id'])) {
-			$data['action'] = $this->url->link('shop/review/add', '' . $url, true);
+			$data['action'] = $this->url->link('dashboard/review/add', '' . $url, true);
 		} else {
-			$data['action'] = $this->url->link('shop/review/edit', '' . '&review_id=' . $this->request->get['review_id'] . $url, true);
+			$data['action'] = $this->url->link('dashboard/review/edit', '' . '&review_id=' . $this->request->get['review_id'] . $url, true);
 		}
 
-		$data['cancel'] = $this->url->link('shop/review', '' . $url, true);
+		$data['cancel'] = $this->url->link('dashboard/review', '' . $url, true);
 
 		if (isset($this->request->get['review_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-			$review_info = $this->model_shop_review->getReview($this->request->get['review_id']);
+			$review_info = $this->model_dashboard_review->getReview($this->request->get['review_id']);
 		}
 
 
@@ -568,11 +568,11 @@ class ControllerShopReview extends Controller {
 			$data['status'] = '';
 		}
 
-		$data['header'] = $this->load->controller('shop/layoutheader');
-		$data['column_left'] = $this->load->controller('shop/layoutleft');
-		$data['footer'] = $this->load->controller('shop/layoutfooter');
+		$data['header'] = $this->load->controller('dashboard/layoutheader');
+		$data['column_left'] = $this->load->controller('dashboard/layoutleft');
+		$data['footer'] = $this->load->controller('dashboard/layoutfooter');
 
-		$this->response->setOutput($this->load->view('shop/review_form', $data));
+		$this->response->setOutput($this->load->view('dashboard/review_form', $data));
 	}
 
 	protected function validateForm() {

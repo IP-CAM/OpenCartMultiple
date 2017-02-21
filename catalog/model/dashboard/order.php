@@ -1,5 +1,5 @@
 <?php
-class ModelShopOrder extends Model {
+class ModelDashboardOrder extends Model {
 	public function deleteOrder($order_id) {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "order` WHERE order_id = '" . (int)$order_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "order_product` WHERE order_id = '" . (int)$order_id . "'");

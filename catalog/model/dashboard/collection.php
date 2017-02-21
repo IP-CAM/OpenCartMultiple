@@ -1,5 +1,5 @@
 <?php
-class ModelShopCollection extends Model {
+class ModelDashboardCollection extends Model {
 	public function addCollection($data) {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "collection` SET rank = '" . (int)$data['rank'] . "', shop_id = '" . $this->customer->getId() . "', collection_name = '" .$this->db->escape($data['collection_name']) . "',  created_time = ".time());
 		return $this->db->getLastId();

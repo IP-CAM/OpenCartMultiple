@@ -1,5 +1,5 @@
 <?php
-class ControllerShopTheme extends Controller {
+class ControllerDashboardTheme extends Controller {
 	private $error = array();
 
 	public function index() {
@@ -17,7 +17,7 @@ class ControllerShopTheme extends Controller {
 		$json = array();
 
 		if (isset($this->request->get['filter_name'])) {
-			$this->load->model('shop/theme');
+			$this->load->model('dashboard/theme');
 
 			$filter_data = array(
 				'filter_name' => $this->request->get['filter_name'],
@@ -27,7 +27,7 @@ class ControllerShopTheme extends Controller {
 				'limit'       => 5
 			);
 
-			$results = $this->model_shop_theme->getThemeByNameFilters($filter_data);
+			$results = $this->model_dashboard_theme->getThemeByNameFilters($filter_data);
 
 			foreach ($results as $result) {
 				$json[] = array(
@@ -54,8 +54,8 @@ class ControllerShopTheme extends Controller {
 	 */
 	public function autocreate(){
 		if (isset($this->request->get['theme_name'])) {
-			$this->load->model('shop/theme');
-			$json = array('theme_id'=> $this->model_shop_theme->addTheme($this->request->get['theme_name']));
+			$this->load->model('dashboard/theme');
+			$json = array('theme_id'=> $this->model_dashboard_theme->addTheme($this->request->get['theme_name']));
 			$this->response->addHeader('Content-Type: application/json');
 			$this->response->setOutput(json_encode($json));
 		}

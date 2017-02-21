@@ -48,9 +48,9 @@ class ControllerDashboardCollection extends Controller {
 			'limit'                   => $this->config->get('config_limit_admin')
 		);
 
-		$collection_total = $this->model_shop_collection->getTotalCollections();
+		$collection_total = $this->model_dashboard_collection->getTotalCollections();
 
-		$results = $this->model_shop_collection->getCollections($filter_data);
+		$results = $this->model_dashboard_collection->getCollections($filter_data);
 
 		foreach ($results as $result) {
 			$data['collections'][] = array(
@@ -103,9 +103,9 @@ class ControllerDashboardCollection extends Controller {
 
 		$data['results'] = sprintf($this->language->get('text_pagination'), ($collection_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($collection_total - $this->config->get('config_limit_admin'))) ? $collection_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $collection_total, ceil($collection_total / $this->config->get('config_limit_admin')));
 
-		$data['header'] = $this->load->controller('shop/layoutheader');
-		$data['column_left'] = $this->load->controller('shop/layoutleft');
-		$data['footer'] = $this->load->controller('shop/layoutfooter');
+		$data['header'] = $this->load->controller('dashboard/layoutheader');
+		$data['column_left'] = $this->load->controller('dashboard/layoutleft');
+		$data['footer'] = $this->load->controller('dashboard/layoutfooter');
 
 		$this->response->setOutput($this->load->view('dashboard/collection_list', $data));
 	}
@@ -116,7 +116,7 @@ class ControllerDashboardCollection extends Controller {
 		$this->load->model('dashboard/collection');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_shop_collection->addCollection($this->request->post);
+			$this->model_dashboard_collection->addCollection($this->request->post);
 			$this->session->data['success'] = $this->language->get('text_success');
 			$url = '';
 			if (isset($this->request->get['page'])) {
@@ -135,7 +135,7 @@ class ControllerDashboardCollection extends Controller {
 		$this->load->model('dashboard/collection');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_shop_collection->editCollection($this->request->get['collection_id'], $this->request->post);
+			$this->model_dashboard_collection->editCollection($this->request->get['collection_id'], $this->request->post);
 			$this->session->data['success'] = $this->language->get('text_success');
 			$url = '';
 			if (isset($this->request->get['page'])) {
@@ -198,7 +198,7 @@ class ControllerDashboardCollection extends Controller {
 		$data['cancel'] = $this->url->link('dashboard/collection', '' . $url, true);
 
 		if (isset($this->request->get['collection_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-			$collection_info = $this->model_shop_collection->getCollection($this->request->get['collection_id']);
+			$collection_info = $this->model_dashboard_collection->getCollection($this->request->get['collection_id']);
 		}
 
 
@@ -235,7 +235,7 @@ class ControllerDashboardCollection extends Controller {
 
 		if (isset($this->request->post['collection_id']) && $this->validateDelete()) {
 
-			$this->model_shop_collection->deleteCollection($this->request->post['collection_id']);
+			$this->model_dashboard_collection->deleteCollection($this->request->post['collection_id']);
 			$this->session->data['success'] = $this->language->get('text_success');
 			$url = '';
 			if (isset($this->request->get['page'])) {

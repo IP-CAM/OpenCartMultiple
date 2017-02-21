@@ -1,5 +1,5 @@
 <?php
-class ModelShopDownload extends Model {
+class ModelDashboardDownload extends Model {
 	public function addDownload($data) {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "download SET filename = '" . $this->db->escape($data['filename']) . "', mask = '" . $this->db->escape($data['mask']) . "', date_added = NOW()");
 

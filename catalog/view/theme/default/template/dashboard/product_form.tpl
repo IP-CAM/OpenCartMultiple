@@ -1068,7 +1068,7 @@
 $('input[name=\'theme_new\']').autocomplete({
 	'source': function(request, response) {
 		$.ajax({
-			url: 'index.php?route=shop/theme/autocomplete&filter_name=' +  encodeURIComponent(request),
+			url: 'index.php?route=dashboard/theme/autocomplete&filter_name=' +  encodeURIComponent(request),
 			dataType: 'json',
 			success: function(json) {
 				response($.map(json, function(item) {
@@ -1092,7 +1092,7 @@ $('#btn_theme_add').click(function(){
     return;
   }
   $.ajax({
-    url: 'index.php?route=shop/theme/autocreate&theme_name=' + name ,
+    url: 'index.php?route=dashboard/theme/autocreate&theme_name=' + name ,
     dataType: 'json',
     success: function(json) {
       addTheme(json['theme_id'],name);

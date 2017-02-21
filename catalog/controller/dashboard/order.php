@@ -1,47 +1,47 @@
 <?php
-class ControllerShopOrder extends Controller {
+class ControllerDashboardOrder extends Controller {
 	private $error = array();
 
 	public function index() {
-		$this->load->language('shop/order');
+		$this->load->language('dashboard/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('shop/order');
+		$this->load->model('dashboard/order');
 
 		$this->getList();
 	}
 
 	public function add() {
-		$this->load->language('shop/order');
+		$this->load->language('dashboard/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('shop/order');
+		$this->load->model('dashboard/order');
 
 		$this->getForm();
 	}
 
 	public function edit() {
-		$this->load->language('shop/order');
+		$this->load->language('dashboard/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('shop/order');
+		$this->load->model('dashboard/order');
 
 		$this->getForm();
 	}
 	
 	public function delete() {
-		$this->load->language('shop/order');
+		$this->load->language('dashboard/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('shop/order');
+		$this->load->model('dashboard/order');
 
 		if (isset($this->request->post['selected']) && $this->validate()) {
 			foreach ($this->request->post['selected'] as $order_id) {
-				$this->model_shop_order->deleteOrder($order_id);
+				$this->model_dashboard_order->deleteOrder($order_id);
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -72,7 +72,7 @@ class ControllerShopOrder extends Controller {
 				$url .= '&filter_date_modified=' . $this->request->get['filter_date_modified'];
 			}
 
-			$this->response->redirect($this->url->link('shop/order', '' . $url, true));
+			$this->response->redirect($this->url->link('dashboard/order', '' . $url, true));
 		}
 
 		$this->getList();
@@ -175,18 +175,18 @@ class ControllerShopOrder extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('shop/dashboard', '', true)
+			'href' => $this->url->link('dashboard/home', '', true)
 		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('shop/order', '' . $url, true)
+			'href' => $this->url->link('dashboard/order', '' . $url, true)
 		);
 
-		$data['invoice'] = $this->url->link('shop/order/invoice', '', true);
-		$data['shipping'] = $this->url->link('shop/order/shipping', '', true);
-		$data['add'] = $this->url->link('shop/order/add', '', true);
-		$data['delete'] = $this->url->link('shop/order/delete', '', true);
+		$data['invoice'] = $this->url->link('dashboard/order/invoice', '', true);
+		$data['shipping'] = $this->url->link('dashboard/order/shipping', '', true);
+		$data['add'] = $this->url->link('dashboard/order/add', '', true);
+		$data['delete'] = $this->url->link('dashboard/order/delete', '', true);
 
 		$data['orders'] = array();
 
@@ -203,9 +203,9 @@ class ControllerShopOrder extends Controller {
 			'limit'                => $this->config->get('config_limit_admin')
 		);
 
-		$order_total = $this->model_shop_order->getTotalOrders($filter_data);
+		$order_total = $this->model_dashboard_order->getTotalOrders($filter_data);
 
-		$results = $this->model_shop_order->getOrders($filter_data);
+		$results = $this->model_dashboard_order->getOrders($filter_data);
 
 		foreach ($results as $result) {
 			$data['orders'][] = array(
@@ -216,8 +216,8 @@ class ControllerShopOrder extends Controller {
 				'date_added'    => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'date_modified' => date($this->language->get('date_format_short'), strtotime($result['date_modified'])),
 				'shipping_code' => $result['shipping_code'],
-				'view'          => $this->url->link('shop/order/info', '' . '&order_id=' . $result['order_id'] . $url, true),
-				'edit'          => $this->url->link('shop/order/edit', '' . '&order_id=' . $result['order_id'] . $url, true)
+				'view'          => $this->url->link('dashboard/order/info', '' . '&order_id=' . $result['order_id'] . $url, true),
+				'edit'          => $this->url->link('dashboard/order/edit', '' . '&order_id=' . $result['order_id'] . $url, true)
 			);
 		}
 
@@ -310,12 +310,12 @@ class ControllerShopOrder extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['sort_order'] = $this->url->link('shop/order', '' . '&sort=o.order_id' . $url, true);
-		$data['sort_customer'] = $this->url->link('shop/order', '' . '&sort=customer' . $url, true);
-		$data['sort_status'] = $this->url->link('shop/order', '' . '&sort=order_status' . $url, true);
-		$data['sort_total'] = $this->url->link('shop/order', '' . '&sort=o.total' . $url, true);
-		$data['sort_date_added'] = $this->url->link('shop/order', '' . '&sort=o.date_added' . $url, true);
-		$data['sort_date_modified'] = $this->url->link('shop/order', '' . '&sort=o.date_modified' . $url, true);
+		$data['sort_order'] = $this->url->link('dashboard/order', '' . '&sort=o.order_id' . $url, true);
+		$data['sort_customer'] = $this->url->link('dashboard/order', '' . '&sort=customer' . $url, true);
+		$data['sort_status'] = $this->url->link('dashboard/order', '' . '&sort=order_status' . $url, true);
+		$data['sort_total'] = $this->url->link('dashboard/order', '' . '&sort=o.total' . $url, true);
+		$data['sort_date_added'] = $this->url->link('dashboard/order', '' . '&sort=o.date_added' . $url, true);
+		$data['sort_date_modified'] = $this->url->link('dashboard/order', '' . '&sort=o.date_modified' . $url, true);
 
 		$url = '';
 
@@ -355,7 +355,7 @@ class ControllerShopOrder extends Controller {
 		$pagination->total = $order_total;
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_limit_admin');
-		$pagination->url = $this->url->link('shop/order', '' . $url . '&page={page}', true);
+		$pagination->url = $this->url->link('dashboard/order', '' . $url . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
 
@@ -375,11 +375,11 @@ class ControllerShopOrder extends Controller {
 
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 		
-		$data['header'] = $this->load->controller('shop/layoutheader');
-		$data['column_left'] = $this->load->controller('shop/layoutleft');
-		$data['footer'] = $this->load->controller('shop/layoutfooter');
+		$data['header'] = $this->load->controller('dashboard/layoutheader');
+		$data['column_left'] = $this->load->controller('dashboard/layoutleft');
+		$data['footer'] = $this->load->controller('dashboard/layoutfooter');
 
-		$this->response->setOutput($this->load->view('shop/order_list', $data));
+		$this->response->setOutput($this->load->view('dashboard/order_list', $data));
 	}
 
 	public function getForm() {
@@ -502,18 +502,18 @@ class ControllerShopOrder extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('shop/dashboard', '', true)
+			'href' => $this->url->link('dashboard/home', '', true)
 		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('shop/order', '' . $url, true)
+			'href' => $this->url->link('dashboard/order', '' . $url, true)
 		);
 
-		$data['cancel'] = $this->url->link('shop/order', '' . $url, true);
+		$data['cancel'] = $this->url->link('dashboard/order', '' . $url, true);
 
 		if (isset($this->request->get['order_id'])) {
-			$order_info = $this->model_shop_order->getOrder($this->request->get['order_id']);
+			$order_info = $this->model_dashboard_order->getOrder($this->request->get['order_id']);
 		}
 
 		if (!empty($order_info)) {
@@ -531,9 +531,9 @@ class ControllerShopOrder extends Controller {
 			$data['fax'] = $order_info['fax'];
 			$data['account_custom_field'] = $order_info['custom_field'];
 
-			$this->load->model('shop/customer');
+			$this->load->model('dashboard/customer');
 
-			$data['addresses'] = $this->model_shop_customer->getAddresses($order_info['customer_id']);
+			$data['addresses'] = $this->model_dashboard_customer->getAddresses($order_info['customer_id']);
 
 			$data['payment_firstname'] = $order_info['payment_firstname'];
 			$data['payment_lastname'] = $order_info['payment_lastname'];
@@ -564,14 +564,14 @@ class ControllerShopOrder extends Controller {
 			// Products
 			$data['order_products'] = array();
 
-			$products = $this->model_shop_order->getOrderProducts($this->request->get['order_id']);
+			$products = $this->model_dashboard_order->getOrderProducts($this->request->get['order_id']);
 
 			foreach ($products as $product) {
 				$data['order_products'][] = array(
 					'product_id' => $product['product_id'],
 					'name'       => $product['name'],
 					'model'      => $product['model'],
-					'option'     => $this->model_shop_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']),
+					'option'     => $this->model_dashboard_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']),
 					'quantity'   => $product['quantity'],
 					'price'      => $product['price'],
 					'total'      => $product['total'],
@@ -580,7 +580,7 @@ class ControllerShopOrder extends Controller {
 			}
 
 			// Vouchers
-			$data['order_vouchers'] = $this->model_shop_order->getOrderVouchers($this->request->get['order_id']);
+			$data['order_vouchers'] = $this->model_dashboard_order->getOrderVouchers($this->request->get['order_id']);
 
 			$data['coupon'] = '';
 			$data['voucher'] = '';
@@ -588,7 +588,7 @@ class ControllerShopOrder extends Controller {
 
 			$data['order_totals'] = array();
 
-			$order_totals = $this->model_shop_order->getOrderTotals($this->request->get['order_id']);
+			$order_totals = $this->model_dashboard_order->getOrderTotals($this->request->get['order_id']);
 
 			foreach ($order_totals as $order_total) {
 				// If coupon, voucher or reward points
@@ -751,11 +751,11 @@ class ControllerShopOrder extends Controller {
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
-		$this->response->setOutput($this->load->view('shop/order_form', $data));
+		$this->response->setOutput($this->load->view('dashboard/order_form', $data));
 	}
 
 	public function info() {
-		$this->load->model('shop/order');
+		$this->load->model('dashboard/order');
 
 		if (isset($this->request->get['order_id'])) {
 			$order_id = $this->request->get['order_id'];
@@ -763,10 +763,10 @@ class ControllerShopOrder extends Controller {
 			$order_id = 0;
 		}
 
-		$order_info = $this->model_shop_order->getOrder($order_id);
+		$order_info = $this->model_dashboard_order->getOrder($order_id);
 
 		if ($order_info) {
-			$this->load->language('shop/order');
+			$this->load->language('dashboard/order');
 
 			$this->document->setTitle($this->language->get('heading_title'));
 
@@ -873,18 +873,18 @@ class ControllerShopOrder extends Controller {
 
 			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_home'),
-				'href' => $this->url->link('shop/dashboard', '', true)
+				'href' => $this->url->link('dashboard/home', '', true)
 			);
 
 			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('heading_title'),
-				'href' => $this->url->link('shop/order', '' . $url, true)
+				'href' => $this->url->link('dashboard/order', '' . $url, true)
 			);
 
-			$data['shipping'] = $this->url->link('shop/order/shipping', '' . '&order_id=' . (int)$this->request->get['order_id'], true);
-			$data['invoice'] = $this->url->link('shop/order/invoice', '' . '&order_id=' . (int)$this->request->get['order_id'], true);
-			$data['edit'] = $this->url->link('shop/order/edit', '' . '&order_id=' . (int)$this->request->get['order_id'], true);
-			$data['cancel'] = $this->url->link('shop/order', '' . $url, true);
+			$data['shipping'] = $this->url->link('dashboard/order/shipping', '' . '&order_id=' . (int)$this->request->get['order_id'], true);
+			$data['invoice'] = $this->url->link('dashboard/order/invoice', '' . '&order_id=' . (int)$this->request->get['order_id'], true);
+			$data['edit'] = $this->url->link('dashboard/order/edit', '' . '&order_id=' . (int)$this->request->get['order_id'], true);
+			$data['cancel'] = $this->url->link('dashboard/order', '' . $url, true);
 
 			$data['order_id'] = $this->request->get['order_id'];
 
@@ -914,9 +914,9 @@ class ControllerShopOrder extends Controller {
 				$data['customer'] = '';
 			}
 
-			$this->load->model('shop/customer_group');
+			$this->load->model('dashboard/customer_group');
 
-			$customer_group_info = $this->model_shop_customer_group->getCustomerGroup($order_info['customer_group_id']);
+			$customer_group_info = $this->model_dashboard_customer_group->getCustomerGroup($order_info['customer_group_id']);
 
 			if ($customer_group_info) {
 				$data['customer_group'] = $customer_group_info['name'];
@@ -1005,12 +1005,12 @@ class ControllerShopOrder extends Controller {
 
 			$data['products'] = array();
 
-			$products = $this->model_shop_order->getOrderProducts($this->request->get['order_id']);
+			$products = $this->model_dashboard_order->getOrderProducts($this->request->get['order_id']);
 
 			foreach ($products as $product) {
 				$option_data = array();
 
-				$options = $this->model_shop_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']);
+				$options = $this->model_dashboard_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']);
 
 				foreach ($options as $option) {
 					if ($option['type'] != 'file') {
@@ -1048,7 +1048,7 @@ class ControllerShopOrder extends Controller {
 
 			$data['vouchers'] = array();
 
-			$vouchers = $this->model_shop_order->getOrderVouchers($this->request->get['order_id']);
+			$vouchers = $this->model_dashboard_order->getOrderVouchers($this->request->get['order_id']);
 
 			foreach ($vouchers as $voucher) {
 				$data['vouchers'][] = array(
@@ -1060,7 +1060,7 @@ class ControllerShopOrder extends Controller {
 
 			$data['totals'] = array();
 
-			$totals = $this->model_shop_order->getOrderTotals($this->request->get['order_id']);
+			$totals = $this->model_dashboard_order->getOrderTotals($this->request->get['order_id']);
 
 			foreach ($totals as $total) {
 				$data['totals'][] = array(
@@ -1071,11 +1071,11 @@ class ControllerShopOrder extends Controller {
 
 			$data['comment'] = nl2br($order_info['comment']);
 
-			$this->load->model('shop/customer');
+			$this->load->model('dashboard/customer');
 
 			$data['reward'] = $order_info['reward'];
 
-			$data['reward_total'] = $this->model_shop_customer->getTotalCustomerRewardsByOrderId($this->request->get['order_id']);
+			$data['reward_total'] = $this->model_dashboard_customer->getTotalCustomerRewardsByOrderId($this->request->get['order_id']);
 
 			$data['affiliate_firstname'] = $order_info['affiliate_firstname'];
 			$data['affiliate_lastname'] = $order_info['affiliate_lastname'];
@@ -1088,9 +1088,9 @@ class ControllerShopOrder extends Controller {
 
 			$data['commission'] = $this->currency->format($order_info['commission'], $order_info['currency_code'], $order_info['currency_value']);
 
-			$this->load->model('shop/affiliate');
+			$this->load->model('dashboard/affiliate');
 
-			$data['commission_total'] = $this->model_shop_affiliate->getTotalTransactionsByOrderId($this->request->get['order_id']);
+			$data['commission_total'] = $this->model_dashboard_affiliate->getTotalTransactionsByOrderId($this->request->get['order_id']);
 
 			$this->load->model('localisation/order_status');
 
@@ -1109,7 +1109,7 @@ class ControllerShopOrder extends Controller {
 			$data['account_custom_field'] = $order_info['custom_field'];
 
 			// Custom Fields
-			$this->load->model('shop/custom_field');
+			$this->load->model('dashboard/custom_field');
 
 			$data['account_custom_fields'] = array();
 
@@ -1118,7 +1118,7 @@ class ControllerShopOrder extends Controller {
 				'order' => 'ASC'
 			);
 
-			$custom_fields = $this->model_shop_custom_field->getCustomFields($filter_data);
+			$custom_fields = $this->model_dashboard_custom_field->getCustomFields($filter_data);
 
 			foreach ($custom_fields as $custom_field) {
 				if ($custom_field['location'] == 'account' && isset($order_info['custom_field'][$custom_field['custom_field_id']])) {
@@ -1289,18 +1289,18 @@ class ControllerShopOrder extends Controller {
             $data['api_key'] = '';
             $data['api_ip'] = '';
 
-			$data['header'] = $this->load->controller('shop/layoutheader');
-			$data['column_left'] = $this->load->controller('shop/layoutleft');
-			$data['footer'] = $this->load->controller('shop/layoutfooter');
+			$data['header'] = $this->load->controller('dashboard/layoutheader');
+			$data['column_left'] = $this->load->controller('dashboard/layoutleft');
+			$data['footer'] = $this->load->controller('dashboard/layoutfooter');
 
-			$this->response->setOutput($this->load->view('shop/order_info', $data));
+			$this->response->setOutput($this->load->view('dashboard/order_info', $data));
 		} else {
 			return new Action('error/not_found');
 		}
 	}
 	
 	protected function validate() {
-		if (!$this->user->hasPermission('modify', 'shop/order')) {
+		if (!$this->user->hasPermission('modify', 'dashboard/order')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
@@ -1308,11 +1308,11 @@ class ControllerShopOrder extends Controller {
 	}
 	
 	public function createInvoiceNo() {
-		$this->load->language('shop/order');
+		$this->load->language('dashboard/order');
 
 		$json = array();
 
-		if (!$this->user->hasPermission('modify', 'shop/order')) {
+		if (!$this->user->hasPermission('modify', 'dashboard/order')) {
 			$json['error'] = $this->language->get('error_permission');
 		} elseif (isset($this->request->get['order_id'])) {
 			if (isset($this->request->get['order_id'])) {
@@ -1321,9 +1321,9 @@ class ControllerShopOrder extends Controller {
 				$order_id = 0;
 			}
 
-			$this->load->model('shop/order');
+			$this->load->model('dashboard/order');
 
-			$invoice_no = $this->model_shop_order->createInvoiceNo($order_id);
+			$invoice_no = $this->model_dashboard_order->createInvoiceNo($order_id);
 
 			if ($invoice_no) {
 				$json['invoice_no'] = $invoice_no;
@@ -1337,11 +1337,11 @@ class ControllerShopOrder extends Controller {
 	}
 
 	public function addReward() {
-		$this->load->language('shop/order');
+		$this->load->language('dashboard/order');
 
 		$json = array();
 
-		if (!$this->user->hasPermission('modify', 'shop/order')) {
+		if (!$this->user->hasPermission('modify', 'dashboard/order')) {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
 			if (isset($this->request->get['order_id'])) {
@@ -1350,9 +1350,9 @@ class ControllerShopOrder extends Controller {
 				$order_id = 0;
 			}
 
-			$this->load->model('shop/order');
+			$this->load->model('dashboard/order');
 
-			$order_info = $this->model_shop_order->getOrder($order_id);
+			$order_info = $this->model_dashboard_order->getOrder($order_id);
 
 			if ($order_info && $order_info['customer_id'] && ($order_info['reward'] > 0)) {
 				$this->load->model('customer/customer');
@@ -1372,11 +1372,11 @@ class ControllerShopOrder extends Controller {
 	}
 
 	public function removeReward() {
-		$this->load->language('shop/order');
+		$this->load->language('dashboard/order');
 
 		$json = array();
 
-		if (!$this->user->hasPermission('modify', 'shop/order')) {
+		if (!$this->user->hasPermission('modify', 'dashboard/order')) {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
 			if (isset($this->request->get['order_id'])) {
@@ -1385,9 +1385,9 @@ class ControllerShopOrder extends Controller {
 				$order_id = 0;
 			}
 
-			$this->load->model('shop/order');
+			$this->load->model('dashboard/order');
 
-			$order_info = $this->model_shop_order->getOrder($order_id);
+			$order_info = $this->model_dashboard_order->getOrder($order_id);
 
 			if ($order_info) {
 				$this->load->model('customer/customer');
@@ -1403,11 +1403,11 @@ class ControllerShopOrder extends Controller {
 	}
 
 	public function addCommission() {
-		$this->load->language('shop/order');
+		$this->load->language('dashboard/order');
 
 		$json = array();
 
-		if (!$this->user->hasPermission('modify', 'shop/order')) {
+		if (!$this->user->hasPermission('modify', 'dashboard/order')) {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
 			if (isset($this->request->get['order_id'])) {
@@ -1416,14 +1416,14 @@ class ControllerShopOrder extends Controller {
 				$order_id = 0;
 			}
 
-			$this->load->model('shop/order');
+			$this->load->model('dashboard/order');
 
-			$order_info = $this->model_shop_order->getOrder($order_id);
+			$order_info = $this->model_dashboard_order->getOrder($order_id);
 
 			if ($order_info) {
 				$this->load->model('ahop/affiliate');
 
-				$affiliate_total = $this->model_shop_affiliate->getTotalTransactionsByOrderId($order_id);
+				$affiliate_total = $this->model_dashboard_affiliate->getTotalTransactionsByOrderId($order_id);
 
 				if (!$affiliate_total) {
 					$this->model_marketing_affiliate->addTransaction($order_info['affiliate_id'], $this->language->get('text_order_id') . ' #' . $order_id, $order_info['commission'], $order_id);
@@ -1438,11 +1438,11 @@ class ControllerShopOrder extends Controller {
 	}
 
 	public function removeCommission() {
-		$this->load->language('shop/order');
+		$this->load->language('dashboard/order');
 
 		$json = array();
 
-		if (!$this->user->hasPermission('modify', 'shop/order')) {
+		if (!$this->user->hasPermission('modify', 'dashboard/order')) {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
 			if (isset($this->request->get['order_id'])) {
@@ -1451,14 +1451,14 @@ class ControllerShopOrder extends Controller {
 				$order_id = 0;
 			}
 
-			$this->load->model('shop/order');
+			$this->load->model('dashboard/order');
 
-			$order_info = $this->model_shop_order->getOrder($order_id);
+			$order_info = $this->model_dashboard_order->getOrder($order_id);
 
 			if ($order_info) {
-				$this->load->model('shop/affiliate');
+				$this->load->model('dashboard/affiliate');
 
-				$this->model_shop_affiliate->deleteTransaction($order_id);
+				$this->model_dashboard_affiliate->deleteTransaction($order_id);
 			}
 
 			$json['success'] = $this->language->get('text_commission_removed');
@@ -1469,7 +1469,7 @@ class ControllerShopOrder extends Controller {
 	}
 
 	public function history() {
-		$this->load->language('shop/order');
+		$this->load->language('dashboard/order');
 
 		$data['text_no_results'] = $this->language->get('text_no_results');
 
@@ -1486,9 +1486,9 @@ class ControllerShopOrder extends Controller {
 
 		$data['histories'] = array();
 
-		$this->load->model('shop/order');
+		$this->load->model('dashboard/order');
 
-		$results = $this->model_shop_order->getOrderHistories($this->request->get['order_id'], ($page - 1) * 10, 10);
+		$results = $this->model_dashboard_order->getOrderHistories($this->request->get['order_id'], ($page - 1) * 10, 10);
 
 		foreach ($results as $result) {
 			$data['histories'][] = array(
@@ -1499,23 +1499,23 @@ class ControllerShopOrder extends Controller {
 			);
 		}
 
-		$history_total = $this->model_shop_order->getTotalOrderHistories($this->request->get['order_id']);
+		$history_total = $this->model_dashboard_order->getTotalOrderHistories($this->request->get['order_id']);
 
 		$pagination = new Pagination();
 		$pagination->total = $history_total;
 		$pagination->page = $page;
 		$pagination->limit = 10;
-		$pagination->url = $this->url->link('shop/order/history', '' . '&order_id=' . $this->request->get['order_id'] . '&page={page}', true);
+		$pagination->url = $this->url->link('dashboard/order/history', '' . '&order_id=' . $this->request->get['order_id'] . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
 
 		$data['results'] = sprintf($this->language->get('text_pagination'), ($history_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($history_total - 10)) ? $history_total : ((($page - 1) * 10) + 10), $history_total, ceil($history_total / 10));
 
-		$this->response->setOutput($this->load->view('shop/order_history', $data));
+		$this->response->setOutput($this->load->view('dashboard/order_history', $data));
 	}
 
 	public function invoice() {
-		$this->load->language('shop/order');
+		$this->load->language('dashboard/order');
 
 		$data['title'] = $this->language->get('text_invoice');
 
@@ -1550,7 +1550,7 @@ class ControllerShopOrder extends Controller {
 		$data['column_price'] = $this->language->get('column_price');
 		$data['column_total'] = $this->language->get('column_total');
 
-		$this->load->model('shop/order');
+		$this->load->model('dashboard/order');
 
 		$this->load->model('setting/setting');
 
@@ -1565,7 +1565,7 @@ class ControllerShopOrder extends Controller {
 		}
 
 		foreach ($orders as $order_id) {
-			$order_info = $this->model_shop_order->getOrder($order_id);
+			$order_info = $this->model_dashboard_order->getOrder($order_id);
 
 			if ($order_info) {
 				$store_info = $this->model_setting_setting->getSetting('config', $order_info['store_id']);
@@ -1660,12 +1660,12 @@ class ControllerShopOrder extends Controller {
 
 				$product_data = array();
 
-				$products = $this->model_shop_order->getOrderProducts($order_id);
+				$products = $this->model_dashboard_order->getOrderProducts($order_id);
 
 				foreach ($products as $product) {
 					$option_data = array();
 
-					$options = $this->model_shop_order->getOrderOptions($order_id, $product['order_product_id']);
+					$options = $this->model_dashboard_order->getOrderOptions($order_id, $product['order_product_id']);
 
 					foreach ($options as $option) {
 						if ($option['type'] != 'file') {
@@ -1698,7 +1698,7 @@ class ControllerShopOrder extends Controller {
 
 				$voucher_data = array();
 
-				$vouchers = $this->model_shop_order->getOrderVouchers($order_id);
+				$vouchers = $this->model_dashboard_order->getOrderVouchers($order_id);
 
 				foreach ($vouchers as $voucher) {
 					$voucher_data[] = array(
@@ -1709,7 +1709,7 @@ class ControllerShopOrder extends Controller {
 
 				$total_data = array();
 
-				$totals = $this->model_shop_order->getOrderTotals($order_id);
+				$totals = $this->model_dashboard_order->getOrderTotals($order_id);
 
 				foreach ($totals as $total) {
 					$total_data[] = array(
@@ -1742,11 +1742,11 @@ class ControllerShopOrder extends Controller {
 			}
 		}
 
-		$this->response->setOutput($this->load->view('shop/order_invoice', $data));
+		$this->response->setOutput($this->load->view('dashboard/order_invoice', $data));
 	}
 
 	public function shipping() {
-		$this->load->language('shop/order');
+		$this->load->language('dashboard/order');
 
 		$data['title'] = $this->language->get('text_shipping');
 
@@ -1788,7 +1788,7 @@ class ControllerShopOrder extends Controller {
 		$data['column_model'] = $this->language->get('column_model');
 		$data['column_quantity'] = $this->language->get('column_quantity');
 
-		$this->load->model('shop/order');
+		$this->load->model('dashboard/order');
 
 		$this->load->model('catalog/product');
 
@@ -1805,7 +1805,7 @@ class ControllerShopOrder extends Controller {
 		}
 
 		foreach ($orders as $order_id) {
-			$order_info = $this->model_shop_order->getOrder($order_id);
+			$order_info = $this->model_dashboard_order->getOrder($order_id);
 
 			// Make sure there is a shipping method
 			if ($order_info && $order_info['shipping_code']) {
@@ -1867,7 +1867,7 @@ class ControllerShopOrder extends Controller {
 
 				$product_data = array();
 
-				$products = $this->model_shop_order->getOrderProducts($order_id);
+				$products = $this->model_dashboard_order->getOrderProducts($order_id);
 
 				foreach ($products as $product) {
 					$option_weight = '';
@@ -1877,7 +1877,7 @@ class ControllerShopOrder extends Controller {
 					if ($product_info) {
 						$option_data = array();
 
-						$options = $this->model_shop_order->getOrderOptions($order_id, $product['order_product_id']);
+						$options = $this->model_dashboard_order->getOrderOptions($order_id, $product['order_product_id']);
 
 						foreach ($options as $option) {
 							if ($option['type'] != 'file') {
@@ -1945,6 +1945,6 @@ class ControllerShopOrder extends Controller {
 			}
 		}
 
-		$this->response->setOutput($this->load->view('shop/order_shipping', $data));
+		$this->response->setOutput($this->load->view('dashboard/order_shipping', $data));
 	}
 }

@@ -1,5 +1,5 @@
 <?php
-class ModelShopShop extends Model {
+class ModelDashboardShop extends Model {
     public function addShop($data) {
         //Whether is Added
         $count = $this->db->query("SELECT *  FROM " . DB_PREFIX . "shop WHERE customer_id = ".$data['customer_id']);

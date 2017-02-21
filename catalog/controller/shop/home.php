@@ -1,11 +1,11 @@
 <?php
-class ControllerArtistHome extends Controller {
+class ControllerShopHome extends Controller {
 	public function index() {
-		$this->load->language('artist/home');
+		$this->load->language('shop/home');
 
 		$this->load->model('catalog/category');
 
-		$this->load->model('artist/home');
+		$this->load->model('shop/home');
 
 		$this->load->model('tool/image');
 
@@ -101,8 +101,8 @@ class ControllerArtistHome extends Controller {
 				);
 
 				$data['categories'][] = array(
-					'name' => $result['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_artist_home->getTotalProducts($filter_data) . ')' : ''),
-					'href' => $this->url->link('artist/home', 'path=' . $this->request->get['path'] . '_' . $result['category_id'] . $url)
+					'name' => $result['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_shop_home->getTotalProducts($filter_data) . ')' : ''),
+					'href' => $this->url->link('shop/home', 'path=' . $this->request->get['path'] . '_' . $result['category_id'] . $url)
 				);
 			}
 
@@ -117,9 +117,9 @@ class ControllerArtistHome extends Controller {
 				'limit'              => $limit
 			);
 
-			$product_total = $this->model_artist_home->getTotalProducts($filter_data);
+			$product_total = $this->model_shop_home->getTotalProducts($filter_data);
 
-			$results = $this->model_artist_home->getProducts($filter_data);
+			$results = $this->model_shop_home->getProducts($filter_data);
 
 			foreach ($results as $result) {
 				if ($result['image']) {
@@ -171,7 +171,7 @@ class ControllerArtistHome extends Controller {
 				$data['limits'][] = array(
 					'text'  => $value,
 					'value' => $value,
-					'href'  => $this->url->link('artist/home', 'path=' . $this->request->get['path'] . $url . '&limit=' . $value)
+					'href'  => $this->url->link('shop/home', 'path=' . $this->request->get['path'] . $url . '&limit=' . $value)
 				);
 			}
 
@@ -181,7 +181,7 @@ class ControllerArtistHome extends Controller {
 			$pagination->total = $product_total;
 			$pagination->page = $page;
 			$pagination->limit = $limit;
-			$pagination->url = $this->url->link('artist/home', 'path=' . $this->request->get['path'] . $url . '&page={page}');
+			$pagination->url = $this->url->link('shop/home', 'path=' . $this->request->get['path'] . $url . '&page={page}');
 
 			$data['pagination'] = $pagination->render();
 
@@ -189,15 +189,15 @@ class ControllerArtistHome extends Controller {
 
 			// http://googlewebmastercentral.blogspot.com/2011/09/pagination-with-relnext-and-relprev.html
 			if ($page == 1) {
-			    $this->document->addLink($this->url->link('artist/home', 'path=' . $category_info['category_id'], true), 'canonical');
+			    $this->document->addLink($this->url->link('shop/home', 'path=' . $category_info['category_id'], true), 'canonical');
 			} elseif ($page == 2) {
-			    $this->document->addLink($this->url->link('artist/home', 'path=' . $category_info['category_id'], true), 'prev');
+			    $this->document->addLink($this->url->link('shop/home', 'path=' . $category_info['category_id'], true), 'prev');
 			} else {
-			    $this->document->addLink($this->url->link('artist/home', 'path=' . $category_info['category_id'] . '&page='. ($page - 1), true), 'prev');
+			    $this->document->addLink($this->url->link('shop/home', 'path=' . $category_info['category_id'] . '&page='. ($page - 1), true), 'prev');
 			}
 
 			if ($limit && ceil($product_total / $limit) > $page) {
-			    $this->document->addLink($this->url->link('artist/home', 'path=' . $category_info['category_id'] . '&page='. ($page + 1), true), 'next');
+			    $this->document->addLink($this->url->link('shop/home', 'path=' . $category_info['category_id'] . '&page='. ($page + 1), true), 'next');
 			}
 
 			$data['sort'] = $sort;
@@ -205,7 +205,7 @@ class ControllerArtistHome extends Controller {
 			$data['limit'] = $limit;
 
 			//Follow Related
-			$data['is_follow'] = $this->model_artist_home->getIsFollow($shop_id);
+			$data['is_follow'] = $this->model_shop_home->getIsFollow($shop_id);
 			$data['shop_id'] = $shop_id;
 
 			$data['continue'] = $this->url->link('common/home');
@@ -217,12 +217,12 @@ class ControllerArtistHome extends Controller {
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
 
-			$this->response->setOutput($this->load->view('artist/home', $data));
+			$this->response->setOutput($this->load->view('shop/home', $data));
 		} else {
 			$url = '';
 			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_error'),
-				'href' => $this->url->link('artist/home', $url)
+				'href' => $this->url->link('shop/home', $url)
 			);
 
 			$this->document->setTitle($this->language->get('text_error'));
@@ -244,15 +244,15 @@ class ControllerArtistHome extends Controller {
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
 
-			$this->response->setOutput($this->load->view('artist/not_found', $data));
+			$this->response->setOutput($this->load->view('shop/not_found', $data));
 		}
 	}
 
 	public function follow(){
 		$json = array();
 		if(isset($this->request->get['shop_id'])){
-			$this->load->model('artist/home');
-			$this->model_artist_home->followArtist($this->request->get['shop_id']);
+			$this->load->model('shop/home');
+			$this->model_shop_home->followArtist($this->request->get['shop_id']);
 		}
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
@@ -261,8 +261,8 @@ class ControllerArtistHome extends Controller {
 	public function unfollow(){
 		$json = array();
 		if(isset($this->request->get['shop_id'])){
-			$this->load->model('artist/home');
-			$this->model_artist_home->unfollowArtist($this->request->get['shop_id']);
+			$this->load->model('shop/home');
+			$this->model_shop_home->unfollowArtist($this->request->get['shop_id']);
 		}
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));

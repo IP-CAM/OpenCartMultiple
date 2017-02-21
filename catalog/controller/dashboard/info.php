@@ -1,17 +1,17 @@
 <?php
-class ControllerShopInfo extends Controller {
+class ControllerDashboardInfo extends Controller {
 
     public function index() {
 
-            $this->load->language('shop/info');
+            $this->load->language('dashboard/info');
             $this->document->setTitle($this->language->get('heading_title'));
-            $this->load->model('shop/shop');
+            $this->load->model('dashboard/shop');
 
             if($this->request->server['REQUEST_METHOD'] == 'POST'){
-                    $this->model_shop_shop->editShopInfo($this->customer->getId(),$this->request->post);
+                    $this->model_dashboard_shop->editShopInfo($this->customer->getId(),$this->request->post);
             }
 
-            $data = $this->model_shop_shop->getShopInfo($this->customer->getId());
+            $data = $this->model_dashboard_shop->getShopInfo($this->customer->getId());
             $data['heading_title'] = $this->language->get('heading_title');
             $data['text_form'] =  $this->language->get('text_edit');
             $data['entry_name'] =  $this->language->get('shop_name');
@@ -34,16 +34,16 @@ class ControllerShopInfo extends Controller {
             }
             $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 
-            $data['action'] = $this->url->link('shop/info', '', true);
+            $data['action'] = $this->url->link('dashboard/info', '', true);
 
             $data['breadcrumbs'] = array();
             $data['breadcrumbs'][] = array(
                 'text' => $this->language->get('text_home'),
-                'href' => $this->url->link('shop/dashboard','', true)
+                'href' => $this->url->link('dashboard/dashboard','', true)
             );
             $data['breadcrumbs'][] = array(
                 'text' => $this->language->get('heading_title'),
-                'href' => $this->url->link('shop/info', '', true)
+                'href' => $this->url->link('dashboard/info', '', true)
             );
 
             if (isset($this->error['warning'])) {
@@ -59,10 +59,10 @@ class ControllerShopInfo extends Controller {
             }
 
 
-            $data['footer'] = $this->load->controller('shop/layoutfooter');
-            $data['header'] = $this->load->controller('shop/layoutheader');
-            $data['column_left'] = $this->load->controller('shop/layoutleft');
-            $this->response->setOutput($this->load->view('shop/info', $data));
+            $data['footer'] = $this->load->controller('dashboard/layoutfooter');
+            $data['header'] = $this->load->controller('dashboard/layoutheader');
+            $data['column_left'] = $this->load->controller('dashboard/layoutleft');
+            $this->response->setOutput($this->load->view('dashboard/info', $data));
     }
 
 }

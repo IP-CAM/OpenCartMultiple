@@ -1,5 +1,5 @@
 <?php
-class ModelArtistHome extends Model {
+class ModelShopHome extends Model {
 
 	public function followArtist($shop_id){
 		//查询是否已经有

@@ -1,5 +1,5 @@
 <?php
-class ControllerShopCreate extends Controller {
+class ControllerDashboardCreate extends Controller {
 	public function index() {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/account', '', true);
@@ -7,10 +7,10 @@ class ControllerShopCreate extends Controller {
 		}
 
         if($this->customer->getIsOpenShop()){
-            $this->response->redirect($this->url->link('shop/dashboard', '', true));
+            $this->response->redirect($this->url->link('dashboard/home', '', true));
         }
 
-		$this->load->language('shop/create');
+		$this->load->language('dashboard/create');
 		$this->document->setTitle($this->language->get('heading_title'));
 		$data['heading_title'] = $this->language->get('heading_title');
 		$data['shop_name'] = $this->language->get('shop_name');
@@ -18,16 +18,16 @@ class ControllerShopCreate extends Controller {
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
             // Default Shop
-            $this->load->model('shop/shop');
+            $this->load->model('dashboard/shop');
             $requestData['customer_id'] = $this->customer->getId();
             $requestData['shop_name'] = $this->request->post['shop_name'];
-            $this->model_shop_shop->addShop($requestData);
+            $this->model_dashboard_shop->addShop($requestData);
             $this->customer->setIsOpenShop(1);
             //Redirect
-            $this->response->redirect($this->url->link('shop/account', '', true));
+            $this->response->redirect($this->url->link('dashboard/home', '', true));
         }
 
-		$data['action'] = $this->url->link('shop/create', '', true);
+		$data['action'] = $this->url->link('dashboard/create', '', true);
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
@@ -36,7 +36,7 @@ class ControllerShopCreate extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 		
-		$this->response->setOutput($this->load->view('shop/create', $data));
+		$this->response->setOutput($this->load->view('dashboard/create', $data));
 	}
 
 	public function country() {

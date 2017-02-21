@@ -1,8 +1,8 @@
 <?php
-class ControllerShopLayoutleft extends Controller {
+class ControllerDashboardLayoutleft extends Controller {
 	public function index() {
 		if (true) {
-			$this->load->language('shop/layoutleft');
+			$this->load->language('dashboard/layoutleft');
 
 			// Create a 3 level menu array
 			// Level 2 can not have children
@@ -12,7 +12,7 @@ class ControllerShopLayoutleft extends Controller {
 				'id'       => 'menu-dashboard',
 				'icon'	   => 'fa-dashboard',
 				'name'	   => $this->language->get('text_dashboard'),
-				'href'     => $this->url->link('shop/dashboard', '', true),
+				'href'     => $this->url->link('dashboard/home', '', true),
 				'children' => array()
 			);
 
@@ -21,7 +21,7 @@ class ControllerShopLayoutleft extends Controller {
                 'id'       => 'menu-catalog',
                 'icon'	   => 'fa-tags',
                 'name'	   => $this->language->get('text_catalog'),
-                'href'     => $this->url->link('shop/product', '', true),
+                'href'     => $this->url->link('dashboard/product', '', true),
                 'children' => array()
             );
 	
@@ -30,7 +30,7 @@ class ControllerShopLayoutleft extends Controller {
                 'id'       => 'menu-extension',
                 'icon'	   => 'fa-puzzle-piece',
                 'name'	   => $this->language->get('text_extension'),
-                'href'     => $this->url->link('shop/order', '', true),
+                'href'     => $this->url->link('dashboard/order', '', true),
                 'children' => array()
             );
 			
@@ -39,7 +39,7 @@ class ControllerShopLayoutleft extends Controller {
                 'id'       => 'menu-design',
                 'icon'	   => 'fa-television',
                 'name'	   => $this->language->get('text_design'),
-                'href'     => $this->url->link('shop/info', '', true),
+                'href'     => $this->url->link('dashboard/info', '', true),
                 'children' => array()
             );
 
@@ -48,7 +48,7 @@ class ControllerShopLayoutleft extends Controller {
                 'id'       => 'menu-sale',
                 'icon'	   => 'fa-shopping-cart',
                 'name'	   => $this->language->get('text_sale'),
-                'href'     => $this->url->link('shop/review', '', true),
+                'href'     => $this->url->link('dashboard/review', '', true),
                 'children' => array()
             );
 
@@ -57,7 +57,7 @@ class ControllerShopLayoutleft extends Controller {
                 'id'       => 'menu-customer',
                 'icon'	   => 'fa-user',
                 'name'	   => $this->language->get('text_customer'),
-                'href'     => $this->url->link('shop/return', '', true),
+                'href'     => $this->url->link('dashboard/return', '', true),
                 'children' => array()
             );
 
@@ -66,7 +66,7 @@ class ControllerShopLayoutleft extends Controller {
                 'id'       => 'menu-marketing',
                 'icon'	   => 'fa-share-alt',
                 'name'	   => $this->language->get('text_marketing'),
-                'href'     => $this->url->link('shop/collection', '', true),
+                'href'     => $this->url->link('dashboard/collection', '', true),
                 'children' => array()
             );
 
@@ -88,7 +88,7 @@ class ControllerShopLayoutleft extends Controller {
                 'children' => array()
             );
 
-			return $this->load->view('shop/layoutleft', $data);
+			return $this->load->view('dashboard/layoutleft', $data);
 		}
 	}
 }

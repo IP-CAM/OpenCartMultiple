@@ -1,5 +1,5 @@
 <?php
-class ModelShopTheme extends Model {
+class ModelDashboardTheme extends Model {
 	public function addTheme($theme_name) {
 		//查询是否已经有
 		$theme = $this->db->query("SELECT *  FROM " . DB_PREFIX . "artheme WHERE theme_name = '".$this->db->escape($theme_name)."'");

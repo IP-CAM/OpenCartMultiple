@@ -1,13 +1,13 @@
 <?php
-class ControllerShopReturn extends Controller {
+class ControllerDashboardReturn extends Controller {
 	private $error = array();
 
 	public function index() {
-		$this->load->language('shop/return');
+		$this->load->language('dashboard/return');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('shop/return');
+		$this->load->model('dashboard/return');
 
 		$this->getList();
 	}
@@ -134,11 +134,11 @@ class ControllerShopReturn extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('shop/return', '' . $url, true)
+			'href' => $this->url->link('dashboard/return', '' . $url, true)
 		);
 
-		$data['add'] = $this->url->link('shop/return/add', '' . $url, true);
-		$data['delete'] = $this->url->link('shop/return/delete', '' . $url, true);
+		$data['add'] = $this->url->link('dashboard/return/add', '' . $url, true);
+		$data['delete'] = $this->url->link('dashboard/return/delete', '' . $url, true);
 
 		$data['returns'] = array();
 
@@ -157,9 +157,9 @@ class ControllerShopReturn extends Controller {
 			'limit'                   => $this->config->get('config_limit_admin')
 		);
 
-		$return_total = $this->model_shop_return->getTotalReturns($filter_data);
+		$return_total = $this->model_dashboard_return->getTotalReturns($filter_data);
 
-		$results = $this->model_shop_return->getReturns($filter_data);
+		$results = $this->model_dashboard_return->getReturns($filter_data);
 
 		foreach ($results as $result) {
 			$data['returns'][] = array(
@@ -171,7 +171,7 @@ class ControllerShopReturn extends Controller {
 				'status'        => $result['status'],
 				'date_added'    => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'date_modified' => date($this->language->get('date_format_short'), strtotime($result['date_modified'])),
-				'edit'          => $this->url->link('shop/return/edit', '' . '&return_id=' . $result['return_id'] . $url, true)
+				'edit'          => $this->url->link('dashboard/return/edit', '' . '&return_id=' . $result['return_id'] . $url, true)
 			);
 		}
 
@@ -275,14 +275,14 @@ class ControllerShopReturn extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['sort_return_id'] = $this->url->link('shop/return', '' . '&sort=r.return_id' . $url, true);
-		$data['sort_order_id'] = $this->url->link('shop/return', '' . '&sort=r.order_id' . $url, true);
-		$data['sort_customer'] = $this->url->link('shop/return', '' . '&sort=customer' . $url, true);
-		$data['sort_product'] = $this->url->link('shop/return', '' . '&sort=r.product' . $url, true);
-		$data['sort_model'] = $this->url->link('shop/return', '' . '&sort=r.model' . $url, true);
-		$data['sort_status'] = $this->url->link('shop/return', '' . '&sort=status' . $url, true);
-		$data['sort_date_added'] = $this->url->link('shop/return', '' . '&sort=r.date_added' . $url, true);
-		$data['sort_date_modified'] = $this->url->link('shop/return', '' . '&sort=r.date_modified' . $url, true);
+		$data['sort_return_id'] = $this->url->link('dashboard/return', '' . '&sort=r.return_id' . $url, true);
+		$data['sort_order_id'] = $this->url->link('dashboard/return', '' . '&sort=r.order_id' . $url, true);
+		$data['sort_customer'] = $this->url->link('dashboard/return', '' . '&sort=customer' . $url, true);
+		$data['sort_product'] = $this->url->link('dashboard/return', '' . '&sort=r.product' . $url, true);
+		$data['sort_model'] = $this->url->link('dashboard/return', '' . '&sort=r.model' . $url, true);
+		$data['sort_status'] = $this->url->link('dashboard/return', '' . '&sort=status' . $url, true);
+		$data['sort_date_added'] = $this->url->link('dashboard/return', '' . '&sort=r.date_added' . $url, true);
+		$data['sort_date_modified'] = $this->url->link('dashboard/return', '' . '&sort=r.date_modified' . $url, true);
 
 		$url = '';
 
@@ -330,7 +330,7 @@ class ControllerShopReturn extends Controller {
 		$pagination->total = $return_total;
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_limit_admin');
-		$pagination->url = $this->url->link('shop/return', '' . $url . '&page={page}', true);
+		$pagination->url = $this->url->link('dashboard/return', '' . $url . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
 
@@ -352,11 +352,11 @@ class ControllerShopReturn extends Controller {
 		$data['sort'] = $sort;
 		$data['order'] = $order;
 
-		$data['header'] = $this->load->controller('shop/layoutheader');
-		$data['column_left'] = $this->load->controller('shop/layoutleft');
-		$data['footer'] = $this->load->controller('shop/layoutfooter');
+		$data['header'] = $this->load->controller('dashboard/layoutheader');
+		$data['column_left'] = $this->load->controller('dashboard/layoutleft');
+		$data['footer'] = $this->load->controller('dashboard/layoutfooter');
 
-		$this->response->setOutput($this->load->view('shop/return_list', $data));
+		$this->response->setOutput($this->load->view('dashboard/return_list', $data));
 	}
 	
 }

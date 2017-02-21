@@ -1,5 +1,5 @@
 <?php
-class ControllerShopLayoutheader extends Controller {
+class ControllerDashboardLayoutheader extends Controller {
 	public function index() {
 		$data['title'] = $this->document->getTitle();
 
@@ -17,7 +17,7 @@ class ControllerShopLayoutheader extends Controller {
 		$data['lang'] = $this->language->get('code');
 		$data['direction'] = $this->language->get('direction');
 
-		$this->load->language('shop/layoutheader');
+		$this->load->language('dashboard/layoutheader');
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -43,45 +43,46 @@ class ControllerShopLayoutheader extends Controller {
 		if (false) {
 			$data['logged'] = '';
 
-			$data['home'] = $this->url->link('shop/dashboard', '', true);
+			$data['home'] = $this->url->link('dashboard/home', '', true);
 		} else {
 			$data['logged'] = true;
 
-			$data['home'] = $this->url->link('shop/dashboard', '', true);
-			$data['logout'] = $this->url->link('shop/logout', '', true);
+			$data['home'] = $this->url->link('dashboard/home', '', true);
+			$data['logout'] = $this->url->link('dashboard/logout', '', true);
 
 			// Orders
-			$this->load->model('shop/order');
+			$this->load->model('dashboard/order');
 
 			// Processing Orders
-			$data['processing_status_total'] = $this->model_shop_order->getTotalOrders(array('filter_order_status' => implode(',', $this->config->get('config_processing_status'))));
+			$data['processing_status_total'] = $this->model_dashboard_order->getTotalOrders(array('filter_order_status' => implode(',', $this->config->get('config_processing_status'))));
 			$data['processing_status'] = $this->url->link('sale/order', '' . '&filter_order_status=' . implode(',', $this->config->get('config_processing_status')), true);
 
 			// Complete Orders
-			$data['complete_status_total'] = $this->model_shop_order->getTotalOrders(array('filter_order_status' => implode(',', $this->config->get('config_complete_status'))));
+			$data['complete_status_total'] = $this->model_dashboard_order->getTotalOrders(array('filter_order_status' => implode(',', $this->config->get('config_complete_status'))));
 			$data['complete_status'] = $this->url->link('sale/order', '' . '&filter_order_status=' . implode(',', $this->config->get('config_complete_status')), true);
 
 			// Returns
-			$this->load->model('shop/return');
+			$this->load->model('dashboard/return');
 
-			$return_total = $this->model_shop_return->getTotalReturns(array('filter_return_status_id' => $this->config->get('config_return_status_id')));
+			$return_total = $this->model_dashboard_return->getTotalReturns(array('filter_return_status_id' => $this->config->get('config_return_status_id')));
 
 			$data['return_total'] = $return_total;
 
 			$data['return'] = $this->url->link('sale/return', '', true);
 
 			// Products
-			$this->load->model('shop/product');
-			$product_total = $this->model_shop_product->getTotalProducts(array('filter_quantity' => 0));
+			$this->load->model('dashboard/product');
+			$product_total = $this->model_dashboard_product->getTotalProducts(array('filter_quantity' => 0));
+
 
 			$data['product_total'] = $product_total;
 
 			$data['product'] = $this->url->link('catalog/product', '' . '&filter_quantity=0', true);
 
 			// Reviews
-			$this->load->model('shop/review');
+			$this->load->model('dashboard/review');
 
-			$review_total = $this->model_shop_review->getTotalReviews(array('filter_status' => 0));
+			$review_total = $this->model_dashboard_review->getTotalReviews(array('filter_status' => 0));
 
 			$data['review_total'] = $review_total;
 
@@ -91,6 +92,6 @@ class ControllerShopLayoutheader extends Controller {
 
 		}
 
-		return $this->load->view('shop/layoutheader', $data);
+		return $this->load->view('dashboard/layoutheader', $data);
 	}
 }

@@ -1,27 +1,27 @@
 <?php
-class ControllerShopProduct extends Controller {
+class ControllerDashboardProduct extends Controller {
 	private $error = array();
 
 	public function index() {
-		$this->load->language('shop/product');
+		$this->load->language('dashboard/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('shop/product');
+		$this->load->model('dashboard/product');
 
 		$this->getList();
 	}
 
 	public function add() {
-		$this->load->language('shop/product');
+		$this->load->language('dashboard/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('shop/product');
+		$this->load->model('dashboard/product');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 			$this->request->post['shop_id'] = $this->customer->getId();
-			$this->model_shop_product->addProduct($this->request->post);
+			$this->model_dashboard_product->addProduct($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -59,21 +59,21 @@ class ControllerShopProduct extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('shop/product', '' . $url, true));
+			$this->response->redirect($this->url->link('dashboard/product', '' . $url, true));
 		}
 
 		$this->getForm();
 	}
 
 	public function edit() {
-		$this->load->language('shop/product');
+		$this->load->language('dashboard/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('shop/product');
+		$this->load->model('dashboard/product');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_shop_product->editProduct($this->request->get['product_id'], $this->request->post);
+			$this->model_dashboard_product->editProduct($this->request->get['product_id'], $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -111,22 +111,22 @@ class ControllerShopProduct extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('shop/product', '' . $url, true));
+			$this->response->redirect($this->url->link('dashboard/product', '' . $url, true));
 		}
 
 		$this->getForm();
 	}
 
 	public function delete() {
-		$this->load->language('shop/product');
+		$this->load->language('dashboard/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('shop/product');
+		$this->load->model('dashboard/product');
 
 		if (isset($this->request->post['selected']) && $this->validateDelete()) {
 			foreach ($this->request->post['selected'] as $product_id) {
-				$this->model_shop_product->deleteProduct($product_id);
+				$this->model_dashboard_product->deleteProduct($product_id);
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -165,22 +165,22 @@ class ControllerShopProduct extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('shop/product', '' . $url, true));
+			$this->response->redirect($this->url->link('dashboard/product', '' . $url, true));
 		}
 
 		$this->getList();
 	}
 
 	public function copy() {
-		$this->load->language('shop/product');
+		$this->load->language('dashboard/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('shop/product');
+		$this->load->model('dashboard/product');
 
 		if (isset($this->request->post['selected']) && $this->validateCopy()) {
 			foreach ($this->request->post['selected'] as $product_id) {
-				$this->model_shop_product->copyProduct($product_id);
+				$this->model_dashboard_product->copyProduct($product_id);
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -219,7 +219,7 @@ class ControllerShopProduct extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('shop/product', '' . $url, true));
+			$this->response->redirect($this->url->link('dashboard/product', '' . $url, true));
 		}
 
 		$this->getList();
@@ -322,17 +322,17 @@ class ControllerShopProduct extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('shop/dashboard', '', true)
+			'href' => $this->url->link('dashboard/home', '', true)
 		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('shop/product', '' . $url, true)
+			'href' => $this->url->link('dashboard/product', '' . $url, true)
 		);
 
-		$data['add'] = $this->url->link('shop/product/add', '' . $url, true);
-		$data['copy'] = $this->url->link('shop/product/copy', '' . $url, true);
-		$data['delete'] = $this->url->link('shop/product/delete', '' . $url, true);
+		$data['add'] = $this->url->link('dashboard/product/add', '' . $url, true);
+		$data['copy'] = $this->url->link('dashboard/product/copy', '' . $url, true);
+		$data['delete'] = $this->url->link('dashboard/product/delete', '' . $url, true);
 
 		$data['products'] = array();
 
@@ -351,9 +351,9 @@ class ControllerShopProduct extends Controller {
 
 		$this->load->model('tool/image');
 
-		$product_total = $this->model_shop_product->getTotalProducts($filter_data);
+		$product_total = $this->model_dashboard_product->getTotalProducts($filter_data);
 
-		$results = $this->model_shop_product->getProducts($filter_data);
+		$results = $this->model_dashboard_product->getProducts($filter_data);
 
 		foreach ($results as $result) {
 			if (is_file(DIR_IMAGE . $result['image'])) {
@@ -364,7 +364,7 @@ class ControllerShopProduct extends Controller {
 
 			$special = false;
 
-			$product_specials = $this->model_shop_product->getProductSpecials($result['product_id']);
+			$product_specials = $this->model_dashboard_product->getProductSpecials($result['product_id']);
 
 			foreach ($product_specials  as $product_special) {
 				if (($product_special['date_start'] == '0000-00-00' || strtotime($product_special['date_start']) < time()) && ($product_special['date_end'] == '0000-00-00' || strtotime($product_special['date_end']) > time())) {
@@ -383,7 +383,7 @@ class ControllerShopProduct extends Controller {
 				'special'    => $special,
 				'quantity'   => $result['quantity'],
 				'status'     => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-				'edit'       => $this->url->link('shop/product/edit', '' . '&product_id=' . $result['product_id'] . $url, true)
+				'edit'       => $this->url->link('dashboard/product/edit', '' . '&product_id=' . $result['product_id'] . $url, true)
 			);
 		}
 
@@ -472,12 +472,12 @@ class ControllerShopProduct extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['sort_name'] = $this->url->link('shop/product', '' . '&sort=pd.name' . $url, true);
-		$data['sort_model'] = $this->url->link('shop/product', '' . '&sort=p.model' . $url, true);
-		$data['sort_price'] = $this->url->link('shop/product', '' . '&sort=p.price' . $url, true);
-		$data['sort_quantity'] = $this->url->link('shop/product', '' . '&sort=p.quantity' . $url, true);
-		$data['sort_status'] = $this->url->link('shop/product', '' . '&sort=p.status' . $url, true);
-		$data['sort_order'] = $this->url->link('shop/product', '' . '&sort=p.sort_order' . $url, true);
+		$data['sort_name'] = $this->url->link('dashboard/product', '' . '&sort=pd.name' . $url, true);
+		$data['sort_model'] = $this->url->link('dashboard/product', '' . '&sort=p.model' . $url, true);
+		$data['sort_price'] = $this->url->link('dashboard/product', '' . '&sort=p.price' . $url, true);
+		$data['sort_quantity'] = $this->url->link('dashboard/product', '' . '&sort=p.quantity' . $url, true);
+		$data['sort_status'] = $this->url->link('dashboard/product', '' . '&sort=p.status' . $url, true);
+		$data['sort_order'] = $this->url->link('dashboard/product', '' . '&sort=p.sort_order' . $url, true);
 
 		$url = '';
 
@@ -517,7 +517,7 @@ class ControllerShopProduct extends Controller {
 		$pagination->total = $product_total;
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_limit_admin');
-		$pagination->url = $this->url->link('shop/product', '' . $url . '&page={page}', true);
+		$pagination->url = $this->url->link('dashboard/product', '' . $url . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
 
@@ -533,11 +533,11 @@ class ControllerShopProduct extends Controller {
 		$data['sort'] = $sort;
 		$data['order'] = $order;
 
-        $data['footer'] = $this->load->controller('shop/layoutfooter');
-        $data['header'] = $this->load->controller('shop/layoutheader');
-        $data['column_left'] = $this->load->controller('shop/layoutleft');
+        $data['footer'] = $this->load->controller('dashboard/layoutfooter');
+        $data['header'] = $this->load->controller('dashboard/layoutheader');
+        $data['column_left'] = $this->load->controller('dashboard/layoutleft');
 
-		$this->response->setOutput($this->load->view('shop/product_list', $data));
+		$this->response->setOutput($this->load->view('dashboard/product_list', $data));
 	}
 
 	protected function getForm() {
@@ -731,24 +731,24 @@ class ControllerShopProduct extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('shop/dashboard', '', true)
+			'href' => $this->url->link('dashboard/home', '', true)
 		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('shop/product', '' . $url, true)
+			'href' => $this->url->link('dashboard/product', '' . $url, true)
 		);
 
 		if (!isset($this->request->get['product_id'])) {
-			$data['action'] = $this->url->link('shop/product/add', '' . $url, true);
+			$data['action'] = $this->url->link('dashboard/product/add', '' . $url, true);
 		} else {
-			$data['action'] = $this->url->link('shop/product/edit', '' . '&product_id=' . $this->request->get['product_id'] . $url, true);
+			$data['action'] = $this->url->link('dashboard/product/edit', '' . '&product_id=' . $this->request->get['product_id'] . $url, true);
 		}
 
-		$data['cancel'] = $this->url->link('shop/product', '' . $url, true);
+		$data['cancel'] = $this->url->link('dashboard/product', '' . $url, true);
 
 		if (isset($this->request->get['product_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-			$product_info = $this->model_shop_product->getProduct($this->request->get['product_id']);
+			$product_info = $this->model_dashboard_product->getProduct($this->request->get['product_id']);
 		}
 
 		$this->load->model('localisation/language');
@@ -758,7 +758,7 @@ class ControllerShopProduct extends Controller {
 		if (isset($this->request->post['product_description'])) {
 			$data['product_description'] = $this->request->post['product_description'];
 		} elseif (isset($this->request->get['product_id'])) {
-			$data['product_description'] = $this->model_shop_product->getProductDescriptions($this->request->get['product_id']);
+			$data['product_description'] = $this->model_dashboard_product->getProductDescriptions($this->request->get['product_id']);
 		} else {
 			$data['product_description'] = array();
 		}
@@ -834,7 +834,7 @@ class ControllerShopProduct extends Controller {
 		if (isset($this->request->post['product_store'])) {
 			$data['product_store'] = $this->request->post['product_store'];
 		} elseif (isset($this->request->get['product_id'])) {
-			$data['product_store'] = $this->model_shop_product->getProductStores($this->request->get['product_id']);
+			$data['product_store'] = $this->model_dashboard_product->getProductStores($this->request->get['product_id']);
 		} else {
 			$data['product_store'] = array(0);
 		}
@@ -863,14 +863,14 @@ class ControllerShopProduct extends Controller {
 			$data['price'] = '';
 		}
 
-		$this->load->model('shop/recurring');
+		$this->load->model('dashboard/recurring');
 
-		$data['recurrings'] = $this->model_shop_recurring->getRecurrings();
+		$data['recurrings'] = $this->model_dashboard_recurring->getRecurrings();
 
 		if (isset($this->request->post['product_recurrings'])) {
 			$data['product_recurrings'] = $this->request->post['product_recurrings'];
 		} elseif (!empty($product_info)) {
-			$data['product_recurrings'] = $this->model_shop_product->getRecurrings($product_info['product_id']);
+			$data['product_recurrings'] = $this->model_dashboard_product->getRecurrings($product_info['product_id']);
 		} else {
 			$data['product_recurrings'] = array();
 		}
@@ -1033,7 +1033,7 @@ class ControllerShopProduct extends Controller {
 		if (isset($this->request->post['product_category'])) {
 			$categories = $this->request->post['product_category'];
 		} elseif (isset($this->request->get['product_id'])) {
-			$categories = $this->model_shop_product->getProductCategories($this->request->get['product_id']);
+			$categories = $this->model_dashboard_product->getProductCategories($this->request->get['product_id']);
 		} else {
 			$categories = array();
 		}
@@ -1052,12 +1052,12 @@ class ControllerShopProduct extends Controller {
 		}
 
 		// Filters
-		$this->load->model('shop/filter');
+		$this->load->model('dashboard/filter');
 
 		if (isset($this->request->post['product_filter'])) {
 			$filters = $this->request->post['product_filter'];
 		} elseif (isset($this->request->get['product_id'])) {
-			$filters = $this->model_shop_product->getProductFilters($this->request->get['product_id']);
+			$filters = $this->model_dashboard_product->getProductFilters($this->request->get['product_id']);
 		} else {
 			$filters = array();
 		}
@@ -1065,7 +1065,7 @@ class ControllerShopProduct extends Controller {
 		$data['product_filters'] = array();
 
 		foreach ($filters as $filter_id) {
-			$filter_info = $this->model_shop_filter->getFilter($filter_id);
+			$filter_info = $this->model_dashboard_filter->getFilter($filter_id);
 
 			if ($filter_info) {
 				$data['product_filters'][] = array(
@@ -1076,12 +1076,12 @@ class ControllerShopProduct extends Controller {
 		}
 
 		// Attributes
-		$this->load->model('shop/attribute');
+		$this->load->model('dashboard/attribute');
 
 		if (isset($this->request->post['product_attribute'])) {
 			$product_attributes = $this->request->post['product_attribute'];
 		} elseif (isset($this->request->get['product_id'])) {
-			$product_attributes = $this->model_shop_product->getProductAttributes($this->request->get['product_id']);
+			$product_attributes = $this->model_dashboard_product->getProductAttributes($this->request->get['product_id']);
 		} else {
 			$product_attributes = array();
 		}
@@ -1089,7 +1089,7 @@ class ControllerShopProduct extends Controller {
 		$data['product_attributes'] = array();
 
 		foreach ($product_attributes as $product_attribute) {
-			$attribute_info = $this->model_shop_attribute->getAttribute($product_attribute['attribute_id']);
+			$attribute_info = $this->model_dashboard_attribute->getAttribute($product_attribute['attribute_id']);
 
 			if ($attribute_info) {
 				$data['product_attributes'][] = array(
@@ -1101,12 +1101,12 @@ class ControllerShopProduct extends Controller {
 		}
 
 		// Options
-		$this->load->model('shop/option');
+		$this->load->model('dashboard/option');
 
 		if (isset($this->request->post['product_option'])) {
 			$product_options = $this->request->post['product_option'];
 		} elseif (isset($this->request->get['product_id'])) {
-			$product_options = $this->model_shop_product->getProductOptions($this->request->get['product_id']);
+			$product_options = $this->model_dashboard_product->getProductOptions($this->request->get['product_id']);
 		} else {
 			$product_options = array();
 		}
@@ -1154,14 +1154,14 @@ class ControllerShopProduct extends Controller {
 			}
 		}
 
-		$this->load->model('shop/customer_group');
+		$this->load->model('dashboard/customer_group');
 
-		$data['customer_groups'] = $this->model_shop_customer_group->getCustomerGroups();
+		$data['customer_groups'] = $this->model_dashboard_customer_group->getCustomerGroups();
 
 		if (isset($this->request->post['product_discount'])) {
 			$product_discounts = $this->request->post['product_discount'];
 		} elseif (isset($this->request->get['product_id'])) {
-			$product_discounts = $this->model_shop_product->getProductDiscounts($this->request->get['product_id']);
+			$product_discounts = $this->model_dashboard_product->getProductDiscounts($this->request->get['product_id']);
 		} else {
 			$product_discounts = array();
 		}
@@ -1182,7 +1182,7 @@ class ControllerShopProduct extends Controller {
 		if (isset($this->request->post['product_special'])) {
 			$product_specials = $this->request->post['product_special'];
 		} elseif (isset($this->request->get['product_id'])) {
-			$product_specials = $this->model_shop_product->getProductSpecials($this->request->get['product_id']);
+			$product_specials = $this->model_dashboard_product->getProductSpecials($this->request->get['product_id']);
 		} else {
 			$product_specials = array();
 		}
@@ -1224,7 +1224,7 @@ class ControllerShopProduct extends Controller {
 		if (isset($this->request->post['product_image'])) {
 			$product_images = $this->request->post['product_image'];
 		} elseif (isset($this->request->get['product_id'])) {
-			$product_images = $this->model_shop_product->getProductImages($this->request->get['product_id']);
+			$product_images = $this->model_dashboard_product->getProductImages($this->request->get['product_id']);
 		} else {
 			$product_images = array();
 		}
@@ -1248,12 +1248,12 @@ class ControllerShopProduct extends Controller {
 		}
 
 		// Downloads
-		$this->load->model('shop/download');
+		$this->load->model('dashboard/download');
 
 		if (isset($this->request->post['product_download'])) {
 			$product_downloads = $this->request->post['product_download'];
 		} elseif (isset($this->request->get['product_id'])) {
-			$product_downloads = $this->model_shop_product->getProductDownloads($this->request->get['product_id']);
+			$product_downloads = $this->model_dashboard_product->getProductDownloads($this->request->get['product_id']);
 		} else {
 			$product_downloads = array();
 		}
@@ -1261,7 +1261,7 @@ class ControllerShopProduct extends Controller {
 		$data['product_downloads'] = array();
 
 		foreach ($product_downloads as $download_id) {
-			$download_info = $this->model_shop_download->getDownload($download_id);
+			$download_info = $this->model_dashboard_download->getDownload($download_id);
 
 			if ($download_info) {
 				$data['product_downloads'][] = array(
@@ -1274,7 +1274,7 @@ class ControllerShopProduct extends Controller {
 		if (isset($this->request->post['product_related'])) {
 			$products = $this->request->post['product_related'];
 		} elseif (isset($this->request->get['product_id'])) {
-			$products = $this->model_shop_product->getProductRelated($this->request->get['product_id']);
+			$products = $this->model_dashboard_product->getProductRelated($this->request->get['product_id']);
 		} else {
 			$products = array();
 		}
@@ -1282,7 +1282,7 @@ class ControllerShopProduct extends Controller {
 		$data['product_relateds'] = array();
 
 		foreach ($products as $product_id) {
-			$related_info = $this->model_shop_product->getProduct($product_id);
+			$related_info = $this->model_dashboard_product->getProduct($product_id);
 
 			if ($related_info) {
 				$data['product_relateds'][] = array(
@@ -1303,7 +1303,7 @@ class ControllerShopProduct extends Controller {
 		if (isset($this->request->post['product_reward'])) {
 			$data['product_reward'] = $this->request->post['product_reward'];
 		} elseif (isset($this->request->get['product_id'])) {
-			$data['product_reward'] = $this->model_shop_product->getProductRewards($this->request->get['product_id']);
+			$data['product_reward'] = $this->model_dashboard_product->getProductRewards($this->request->get['product_id']);
 		} else {
 			$data['product_reward'] = array();
 		}
@@ -1311,7 +1311,7 @@ class ControllerShopProduct extends Controller {
 		if (isset($this->request->post['product_layout'])) {
 			$data['product_layout'] = $this->request->post['product_layout'];
 		} elseif (isset($this->request->get['product_id'])) {
-			$data['product_layout'] = $this->model_shop_product->getProductLayouts($this->request->get['product_id']);
+			$data['product_layout'] = $this->model_dashboard_product->getProductLayouts($this->request->get['product_id']);
 		} else {
 			$data['product_layout'] = array();
 		}
@@ -1320,9 +1320,9 @@ class ControllerShopProduct extends Controller {
 		//$data['layouts'] = $this->model_design_layout->getLayouts();
 
 		//Theme
-		$this->load->model('shop/theme');
+		$this->load->model('dashboard/theme');
 		if (isset($this->request->get['product_id'])) {
-			$data['theme_selected'] = $this->model_shop_product->getProductThemes($this->request->get['product_id']);
+			$data['theme_selected'] = $this->model_dashboard_product->getProductThemes($this->request->get['product_id']);
 		} else if(isset($this->request->get['theme_id']) && isset($this->request->get['theme_name'])){
 			$data['theme_selected'] = array(array('theme_name'=> $this->request->get['theme_name'],'theme_id'=>$this->request->get['theme_id']));
 		}else{
@@ -1330,7 +1330,7 @@ class ControllerShopProduct extends Controller {
 		}
 
 		//get Hot Thme List
-		$results = $this->model_shop_theme->getThemeUsed();
+		$results = $this->model_dashboard_theme->getThemeUsed();
 		$result_id = array();
 		foreach($results as $result){
 			if(!in_array($result['theme_id'],$result_id)){
@@ -1343,7 +1343,7 @@ class ControllerShopProduct extends Controller {
 		}
 
 		//getUsed Theme List
-		$results = $this->model_shop_theme->getThemeHot();
+		$results = $this->model_dashboard_theme->getThemeHot();
 		foreach($results as $result){
 			$data['theme_hotlist'][] = array(
 				'theme_id' => $result['theme_id'],
@@ -1352,14 +1352,14 @@ class ControllerShopProduct extends Controller {
 		}
 
 		//Collection
-		$this->load->model('shop/collection');
+		$this->load->model('dashboard/collection');
 		if (isset($this->request->get['product_id'])) {
-			$data['collection_selected'] = $this->model_shop_product->getProductCollections($this->request->get['product_id']);
+			$data['collection_selected'] = $this->model_dashboard_product->getProductCollections($this->request->get['product_id']);
 		} else{
 			$data['collection_selected'] = array();
 		}
 		//getUser Collection List
-		$results = $this->model_shop_collection->getCollections(array());
+		$results = $this->model_dashboard_collection->getCollections(array());
 		foreach($results as $result){
 			$data['collection_list'][] = array(
 					'collection_id' => $result['collection_id'],
@@ -1367,11 +1367,11 @@ class ControllerShopProduct extends Controller {
 			);
 		}
 
-        $data['footer'] = $this->load->controller('shop/layoutfooter');
-        $data['header'] = $this->load->controller('shop/layoutheader');
-        $data['column_left'] = $this->load->controller('shop/layoutleft');
+        $data['footer'] = $this->load->controller('dashboard/layoutfooter');
+        $data['header'] = $this->load->controller('dashboard/layoutheader');
+        $data['column_left'] = $this->load->controller('dashboard/layoutleft');
 
-		$this->response->setOutput($this->load->view('shop/product_form', $data));
+		$this->response->setOutput($this->load->view('dashboard/product_form', $data));
 	}
 
 	protected function validateForm() {
@@ -1426,8 +1426,8 @@ class ControllerShopProduct extends Controller {
 		$json = array();
 
 		if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_model'])) {
-			$this->load->model('shop/product');
-			$this->load->model('shop/option');
+			$this->load->model('dashboard/product');
+			$this->load->model('dashboard/option');
 
 			if (isset($this->request->get['filter_name'])) {
 				$filter_name = $this->request->get['filter_name'];
@@ -1454,12 +1454,12 @@ class ControllerShopProduct extends Controller {
 				'limit'        => $limit
 			);
 
-			$results = $this->model_shop_product->getProducts($filter_data);
+			$results = $this->model_dashboard_product->getProducts($filter_data);
 
 			foreach ($results as $result) {
 				$option_data = array();
 
-				$product_options = $this->model_shop_product->getProductOptions($result['product_id']);
+				$product_options = $this->model_dashboard_product->getProductOptions($result['product_id']);
 
 				foreach ($product_options as $product_option) {
 					$option_info = $this->model_catalog_option->getOption($product_option['option_id']);

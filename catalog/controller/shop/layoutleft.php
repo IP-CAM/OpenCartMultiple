@@ -66,7 +66,7 @@ class ControllerShopLayoutleft extends Controller {
                 'id'       => 'menu-marketing',
                 'icon'	   => 'fa-share-alt',
                 'name'	   => $this->language->get('text_marketing'),
-                'href'     => '',
+                'href'     => $this->url->link('shop/collection', '', true),
                 'children' => array()
             );
 

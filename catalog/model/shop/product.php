@@ -58,6 +58,12 @@ class ModelShopProduct extends Model {
 			}
 		}
 
+		if(isset($data['collection_id'])){
+			foreach ($data['collection_id'] as $collection_id) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_collection SET product_id = '" . (int)$product_id . "', collection_id = " . $collection_id );
+			}
+		}
+
 		if (isset($data['product_discount'])) {
 			foreach ($data['product_discount'] as $product_discount) {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "product_discount SET product_id = '" . (int)$product_id . "', customer_group_id = '" . (int)$product_discount['customer_group_id'] . "', quantity = '" . (int)$product_discount['quantity'] . "', priority = '" . (int)$product_discount['priority'] . "', price = '" . (float)$product_discount['price'] . "', date_start = '" . $this->db->escape($product_discount['date_start']) . "', date_end = '" . $this->db->escape($product_discount['date_end']) . "'");
@@ -158,6 +164,14 @@ class ModelShopProduct extends Model {
 		if(isset($data['theme_id'])){
 			foreach ($data['theme_id'] as $theme_id) {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "product_theme SET product_id = '" . (int)$product_id . "', theme_id = " . $theme_id . ", shop_id = " . $this->customer->getId() );
+			}
+		}
+
+		//Collectioon
+		$this->db->query("DELETE FROM " . DB_PREFIX . "product_collection WHERE product_id = '" . (int)$product_id . "'");
+		if(isset($data['collection_id'])){
+			foreach ($data['collection_id'] as $collection_id) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_collection SET product_id = '" . (int)$product_id . "', collection_id = " . $collection_id );
 			}
 		}
 
@@ -344,7 +358,8 @@ class ModelShopProduct extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "review WHERE product_id = '" . (int)$product_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = 'product_id=" . (int)$product_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "coupon_product WHERE product_id = '" . (int)$product_id . "'");
-
+		$this->db->query("DELETE FROM " . DB_PREFIX . "product_theme WHERE product_id = '" . (int)$product_id . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "product_collection WHERE product_id = '" . (int)$product_id . "'");
 		$this->cache->delete('product');
 	}
 
@@ -581,6 +596,16 @@ class ModelShopProduct extends Model {
 			$product_theme_data[] = array('theme_id' => $result['theme_id'], 'theme_name' => $result['theme_name']);
 		}
 		return $product_theme_data;
+	}
+
+	public function getProductCollections($product_id){
+		$product_collection_data = array();
+
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_collection pt LEFT JOIN `" . DB_PREFIX . "collection` a ON (pt.collection_id = a.collection_id) WHERE product_id = '" . (int)$product_id . "'");
+		foreach ($query->rows as $result) {
+			$product_collection_data[] = array('collection_id' => $result['collection_id'], 'collection_name' => $result['collection_name']);
+		}
+		return $product_collection_data;
 	}
 
 	public function getProductDownloads($product_id) {

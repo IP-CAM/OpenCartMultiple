@@ -1,6 +1,6 @@
 <?php echo $header; ?><?php echo $column_left; ?>
 <style>
-.theme_list li{
+.theme_list, .collection_list li{
   list-style: none;
   float: left;
   margin: 10px;
@@ -8,7 +8,7 @@
   background: #00a8c6;
   border-radius:30px;
 }
-.theme_list li a{
+.theme_list, .collection_list li a{
   color:#FFFFFF;
 }
 </style>
@@ -51,6 +51,7 @@
             <li><a href="#tab-reward" data-toggle="tab"><?php echo $tab_reward; ?></a></li>
             <li><a href="#tab-design" data-toggle="tab"><?php echo $tab_design; ?></a></li>
             <li><a href="#tab-theme" data-toggle="tab"><?php echo $tab_theme; ?></a></li>
+            <li><a href="#tab-collection" data-toggle="tab"><?php echo $tab_collection; ?></a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab-general">
@@ -1010,6 +1011,50 @@
               </div>
             </div>
 
+
+            <div class="tab-pane" id="tab-collection">
+
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <td class="text-center"><?php echo $entry_collection; ?></td>
+                    <td class="text-center"></td>
+                  </tr>
+                  </thead>
+                  <tbody id="product-collection-id">
+                  <?php foreach ($collection_selected as $collection_sel) { ?>
+                  <tr id="product-collection<?php echo $collection_sel['collection_id']?>">
+                    <td class="text-center"><?php echo $collection_sel['collection_name']; ?><input type="hidden" name="collection_id[]" value="<?php echo $collection_sel['collection_id']?>"></td>
+                    <td class="text-center"><button type="button" onclick="$('#product-collection<?php echo $collection_sel["collection_id"]; ?>').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+                  </tr>
+                  <?php } ?>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <td class="text-center"><?php echo $entry_collection_des; ?></td>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td class="text-center">
+                      <ul class="collection_list">
+                        <?php foreach ($collection_list as $collection) { ?>
+                        <li data-id="<?php echo $collection['collection_id'];?>" data-name="<?php echo $collection['collection_name'];?>"><a href="javascript::void(0)"><?php echo $collection['collection_name']; ?></a></li>
+                        <?php } ?>
+                      </ul>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
           </div>
         </form>
       </div>
@@ -1062,9 +1107,9 @@ $('.theme_list li').click(function(){
 
 function addTheme(theme_id, theme_name){
   var isAdded = false;
-  $("input[name='theme_id[]']").each(function(){
+  $("input[name='collection_id[]']").each(function(){
     if($(this).val() == theme_id){
-       alert("Already Added");
+      alert("Already Added");
       isAdded = true;
     }
   });
@@ -1073,6 +1118,23 @@ function addTheme(theme_id, theme_name){
             '<td class="text-center"><button type="button" onclick="$(\'#product-theme' + theme_id + '\').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td></tr>');
   }
 }
+
+$('.collection_list li').click(function(){
+
+  var isAdded = false;
+  $("input[name='theme_id[]']").each(function(){
+    if($(this).val() == $(this).data('id')){
+      alert("Already Added");
+      isAdded = true;
+    }
+  });
+  if(!isAdded){
+    $('#product-collection-id').append('<tr id="product-collection' + $(this).data('id') + '"><td class="text-center">'+$(this).data('name')+'<input type="hidden" name="collection_id[]" value="' + $(this).data('id') + '"></td>' +
+            '<td class="text-center"><button type="button" onclick="$(\'#product-collection' +  $(this).data('id') + '\').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td></tr>');
+  }
+
+});
+
 
 $('input[name=\'manufacturer\']').autocomplete({
   'source': function(request, response) {

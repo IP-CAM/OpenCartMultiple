@@ -99,3 +99,30 @@ CREATE TABLE IF NOT EXISTS `oc_shop_follow` (
 ALTER TABLE `oc_shop` ADD `follower_number` MEDIUMINT NOT NULL AFTER `owner_image`;
 
 
+CREATE TABLE IF NOT EXISTS `oc_collection` (
+  `collection_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL,
+  `collection_name` varchar(50) NOT NULL,
+  `created_time` int(11) NOT NULL,
+  PRIMARY KEY (`collection_id`),
+  KEY `customer_id` (`customer_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+
+CREATE TABLE IF NOT EXISTS `oc_product_collection` (
+  `product_collection_id` int(11) NOT NULL AUTO_INCREMENT,
+  `collection_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  PRIMARY KEY (`product_collection_id`),
+  KEY `collection_id` (`collection_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+ALTER TABLE `oc_collection` ADD `sort` SMALLINT NOT NULL AFTER `collection_name`;
+
+ALTER TABLE `oc_collection` CHANGE `customer_id` `shop_id` INT(11) NOT NULL;
+
+ALTER TABLE `oc_collection` CHANGE `sort` `rank` SMALLINT(6) NOT NULL;
+
+

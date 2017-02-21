@@ -617,6 +617,8 @@ class ControllerShopProduct extends Controller {
 		$data['entry_theme_hot'] = $this->language->get('entry_theme_hot');
 		$data['entry_theme_add'] = $this->language->get('entry_theme_add');
 		$data['entry_theme_type'] = $this->language->get('entry_theme_type');
+		$data['entry_collection'] = $this->language->get('entry_collection');
+		$data['entry_collection_des'] = $this->language->get('entry_collection_des');
 
 		$data['help_keyword'] = $this->language->get('help_keyword');
 		$data['help_sku'] = $this->language->get('help_sku');
@@ -659,6 +661,7 @@ class ControllerShopProduct extends Controller {
 		$data['tab_design'] = $this->language->get('tab_design');
 		$data['tab_openbay'] = $this->language->get('tab_openbay');
 		$data['tab_theme'] = $this->language->get('tab_theme');
+		$data['tab_collection'] = $this->language->get('tab_collection');
 
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
@@ -1345,6 +1348,22 @@ class ControllerShopProduct extends Controller {
 			$data['theme_hotlist'][] = array(
 				'theme_id' => $result['theme_id'],
 				'theme_name' => $result['theme_name'],
+			);
+		}
+
+		//Collection
+		$this->load->model('shop/collection');
+		if (isset($this->request->get['product_id'])) {
+			$data['collection_selected'] = $this->model_shop_product->getProductCollections($this->request->get['product_id']);
+		} else{
+			$data['collection_selected'] = array();
+		}
+		//getUser Collection List
+		$results = $this->model_shop_collection->getCollections(array());
+		foreach($results as $result){
+			$data['collection_list'][] = array(
+					'collection_id' => $result['collection_id'],
+					'collection_name' => $result['collection_name'],
 			);
 		}
 

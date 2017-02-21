@@ -1,13 +1,13 @@
 <?php
-class ControllerShopCollection extends Controller {
+class ControllerDashboardCollection extends Controller {
 	private $error = array();
 
 	public function index() {
-		$this->load->language('shop/collection');
+		$this->load->language('dashboard/collection');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('shop/collection');
+		$this->load->model('dashboard/collection');
 
 		$this->getList();
 	}
@@ -29,17 +29,17 @@ class ControllerShopCollection extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/dashboard', '', true)
+			'href' => $this->url->link('dashboard/home', '', true)
 		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('shop/collection', '' . $url, true)
+			'href' => $this->url->link('dashboard/collection', '' . $url, true)
 		);
 
-		$data['add'] = $this->url->link('shop/collection/add', '' . $url, true);
-		$data['delete'] = $this->url->link('shop/collection/delete', '' . $url, true);
-		$data['edit'] = $this->url->link('shop/collection/edit', '' . $url, true);
+		$data['add'] = $this->url->link('dashboard/collection/add', '' . $url, true);
+		$data['delete'] = $this->url->link('dashboard/collection/delete', '' . $url, true);
+		$data['edit'] = $this->url->link('dashboard/collection/edit', '' . $url, true);
 
 		$data['collections'] = array();
 
@@ -57,8 +57,8 @@ class ControllerShopCollection extends Controller {
 				'collection_id'     => $result['collection_id'],
 				'collection_name'      => $result['collection_name'],
 				'rank'      => $result['rank'],
-				'edit'          => $this->url->link('shop/collection/edit', '' . '&collection_id=' . $result['collection_id'] . $url, true),
-				'delete'          => $this->url->link('shop/collection/delete', '' . '&collection_id=' . $result['collection_id'] . $url, true)
+				'edit'          => $this->url->link('dashboard/collection/edit', '' . '&collection_id=' . $result['collection_id'] . $url, true),
+				'delete'          => $this->url->link('dashboard/collection/delete', '' . '&collection_id=' . $result['collection_id'] . $url, true)
 			);
 		}
 
@@ -97,7 +97,7 @@ class ControllerShopCollection extends Controller {
 		$pagination->total = $collection_total;
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_limit_admin');
-		$pagination->url = $this->url->link('shop/collection', '&page={page}', true);
+		$pagination->url = $this->url->link('dashboard/collection', '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
 
@@ -107,13 +107,13 @@ class ControllerShopCollection extends Controller {
 		$data['column_left'] = $this->load->controller('shop/layoutleft');
 		$data['footer'] = $this->load->controller('shop/layoutfooter');
 
-		$this->response->setOutput($this->load->view('shop/collection_list', $data));
+		$this->response->setOutput($this->load->view('dashboard/collection_list', $data));
 	}
 
 	public function add() {
-		$this->load->language('shop/collection');
+		$this->load->language('dashboard/collection');
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->load->model('shop/collection');
+		$this->load->model('dashboard/collection');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 			$this->model_shop_collection->addCollection($this->request->post);
@@ -123,16 +123,16 @@ class ControllerShopCollection extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('shop/collection', '' . $url, true));
+			$this->response->redirect($this->url->link('dashboard/collection', '' . $url, true));
 		}
 
 		$this->getForm();
 	}
 
 	public function edit() {
-		$this->load->language('shop/collection');
+		$this->load->language('dashboard/collection');
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->load->model('shop/collection');
+		$this->load->model('dashboard/collection');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 			$this->model_shop_collection->editCollection($this->request->get['collection_id'], $this->request->post);
@@ -141,7 +141,7 @@ class ControllerShopCollection extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-			$this->response->redirect($this->url->link('shop/collection', '' . $url, true));
+			$this->response->redirect($this->url->link('dashboard/collection', '' . $url, true));
 		}
 
 		$this->getForm();
@@ -181,21 +181,21 @@ class ControllerShopCollection extends Controller {
 
 		$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_home'),
-				'href' => $this->url->link('common/dashboard', '', true)
+				'href' => $this->url->link('dashboard/home', '', true)
 		);
 
 		$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('heading_title'),
-				'href' => $this->url->link('shop/collection', '' . $url, true)
+				'href' => $this->url->link('dashboard/collection', '' . $url, true)
 		);
 
 		if (!isset($this->request->get['collection_id'])) {
-			$data['action'] = $this->url->link('shop/collection/add', '' . $url, true);
+			$data['action'] = $this->url->link('dashboard/collection/add', '' . $url, true);
 		} else {
-			$data['action'] = $this->url->link('shop/collection/edit', '' . '&collection_id=' . $this->request->get['collection_id'] . $url, true);
+			$data['action'] = $this->url->link('dashboard/collection/edit', '' . '&collection_id=' . $this->request->get['collection_id'] . $url, true);
 		}
 
-		$data['cancel'] = $this->url->link('shop/collection', '' . $url, true);
+		$data['cancel'] = $this->url->link('dashboard/collection', '' . $url, true);
 
 		if (isset($this->request->get['collection_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
 			$collection_info = $this->model_shop_collection->getCollection($this->request->get['collection_id']);
@@ -218,20 +218,20 @@ class ControllerShopCollection extends Controller {
 			$data['collection_name'] = '';
 		}
 
-		$data['header'] = $this->load->controller('shop/layoutheader');
-		$data['column_left'] = $this->load->controller('shop/layoutleft');
-		$data['footer'] = $this->load->controller('shop/layoutfooter');
+		$data['header'] = $this->load->controller('dashboard/layoutheader');
+		$data['column_left'] = $this->load->controller('dashboard/layoutleft');
+		$data['footer'] = $this->load->controller('dashboard/layoutfooter');
 
-		$this->response->setOutput($this->load->view('shop/collection_form', $data));
+		$this->response->setOutput($this->load->view('dashboard/collection_form', $data));
 	}
 
 
 	public function delete() {
-		$this->load->language('shop/collection');
+		$this->load->language('dashboard/collection');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('shop/collection');
+		$this->load->model('dashboard/collection');
 
 		if (isset($this->request->post['collection_id']) && $this->validateDelete()) {
 
@@ -242,7 +242,7 @@ class ControllerShopCollection extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('shop/collection', '' . $url, true));
+			$this->response->redirect($this->url->link('dashboard/collection', '' . $url, true));
 		}
 
 		$this->getList();

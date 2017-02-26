@@ -1,5 +1,13 @@
 <?php
+
+use Qiniu\Auth;
+use Qiniu\Storage\UploadManager;
+
 class ModelToolFile extends Model {
+
+    private $accessKey = 'kBKRCQj2RNGLTnOOoIaRr8bzrs_cb0v7opoT_PPm';
+    private $secretKey = 'vSLfnegtSkLgVyfUtoqOPLZjXPXDV-OSUwVFo9tM';
+    private $bucket = 'mengchuang';
 	private function mkpath($dir){
 		if(!is_dir($dir)){
 			if(!$this->mkpath(dirname($dir))){
@@ -30,4 +38,18 @@ class ModelToolFile extends Model {
 		}
 		copy($src, $dstFolder.'/'.$filename);
 	}
+
+    /**
+     * 获得七牛TOKEN
+     */
+    public function getQiniuToken(){
+        require_once DIR_LIBRARY. '/qiniu/autoload.php';
+        // 构建鉴权对象
+        $auth = new Auth($this->accessKey, $this->secretKey);
+        // 要上传的空间
+        return $auth->uploadToken($this->bucket);
+    }
+
+
+
 }

@@ -1,4 +1,9 @@
-<?php echo $header; ?><?php echo $column_left; ?>
+<?php echo $header; ?>
+
+<script src="./admin/view/javascript/qiniu/formdata.js" type="text/javascript"></script>
+
+</script>
+<?php echo $column_left; ?>
 <div id="content">
   <div class="page-header">
     <div class="container-fluid">
@@ -66,15 +71,41 @@
 
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_image; ?></label>
-            <div class="col-sm-10"><a href="" id="thumb-image" data-toggle="image" class="img-thumbnail"><img src="<?php echo $thumb; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a>
-              <input type="hidden" name="image" value="<?php echo $owner_image; ?>" id="input-image" />
+            <div class="col-sm-10"><a href="javascript::void(0)" class="img-upload-single" data-inputid="avatar_url">
+                <img id="img_avatar" src="<?php echo $avatar_url_full; ?>" alt="" width="100" height="100" /></a>
+              <input type="hidden" name="avatar_url" id="avatar_url" value="<?php echo $avatar_url; ?>" />
             </div>
           </div>
 
+         <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_image; ?></label>
+            <div class="col-sm-10"><a href="javascript::void(0)" class="img-upload-single" data-inputid="banner_url">
+                <img id="img_banner" src="<?php echo $banner_url_full; ?>" /></a>
+              <input type="hidden" name="banner_url" id="banner_url" value="<?php echo $banner_url; ?>" />
+            </div>
+         </div>
 
         </form>
+
       </div>
     </div>
   </div>
+
+  <div class="container" style="display:none">
+    <form id="cloud_upload_form" method="post" enctype="multipart/form-data">
+        <input name="key" id="cloud_file_name" type="hidden" value=""/>
+        <input name="token" type="hidden" value="<?php echo $qiniu_token;?>"/>
+        <input name="file" id="cloud_file" type="file"/>
+        <input name="accept" type="hidden" />
+    </form>
+    <input name="img_id" id="img_id" type="hidden" value="">
+    <input name="input_id" id="input_id" type="hidden" value="">
+    <input name="img_dir" id="img_dir" type="hidden" value="<?php echo $img_dir;?>">
+    <div class="progress"></div>
+    <script>
+      var domain = "<?php echo QINIU_BASE;?>";
+    </script>
+  </div>
+
 </div>
 <?php echo $footer; ?>

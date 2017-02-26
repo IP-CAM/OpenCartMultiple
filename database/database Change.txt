@@ -126,3 +126,7 @@ ALTER TABLE `oc_collection` CHANGE `customer_id` `shop_id` INT(11) NOT NULL;
 ALTER TABLE `oc_collection` CHANGE `sort` `rank` SMALLINT(6) NOT NULL;
 
 
+ALTER TABLE `oc_shop` CHANGE `owner_image` `avatar_url` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+ALTER TABLE `oc_shop` ADD `banner_url` VARCHAR(100) NOT NULL AFTER `avatar_url`;
+
+ALTER TABLE `oc_collection` ADD `collection_url` VARCHAR(100) NOT NULL AFTER `collection_name`;

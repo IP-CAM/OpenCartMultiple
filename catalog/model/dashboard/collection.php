@@ -1,12 +1,12 @@
 <?php
 class ModelDashboardCollection extends Model {
 	public function addCollection($data) {
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "collection` SET rank = '" . (int)$data['rank'] . "', shop_id = '" . $this->customer->getId() . "', collection_name = '" .$this->db->escape($data['collection_name']) . "',  created_time = ".time());
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "collection` SET rank = '" . (int)$data['rank'] . "', shop_id = '" . $this->customer->getId() . "', collection_name = '" .$this->db->escape($data['collection_name']) ."', collection_url = '" .$this->db->escape($data['collection_url']) . "',  created_time = ".time());
 		return $this->db->getLastId();
 	}
 
 	public function editCollection($collection_id, $data) {
-		$this->db->query("UPDATE `" . DB_PREFIX . "collection` SET rank = '" . (int)$data['rank'] . "', collection_name = '" . $this->db->escape($data['collection_name']) . "' WHERE collection_id = '" . (int)$collection_id . "'");
+		$this->db->query("UPDATE `" . DB_PREFIX . "collection` SET rank = '" . (int)$data['rank'] . "', collection_url = '" . $this->db->escape($data['collection_url']) ."', collection_name = '" . $this->db->escape($data['collection_name']) . "' WHERE collection_id = '" . (int)$collection_id . "'");
 	}
 
 	public function deleteCollection($collection_id) {

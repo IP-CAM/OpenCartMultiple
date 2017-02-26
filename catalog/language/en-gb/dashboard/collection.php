@@ -10,6 +10,7 @@ $_['text_edit']           = 'Edit Product Collection';
 
 $_['column_rank']      = 'Sort Order';
 $_['column_collection_name']       = 'Collection Name';
+$_['column_collection_img']       = 'Collection Image';
 
 $_['column_rank_help']      = 'Integer';
 

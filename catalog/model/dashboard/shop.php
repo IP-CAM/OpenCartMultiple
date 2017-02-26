@@ -22,7 +22,8 @@ class ModelDashboardShop extends Model {
                                                         owner_about = '" . $this->db->escape($data['owner_about']) . "',
                                                         owner_facebook = '" . $this->db->escape($data['owner_facebook']) . "',
                                                         owner_twitter = '" . $this->db->escape($data['owner_twitter']) . "',
-                                                        owner_image = '" . $this->db->escape($data['image']) . "'
+                                                        avatar_url = '" . $this->db->escape($data['avatar_url']) . "',
+                                                        banner_url = '" . $this->db->escape($data['banner_url']) . "'
                                                         WHERE shop_id = " . $shop_id);
     }
 

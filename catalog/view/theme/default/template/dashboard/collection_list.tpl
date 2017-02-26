@@ -35,6 +35,7 @@
             <table class="table table-bordered table-hover">
               <thead>
                 <tr>
+                  <td class="text-center"><?php echo $column_collection_img; ?></td>
                   <td class="text-center"><?php echo $column_collection_name; ?></td>
                   <td class="text-center"><?php echo $column_rank; ?></td>
                   <td class="text-center"></td>
@@ -44,6 +45,7 @@
                 <?php if ($collections) { ?>
                 <?php foreach ($collections as $collection) { ?>
                 <tr>
+                    <td class="text-center"><img src="<?php echo $collection['collection_url_full']; ?>" width="60" height="60"/></td>
                   <td class="text-center"><?php echo $collection['collection_name']; ?></td>
                   <td class="text-center"><?php echo $collection['rank']; ?></td>
                   <td class="text-center"><a href="<?php echo $collection['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>

@@ -52,10 +52,12 @@ class ControllerDashboardCollection extends Controller {
 
 		$results = $this->model_dashboard_collection->getCollections($filter_data);
 
+        $this->load->model('tool/image');
 		foreach ($results as $result) {
 			$data['collections'][] = array(
 				'collection_id'     => $result['collection_id'],
 				'collection_name'      => $result['collection_name'],
+                'collection_url_full'      => $result['collection_url'] == ""? $this->model_tool_image->resize('no_image.png', 100, 100):QINIU_BASE.$result['collection_url']."!thumb",
 				'rank'      => $result['rank'],
 				'edit'          => $this->url->link('dashboard/collection/edit', '' . '&collection_id=' . $result['collection_id'] . $url, true),
 				'delete'          => $this->url->link('dashboard/collection/delete', '' . '&collection_id=' . $result['collection_id'] . $url, true)
@@ -70,6 +72,7 @@ class ControllerDashboardCollection extends Controller {
 
 		$data['column_rank'] = $this->language->get('column_rank');
 		$data['column_collection_name'] = $this->language->get('column_collection_name');
+        $data['column_collection_img'] = $this->language->get('column_collection_img');
 
 		$data['button_add'] = $this->language->get('button_add');
 		$data['button_edit'] = $this->language->get('button_edit');
@@ -154,6 +157,7 @@ class ControllerDashboardCollection extends Controller {
 
 		$data['entry_rank'] = $this->language->get('column_rank');
 		$data['entry_collection_name'] = $this->language->get('column_collection_name');
+        $data['entry_collection_img'] = $this->language->get('column_collection_img');
 		$data['column_rank_help'] = $this->language->get('column_rank_help');
 
 		$data['button_save'] = $this->language->get('button_save');
@@ -217,6 +221,27 @@ class ControllerDashboardCollection extends Controller {
 		} else {
 			$data['collection_name'] = '';
 		}
+
+        //image
+        $this->load->model('tool/image');
+        if (isset($this->request->post['collection_url'])) {
+            $data['collection_url'] = $this->request->post['collection_url'];
+        } elseif (!empty($collection_info)) {
+            $data['collection_url'] = $collection_info['collection_url'];
+        } else {
+            $data['collection_url'] = '';
+        }
+
+        if($data['collection_url'] == ""){
+            $data['collection_url_full'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+        }else{
+            $data['collection_url_full'] = QINIU_BASE.$data['collection_url']."!thumb";
+        }
+
+        // qiniu
+        $this->load->model('tool/file');
+        $data['qiniu_token'] = $this->model_tool_file->getQiniuToken();
+        $data['img_dir'] = floor($this->customer->getId()/1000)."/".$this->customer->getId()."/";
 
 		$data['header'] = $this->load->controller('dashboard/layoutheader');
 		$data['column_left'] = $this->load->controller('dashboard/layoutleft');

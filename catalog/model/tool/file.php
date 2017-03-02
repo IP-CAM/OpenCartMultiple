@@ -50,6 +50,30 @@ class ModelToolFile extends Model {
         return $auth->uploadToken($this->bucket);
     }
 
+	/**
+	 * 上传图片
+	 */
+	public function uploadToQiniu($fileSrc,$dir){
+
+		$key =$dir.substr(md5(time()),0,20).'.png';
+		// 初始化 UploadManager 对象并进行文件的上传。
+		$uploadMgr = new UploadManager();
+
+		// 调用 UploadManager 的 putFile 方法进行文件的上传。
+		list($ret, $err) = $uploadMgr->putFile($this->getQiniuToken(), $key, $fileSrc);
+		if ($err == null) {
+			return $key;
+		}else{
+			return "fail";
+		}
+	}
+
+	/**
+	 * 删除图片
+	 */
+	public function deleteFile($fileUrl){
+		@unlink($fileUrl);
+	}
 
 
 }

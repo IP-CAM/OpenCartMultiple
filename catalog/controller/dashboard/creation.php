@@ -58,11 +58,12 @@ class ControllerDashboardCreation extends Controller {
 				'creation_id'     => $result['creation_id'],
 				'creation_name'      => $result['creation_name'],
 				'creation_description'      => $result['creation_description'],
-                'creation_url_full'      => $result['creation_url'] == ""? $this->model_tool_image->resize('no_image.png', 100, 100):QINIU_BASE.$result['creation_url']."!thumb",
+                'creation_url_full'      => $result['creation_url_show'] == ""? $this->model_tool_image->resize('no_image.png', 100, 100):QINIU_BASE.$result['creation_url_show']."!thumb",
 				'edit'          => $this->url->link('dashboard/creation/edit', '' . '&creation_id=' . $result['creation_id'] . $url, true),
 				'delete'          => $this->url->link('dashboard/creation/delete', '' . '&creation_id=' . $result['creation_id'] . $url, true)
 			);
 		}
+
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -119,14 +120,27 @@ class ControllerDashboardCreation extends Controller {
 		$this->load->model('dashboard/creation');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_dashboard_creation->addCreation($this->request->post);
-			$this->session->data['success'] = $this->language->get('text_success');
-			$url = '';
-			if (isset($this->request->get['page'])) {
-				$url .= '&page=' . $this->request->get['page'];
-			}
+			//Combine new Image
+			$this->load->model('tool/image');
+			$fillColorImgUrl = $this->model_tool_image->toFillColor($this->request->post['creation_color'],700,QINIU_BASE.$this->request->post['creation_url']."!creation");
+			//Upload
+			$this->load->model('tool/file');
+			$this->model_tool_file->getQiniuToken();
+			$uploadFile = $this->model_tool_file->uploadToQiniu($fillColorImgUrl,floor($this->customer->getId()/1000)."/".$this->customer->getId()."/");
 
-			$this->response->redirect($this->url->link('dashboard/creation', '' . $url, true));
+			if($uploadFile != "fail"){
+				$this->request->post['creation_url_show'] = $uploadFile;
+				$this->model_dashboard_creation->addCreation($this->request->post);
+
+				$this->model_tool_file->deleteFile($fillColorImgUrl);
+				$this->session->data['success'] = $this->language->get('text_success');
+				$url = '';
+				if (isset($this->request->get['page'])) {
+					$url .= '&page=' . $this->request->get['page'];
+				}
+				$this->response->redirect($this->url->link('dashboard/creation', '' . $url, true));
+
+			}
 		}
 
 		$this->getForm();
@@ -138,6 +152,20 @@ class ControllerDashboardCreation extends Controller {
 		$this->load->model('dashboard/creation');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+			if($this->request->post['creation_color_origin'] != $this->request->post['creation_color']){
+				//生成图片
+				//Combine new Image
+				$this->load->model('tool/image');
+				$fillColorImgUrl = $this->model_tool_image->toFillColor($this->request->post['creation_color'],700,QINIU_BASE.$this->request->post['creation_url']."!creation");
+				//Upload
+				$this->load->model('tool/file');
+				$this->model_tool_file->getQiniuToken();
+				$uploadFile = $this->model_tool_file->uploadToQiniu($fillColorImgUrl,floor($this->customer->getId()/1000)."/".$this->customer->getId()."/");
+				if($uploadFile != "fail") {
+					$this->request->post['creation_url_show'] = $uploadFile;
+					$this->model_tool_file->deleteFile($fillColorImgUrl);
+				}
+			}
 			$this->model_dashboard_creation->editCreation($this->request->get['creation_id'], $this->request->post);
 			$this->session->data['success'] = $this->language->get('text_success');
 			$url = '';
@@ -154,6 +182,7 @@ class ControllerDashboardCreation extends Controller {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['creation_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
+		$data['text_form_type'] = !isset($this->request->get['creation_id']) ? "add": "edit";
 
 		$data['entry_creation_name'] = $this->language->get('column_creation_name');
         $data['entry_creation_img'] = $this->language->get('column_creation_img');
@@ -247,16 +276,32 @@ class ControllerDashboardCreation extends Controller {
         } else {
             $data['creation_url'] = '';
         }
-
         if($data['creation_url'] == ""){
             $data['creation_url_full'] = $this->model_tool_image->resize('no_image.png', 100, 100);
         }else{
             $data['creation_url_full'] = QINIU_BASE.$data['creation_url']."!thumb";
         }
+		if (isset($this->request->post['creation_url_show'])) {
+			$data['creation_url_show'] = $this->request->post['creation_url_show'];
+		} elseif (!empty($creation_info)) {
+			$data['creation_url_show'] = $creation_info['creation_url_show'];
+		} else {
+			$data['creation_url_show'] = '';
+		}
+
+		if (isset($this->request->post['creation_url'])) {
+			$data['creation_url'] = $this->request->post['creation_url'];
+		} elseif (!empty($creation_info)) {
+			$data['creation_url'] = $creation_info['creation_url'];
+		} else {
+			$data['creation_url'] = '';
+		}
 
         // qiniu
         $this->load->model('tool/file');
         $data['qiniu_token'] = $this->model_tool_file->getQiniuToken();
+		//$this->model_tool_file->uploadToQiniu("C:/wamp/www/opencart/image/temp/1.png","0/1/");
+
         $data['img_dir'] = floor($this->customer->getId()/1000)."/".$this->customer->getId()."/";
 
 		$data['header'] = $this->load->controller('dashboard/layoutheader');
@@ -295,7 +340,7 @@ class ControllerDashboardCreation extends Controller {
 			$this->error['creation_name'] = $this->language->get('error_creation_name');
 		}
 
-		if (utf8_strlen($this->request->post['creation_name']) !=  6) {
+		if (utf8_strlen($this->request->post['creation_color']) !=  6) {
 			$this->error['creation_color'] = $this->language->get('error_creation_color');
 		}
 
@@ -304,6 +349,17 @@ class ControllerDashboardCreation extends Controller {
 
 	protected function validateDelete() {
 		return !$this->error;
+	}
+
+	/**
+	 * Product list页面
+	 */
+	public function product() {
+		$data['header'] = $this->load->controller('dashboard/layoutheader');
+		$data['column_left'] = $this->load->controller('dashboard/layoutleft');
+		$data['footer'] = $this->load->controller('dashboard/layoutfooter');
+
+		$this->response->setOutput($this->load->view('dashboard/creation_product', $data));
 	}
 
 }

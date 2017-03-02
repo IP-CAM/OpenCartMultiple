@@ -5,6 +5,7 @@ class ModelDashboardCreation extends Model {
 		   creation_name = '" .$this->db->escape($data['creation_name']) ."',
 		   creation_description = '" .$this->db->escape($data['creation_description']) ."',
 		   creation_url = '" .$this->db->escape($data['creation_url']) . "',
+		   creation_url_show = '" .$this->db->escape($data['creation_url_show']) . "',
 		   creation_color = '" .$this->db->escape($data['creation_color']) . "',
 		   created_time = ".time());
 		return $this->db->getLastId();
@@ -14,6 +15,7 @@ class ModelDashboardCreation extends Model {
 		$this->db->query("UPDATE `" . DB_PREFIX . "creation` SET  creation_url = '" . $this->db->escape($data['creation_url']) ."',
 		creation_name = '" . $this->db->escape($data['creation_name']) . "',
 		creation_color = '" . $this->db->escape($data['creation_color']) . "',
+		creation_url_show = '" . $this->db->escape($data['creation_url_show']) . "',
 		creation_description = '" . $this->db->escape($data['creation_description']) . "'
 		WHERE creation_id = '" . (int)$creation_id . "'");
 	}

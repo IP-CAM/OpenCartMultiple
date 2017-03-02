@@ -48,18 +48,20 @@
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_creation_img; ?></label>
-                        <div class="col-sm-10"><a href="javascript::void(0)" class="img-upload-single" data-inputid="creation_url">
+                        <div class="col-sm-10"><a href="javascript::void(0)" <?php if($text_form_type == 'add'){ ?>>class="img-upload-single"<?php }?> data-inputid="creation_url">
                                 <div id="color_show"  style="width:150px">
                                     <img id="img_creation" src="<?php echo $creation_url_full; ?>" style="margin: 25px;width:100px" />
                                 </div>
                                 </a>
                             <input type="hidden" name="creation_url" id="creation_url" value="<?php echo $creation_url; ?>" />
+                            <input type="hidden" name="creation_url_show" value="<?php echo $creation_url_show; ?>" />
                         </div>
                     </div>
 
                     <div class="form-group required">
                         <label class="col-sm-2 control-label" for="input-author"><?php echo $entry_creation_color; ?></label>
                         <div class="col-sm-4">
+                            <input type="hidden" name="creation_color_origin" value="<?php echo $creation_color; ?>">
                             <input type="text" name="creation_color" value="<?php echo $creation_color; ?>" placeholder="<?php echo $entry_creation_color; ?>" id="input_color" class="form-control" />
                             <?php if ($error_creation_color) { ?>
                             <div class="text-danger"><?php echo $error_creation_color; ?></div>

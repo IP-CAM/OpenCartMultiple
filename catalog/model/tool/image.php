@@ -49,5 +49,31 @@ class ModelToolImage extends Model {
 		}
 	}
 
+	/**
+	 * Fill Color To Transparent PNG
+	 */
+	public function toFillColor($bgColor, $bgSize, $srcUrl){
+
+		//创建图片的实例
+		$src = imagecreatefrompng($srcUrl);
+
+		//创建图像
+		$dst = @imagecreatetruecolor($bgSize, $bgSize);
+		$bgColor = imagecolorallocate($dst, hexdec(substr($bgColor,0,2)), hexdec(substr($bgColor,2,2)), hexdec(substr($bgColor,4,2)));
+		imagefill($dst,0,0,$bgColor);
+
+		//获取水印图片的宽高
+		list($src_w, $src_h) = getimagesize($srcUrl);
+		imagecopy($dst, $src, ($bgSize - $src_w)/2, ($bgSize - $src_h)/2 , 0 ,0 ,$src_w, $src_h);
+
+		//输出图片
+		$dstUrl = DIR_IMAGE . 'temp/'.$this->customer->getId().'.png';
+		imagepng($dst,$dstUrl);
+
+		imagedestroy($dst);
+		imagedestroy($src);
+		return $dstUrl;
+	}
+
 
 }

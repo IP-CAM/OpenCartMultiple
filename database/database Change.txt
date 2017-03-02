@@ -146,3 +146,5 @@ CREATE TABLE IF NOT EXISTS `oc_creation` (
 ALTER TABLE `oc_creation` ADD `product_num` TINYINT NOT NULL AFTER `creation_url`;
 
 ALTER TABLE `oc_creation` ADD `creation_color` VARCHAR(10) NOT NULL AFTER `creation_url`;
+
+ALTER TABLE `oc_creation` CHANGE `creation_url_origin` `creation_url_show` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;

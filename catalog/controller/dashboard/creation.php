@@ -355,10 +355,39 @@ class ControllerDashboardCreation extends Controller {
 	 * Product list页面
 	 */
 	public function product() {
+		$this->load->language('dashboard/creation');
+		$this->document->setTitle($this->language->get('heading_title'));
+		$this->load->model('dashboard/creation');
+
+		$data['heading_title'] = $this->language->get('heading_title');
+
+		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'][] = array(
+				'text' => $this->language->get('text_home'),
+				'href' => $this->url->link('dashboard/home', '', true)
+		);
+		$data['breadcrumbs'][] = array(
+				'text' => $this->language->get('heading_title'),
+				'href' => $this->url->link('dashboard/creation', '' , true)
+		);
+
+		if (isset($this->error['warning'])) {
+			$data['error_warning'] = $this->error['warning'];
+		} else {
+			$data['error_warning'] = '';
+		}
+		if (isset($this->session->data['success'])) {
+			$data['success'] = $this->session->data['success'];
+			unset($this->session->data['success']);
+		} else {
+			$data['success'] = '';
+		}
+
+		$data['text_product'] = $this->language->get('text_product');
+
 		$data['header'] = $this->load->controller('dashboard/layoutheader');
 		$data['column_left'] = $this->load->controller('dashboard/layoutleft');
 		$data['footer'] = $this->load->controller('dashboard/layoutfooter');
-
 		$this->response->setOutput($this->load->view('dashboard/creation_product', $data));
 	}
 

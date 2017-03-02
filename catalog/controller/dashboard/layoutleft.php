@@ -75,7 +75,7 @@ class ControllerDashboardLayoutleft extends Controller {
                 'id'       => 'menu-system',
                 'icon'	   => 'fa-cog',
                 'name'	   => $this->language->get('text_system'),
-                'href'     => '',
+                'href'     => $this->url->link('dashboard/creation', '', true),
                 'children' => array()
             );
 

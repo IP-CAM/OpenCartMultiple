@@ -1,17 +1,21 @@
 <?php
 // Heading
-$_['heading_title']       = 'Collections Manage';
+$_['heading_title']       = 'Design Manage';
 
 // Text
-$_['text_success']        = 'Success: You have modified collections!';
-$_['text_list']           = 'Product Collection List';
-$_['text_add']            = 'Add Product Collection';
-$_['text_edit']           = 'Edit Product Collection';
+$_['text_success']        = 'Success: You have modified designs!';
+$_['text_list']           = 'Design List';
+$_['text_add']            = 'Add Design';
+$_['text_edit']           = 'Edit Design';
 
 $_['column_rank']      = 'Sort Order';
-$_['column_collection_name']       = 'Collection Name';
-$_['column_collection_img']       = 'Collection Image';
+$_['column_creation_name']       = 'Design Name';
+$_['column_creation_img']       = 'Design Image';
+$_['column_creation_description']       = 'Design Description';
+
+$_['entry_creation_color']       = 'Default Background Color';
+
 
 $_['column_rank_help']      = 'Integer';
-
-$_['error_collection_name']     = 'Collection Name must be between 1 and 32 characters!';
+$_['error_collection_name']     = 'Design Name must be between 1 and 32 characters!';
+$_['error_creation_color']     = 'Default Background Color must be 6 numbers!';

@@ -1,27 +1,34 @@
 <?php
-class ModelDashboardCollection extends Model {
-	public function addCollection($data) {
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "collection` SET rank = '" . (int)$data['rank'] . "', shop_id = '" . $this->customer->getId() . "', collection_name = '" .$this->db->escape($data['collection_name']) ."', collection_url = '" .$this->db->escape($data['collection_url']) . "',  created_time = ".time());
+class ModelDashboardCreation extends Model {
+	public function addCreation($data) {
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "creation` SET shop_id = '" . $this->customer->getId() . "',
+		   creation_name = '" .$this->db->escape($data['creation_name']) ."',
+		   creation_description = '" .$this->db->escape($data['creation_description']) ."',
+		   creation_url = '" .$this->db->escape($data['creation_url']) . "',
+		   creation_color = '" .$this->db->escape($data['creation_color']) . "',
+		   created_time = ".time());
 		return $this->db->getLastId();
 	}
 
-	public function editCollection($collection_id, $data) {
-		$this->db->query("UPDATE `" . DB_PREFIX . "collection` SET rank = '" . (int)$data['rank'] . "', collection_url = '" . $this->db->escape($data['collection_url']) ."', collection_name = '" . $this->db->escape($data['collection_name']) . "' WHERE collection_id = '" . (int)$collection_id . "'");
+	public function editCreation($creation_id, $data) {
+		$this->db->query("UPDATE `" . DB_PREFIX . "creation` SET  creation_url = '" . $this->db->escape($data['creation_url']) ."',
+		creation_name = '" . $this->db->escape($data['creation_name']) . "',
+		creation_color = '" . $this->db->escape($data['creation_color']) . "',
+		creation_description = '" . $this->db->escape($data['creation_description']) . "'
+		WHERE creation_id = '" . (int)$creation_id . "'");
 	}
 
-	public function deleteCollection($collection_id) {
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "collection` WHERE collection_id = '" . (int)$collection_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "product_collection WHERE collection_id = '" . (int)$collection_id . "'");
+	public function deleteCreation($creation_id) {
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "creation` WHERE creation_id = '" . (int)$creation_id . "'");
 	}
 
-	public function getCollection($collection_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "collection  WHERE collection_id = '" . (int)$collection_id . "'");
-
+	public function getCreation($creation_id) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "creation  WHERE creation_id = '" . (int)$creation_id . "'");
 		return $query->row;
 	}
 
-	public function getCollections($data = array()) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "collection  WHERE shop_id = " .$this->customer->getId() ." ORDER BY rank asc" ;
+	public function getCreations($data = array()) {
+		$sql = "SELECT * FROM " . DB_PREFIX . "creation  WHERE shop_id = " .$this->customer->getId() ." ORDER BY creation_id desc" ;
 
 		if (isset($data['start']) || isset($data['limit'])) {
 			if ($data['start'] < 0) {
@@ -40,8 +47,8 @@ class ModelDashboardCollection extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalCollections() {
-		$sql = "SELECT count(*) as total FROM " . DB_PREFIX . "collection  WHERE shop_id = " .$this->customer->getId();
+	public function getTotalCreations() {
+		$sql = "SELECT count(*) as total FROM " . DB_PREFIX . "creation  WHERE shop_id = " .$this->customer->getId();
 		$query = $this->db->query($sql);
 		return $query->row['total'];
 	}

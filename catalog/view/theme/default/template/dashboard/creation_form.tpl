@@ -1,5 +1,6 @@
 <?php echo $header; ?>
 <script src="./admin/view/javascript/qiniu/formdata.js" type="text/javascript"></script>
+<script src="./admin/view/javascript/colorpicker/jscolor.js" type="text/javascript"></script>
 <?php echo $column_left; ?>
 <div id="content">
     <div class="page-header">
@@ -28,28 +29,48 @@
             <div class="panel-body">
                 <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-review" class="form-horizontal">
                     <div class="form-group required">
-                        <label class="col-sm-2 control-label" for="input-author"><?php echo $entry_collection_name; ?></label>
+                        <label class="col-sm-2 control-label" for="input-author"><?php echo $entry_creation_name; ?></label>
                         <div class="col-sm-10">
-                            <input type="text" name="collection_name" value="<?php echo $collection_name; ?>" placeholder="<?php echo $entry_collection_name; ?>" id="input-author" class="form-control" />
-                            <?php if ($error_collection_name) { ?>
-                            <div class="text-danger"><?php echo $error_collection_name; ?></div>
+                            <input type="text" name="creation_name" value="<?php echo $creation_name; ?>" placeholder="<?php echo $entry_creation_name; ?>" id="input-author" class="form-control" />
+                            <?php if ($error_creation_name) { ?>
+                            <div class="text-danger"><?php echo $error_creation_name; ?></div>
                             <?php } ?>
                         </div>
                     </div>
+
                     <div class="form-group required">
-                        <label class="col-sm-2 control-label" for="input-product"><span data-toggle="tooltip" title="<?php echo $column_rank_help; ?>"><?php echo $entry_rank; ?></span></label>
+                        <label class="col-sm-2 control-label" for="input-product"><span data-toggle="tooltip" title="<?php echo $column_rank_help; ?>"><?php echo $entry_creation_description; ?></span></label>
                         <div class="col-sm-10">
-                            <input type="number" name="rank" value="<?php echo $rank; ?>" placeholder="<?php echo $entry_rank; ?>" id="input-product" class="form-control" />
-                            <input type="hidden" name="collection_id" value="<?php echo $collection_id; ?>" />
+                            <textarea name="creation_description" placeholder="<?php echo $entry_creation_description; ?>" class="form-control"><?php echo $creation_description; ?></textarea>
+                            <input type="hidden" name="creation_id" value="<?php echo $creation_id; ?>" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_collection_img; ?></label>
-                        <div class="col-sm-10"><a href="javascript::void(0)" class="img-upload-single" data-inputid="collection_url">
-                                <img id="img_collection" src="<?php echo $collection_url_full; ?>" /></a>
-                            <input type="hidden" name="collection_url" id="collection_url" value="<?php echo $collection_url; ?>" />
+                        <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_creation_img; ?></label>
+                        <div class="col-sm-10"><a href="javascript::void(0)" class="img-upload-single" data-inputid="creation_url">
+                                <div id="color_show"  style="width:150px">
+                                    <img id="img_creation" src="<?php echo $creation_url_full; ?>" style="margin: 25px;width:100px" />
+                                </div>
+                                </a>
+                            <input type="hidden" name="creation_url" id="creation_url" value="<?php echo $creation_url; ?>" />
                         </div>
+                    </div>
+
+                    <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="input-author"><?php echo $entry_creation_color; ?></label>
+                        <div class="col-sm-4">
+                            <input type="text" name="creation_color" value="<?php echo $creation_color; ?>" placeholder="<?php echo $entry_creation_color; ?>" id="input_color" class="form-control" />
+                            <?php if ($error_creation_color) { ?>
+                            <div class="text-danger"><?php echo $error_creation_color; ?></div>
+                            <?php } ?>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="jscolor {valueElement:'input_color', styleElement:'color_show'} btn btn-default">
+                                Pick color
+                            </button>
+                        </div>
+
                     </div>
 
                 </form>
@@ -73,34 +94,21 @@
         </script>
     </div>
 
-    <script type="text/javascript"><!--
-        $('.datetime').datetimepicker({
-            pickDate: true,
-            pickTime: true
-        });
-        //--></script>
-    <script type="text/javascript"><!--
-        $('input[name=\'product\']').autocomplete({
-            'source': function(request, response) {
-                $.ajax({
-                    url: 'index.php?route=shop/product/autocomplete&filter_name=' +  encodeURIComponent(request),
-                    dataType: 'json',
-                    success: function(json) {
-                        response($.map(json, function(item) {
-                            return {
-                                label: item['name'],
-                                value: item['product_id']
-                            }
-                        }));
-                    }
-                });
-            },
-            'select': function(item) {
-                $('input[name=\'product\']').val(item['label']);
-                $('input[name=\'product_id\']').val(item['value']);
-            }
-        });
-        //--></script></div>
+</div>
 
 </div>
+<script>
+    $(function(){
+       $("#input_color").bind('input propertychange', function() {
+           var color = $("#input_color").val();
+           if(color.length == 6){
+               alert(color);
+           }
+       });
+    });
+
+    function setTextColor(picker) {
+        $("#input_color").val( picker.toString());
+    }
+</script>
 <?php echo $footer; ?> 

@@ -1,13 +1,13 @@
 <?php
-class ControllerDashboardCollection extends Controller {
+class ControllerDashboardCreation extends Controller {
 	private $error = array();
 
 	public function index() {
-		$this->load->language('dashboard/collection');
+		$this->load->language('dashboard/creation');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('dashboard/collection');
+		$this->load->model('dashboard/creation');
 
 		$this->getList();
 	}
@@ -34,33 +34,33 @@ class ControllerDashboardCollection extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('dashboard/collection', '' . $url, true)
+			'href' => $this->url->link('dashboard/creation', '' . $url, true)
 		);
 
-		$data['add'] = $this->url->link('dashboard/collection/add', '' . $url, true);
-		$data['delete'] = $this->url->link('dashboard/collection/delete', '' . $url, true);
-		$data['edit'] = $this->url->link('dashboard/collection/edit', '' . $url, true);
+		$data['add'] = $this->url->link('dashboard/creation/add', '' . $url, true);
+		$data['delete'] = $this->url->link('dashboard/creation/delete', '' . $url, true);
+		$data['edit'] = $this->url->link('dashboard/creation/edit', '' . $url, true);
 
-		$data['collections'] = array();
+		$data['creations'] = array();
 
 		$filter_data = array(
 			'start'                   => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit'                   => $this->config->get('config_limit_admin')
 		);
 
-		$collection_total = $this->model_dashboard_collection->getTotalCollections();
+		$creation_total = $this->model_dashboard_creation->getTotalCreations();
 
-		$results = $this->model_dashboard_collection->getCollections($filter_data);
+		$results = $this->model_dashboard_creation->getCreations($filter_data);
 
         $this->load->model('tool/image');
 		foreach ($results as $result) {
-			$data['collections'][] = array(
-				'collection_id'     => $result['collection_id'],
-				'collection_name'      => $result['collection_name'],
-                'collection_url_full'      => $result['collection_url'] == ""? $this->model_tool_image->resize('no_image.png', 100, 100):QINIU_BASE.$result['collection_url']."!thumb",
-				'rank'      => $result['rank'],
-				'edit'          => $this->url->link('dashboard/collection/edit', '' . '&collection_id=' . $result['collection_id'] . $url, true),
-				'delete'          => $this->url->link('dashboard/collection/delete', '' . '&collection_id=' . $result['collection_id'] . $url, true)
+			$data['creations'][] = array(
+				'creation_id'     => $result['creation_id'],
+				'creation_name'      => $result['creation_name'],
+				'creation_description'      => $result['creation_description'],
+                'creation_url_full'      => $result['creation_url'] == ""? $this->model_tool_image->resize('no_image.png', 100, 100):QINIU_BASE.$result['creation_url']."!thumb",
+				'edit'          => $this->url->link('dashboard/creation/edit', '' . '&creation_id=' . $result['creation_id'] . $url, true),
+				'delete'          => $this->url->link('dashboard/creation/delete', '' . '&creation_id=' . $result['creation_id'] . $url, true)
 			);
 		}
 
@@ -70,9 +70,9 @@ class ControllerDashboardCollection extends Controller {
 		$data['text_no_results'] = $this->language->get('text_no_results');
 		$data['text_confirm'] = $this->language->get('text_confirm');
 
-		$data['column_rank'] = $this->language->get('column_rank');
-		$data['column_collection_name'] = $this->language->get('column_collection_name');
-        $data['column_collection_img'] = $this->language->get('column_collection_img');
+		$data['column_creation_name'] = $this->language->get('column_creation_name');
+		$data['column_creation_img'] = $this->language->get('column_creation_img');
+		$data['column_creation_description'] = $this->language->get('column_creation_description');
 
 		$data['button_add'] = $this->language->get('button_add');
 		$data['button_edit'] = $this->language->get('button_edit');
@@ -97,54 +97,54 @@ class ControllerDashboardCollection extends Controller {
 		}
 
 		$pagination = new Pagination();
-		$pagination->total = $collection_total;
+		$pagination->total = $creation_total;
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_limit_admin');
-		$pagination->url = $this->url->link('dashboard/collection', '&page={page}', true);
+		$pagination->url = $this->url->link('dashboard/creation', '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
 
-		$data['results'] = sprintf($this->language->get('text_pagination'), ($collection_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($collection_total - $this->config->get('config_limit_admin'))) ? $collection_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $collection_total, ceil($collection_total / $this->config->get('config_limit_admin')));
+		$data['results'] = sprintf($this->language->get('text_pagination'), ($creation_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($creation_total - $this->config->get('config_limit_admin'))) ? $creation_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $creation_total, ceil($creation_total / $this->config->get('config_limit_admin')));
 
 		$data['header'] = $this->load->controller('dashboard/layoutheader');
 		$data['column_left'] = $this->load->controller('dashboard/layoutleft');
 		$data['footer'] = $this->load->controller('dashboard/layoutfooter');
 
-		$this->response->setOutput($this->load->view('dashboard/collection_list', $data));
+		$this->response->setOutput($this->load->view('dashboard/creation_list', $data));
 	}
 
 	public function add() {
-		$this->load->language('dashboard/collection');
+		$this->load->language('dashboard/creation');
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->load->model('dashboard/collection');
+		$this->load->model('dashboard/creation');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_dashboard_collection->addCollection($this->request->post);
+			$this->model_dashboard_creation->addCreation($this->request->post);
 			$this->session->data['success'] = $this->language->get('text_success');
 			$url = '';
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('dashboard/collection', '' . $url, true));
+			$this->response->redirect($this->url->link('dashboard/creation', '' . $url, true));
 		}
 
 		$this->getForm();
 	}
 
 	public function edit() {
-		$this->load->language('dashboard/collection');
+		$this->load->language('dashboard/creation');
 		$this->document->setTitle($this->language->get('heading_title'));
-		$this->load->model('dashboard/collection');
+		$this->load->model('dashboard/creation');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_dashboard_collection->editCollection($this->request->get['collection_id'], $this->request->post);
+			$this->model_dashboard_creation->editCreation($this->request->get['creation_id'], $this->request->post);
 			$this->session->data['success'] = $this->language->get('text_success');
 			$url = '';
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-			$this->response->redirect($this->url->link('dashboard/collection', '' . $url, true));
+			$this->response->redirect($this->url->link('dashboard/creation', '' . $url, true));
 		}
 
 		$this->getForm();
@@ -153,11 +153,12 @@ class ControllerDashboardCollection extends Controller {
 	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
-		$data['text_form'] = !isset($this->request->get['collection_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
+		$data['text_form'] = !isset($this->request->get['creation_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 
-		$data['entry_rank'] = $this->language->get('column_rank');
-		$data['entry_collection_name'] = $this->language->get('column_collection_name');
-        $data['entry_collection_img'] = $this->language->get('column_collection_img');
+		$data['entry_creation_name'] = $this->language->get('column_creation_name');
+        $data['entry_creation_img'] = $this->language->get('column_creation_img');
+		$data['entry_creation_description'] = $this->language->get('column_creation_description');
+		$data['entry_creation_color'] = $this->language->get('entry_creation_color');
 		$data['column_rank_help'] = $this->language->get('column_rank_help');
 
 		$data['button_save'] = $this->language->get('button_save');
@@ -169,10 +170,16 @@ class ControllerDashboardCollection extends Controller {
 			$data['error_warning'] = '';
 		}
 
-		if (isset($this->error['collection_name'])) {
-			$data['error_collection_name'] = $this->error['collection_name'];
+		if (isset($this->error['creation_name'])) {
+			$data['error_creation_name'] = $this->error['creation_name'];
 		} else {
-			$data['error_collection_name'] = '';
+			$data['error_creation_name'] = '';
+		}
+
+		if (isset($this->error['creation_color'])) {
+			$data['error_creation_color'] = $this->error['creation_color'];
+		} else {
+			$data['error_creation_color'] = '';
 		}
 
 		$url = '';
@@ -190,52 +197,61 @@ class ControllerDashboardCollection extends Controller {
 
 		$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('heading_title'),
-				'href' => $this->url->link('dashboard/collection', '' . $url, true)
+				'href' => $this->url->link('dashboard/creation', '' . $url, true)
 		);
 
-		if (!isset($this->request->get['collection_id'])) {
-			$data['action'] = $this->url->link('dashboard/collection/add', '' . $url, true);
+		if (!isset($this->request->get['creation_id'])) {
+			$data['action'] = $this->url->link('dashboard/creation/add', '' . $url, true);
+			$data['creation_id'] = "";
 		} else {
-			$data['action'] = $this->url->link('dashboard/collection/edit', '' . '&collection_id=' . $this->request->get['collection_id'] . $url, true);
+			$data['action'] = $this->url->link('dashboard/creation/edit', '' . '&creation_id=' . $this->request->get['creation_id'] . $url, true);
+			$data['creation_id'] = $this->request->get['creation_id'];
 		}
 
-		$data['cancel'] = $this->url->link('dashboard/collection', '' . $url, true);
+		$data['cancel'] = $this->url->link('dashboard/creation', '' . $url, true);
 
-		if (isset($this->request->get['collection_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-			$collection_info = $this->model_dashboard_collection->getCollection($this->request->get['collection_id']);
+		if (isset($this->request->get['creation_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
+			$creation_info = $this->model_dashboard_creation->getCreation($this->request->get['creation_id']);
 		}
 
-
-		if (isset($this->request->post['rank'])) {
-			$data['rank'] = $this->request->post['rank'];
-		} elseif (!empty($collection_info)) {
-			$data['rank'] = $collection_info['rank'];
+		if (isset($this->request->post['creation_name'])) {
+			$data['creation_name'] = $this->request->post['creation_name'];
+		} elseif (!empty($creation_info)) {
+			$data['creation_name'] = $creation_info['creation_name'];
 		} else {
-			$data['rank'] = '';
+			$data['creation_name'] = '';
 		}
 
-		if (isset($this->request->post['collection_name'])) {
-			$data['collection_name'] = $this->request->post['collection_name'];
-		} elseif (!empty($collection_info)) {
-			$data['collection_name'] = $collection_info['collection_name'];
+		if (isset($this->request->post['creation_description'])) {
+			$data['creation_description'] = $this->request->post['creation_description'];
+		} elseif (!empty($creation_info)) {
+			$data['creation_description'] = $creation_info['creation_description'];
 		} else {
-			$data['collection_name'] = '';
+			$data['creation_description'] = '';
+		}
+
+		if (isset($this->request->post['creation_color'])) {
+			$data['creation_color'] = $this->request->post['creation_color'];
+		} elseif (!empty($creation_info)) {
+			$data['creation_color'] = $creation_info['creation_color'];
+		} else {
+			$data['creation_color'] = '';
 		}
 
         //image
         $this->load->model('tool/image');
-        if (isset($this->request->post['collection_url'])) {
-            $data['collection_url'] = $this->request->post['collection_url'];
-        } elseif (!empty($collection_info)) {
-            $data['collection_url'] = $collection_info['collection_url'];
+        if (isset($this->request->post['creation_url'])) {
+            $data['creation_url'] = $this->request->post['creation_url'];
+        } elseif (!empty($creation_info)) {
+            $data['creation_url'] = $creation_info['creation_url'];
         } else {
-            $data['collection_url'] = '';
+            $data['creation_url'] = '';
         }
 
-        if($data['collection_url'] == ""){
-            $data['collection_url_full'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+        if($data['creation_url'] == ""){
+            $data['creation_url_full'] = $this->model_tool_image->resize('no_image.png', 100, 100);
         }else{
-            $data['collection_url_full'] = QINIU_BASE.$data['collection_url']."!thumb";
+            $data['creation_url_full'] = QINIU_BASE.$data['creation_url']."!thumb";
         }
 
         // qiniu
@@ -247,27 +263,27 @@ class ControllerDashboardCollection extends Controller {
 		$data['column_left'] = $this->load->controller('dashboard/layoutleft');
 		$data['footer'] = $this->load->controller('dashboard/layoutfooter');
 
-		$this->response->setOutput($this->load->view('dashboard/collection_form', $data));
+		$this->response->setOutput($this->load->view('dashboard/creation_form', $data));
 	}
 
 
 	public function delete() {
-		$this->load->language('dashboard/collection');
+		$this->load->language('dashboard/creation');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('dashboard/collection');
+		$this->load->model('dashboard/creation');
 
-		if (isset($this->request->post['collection_id']) && $this->validateDelete()) {
+		if (isset($this->request->post['creation_id']) && $this->validateDelete()) {
 
-			$this->model_dashboard_collection->deleteCollection($this->request->post['collection_id']);
+			$this->model_dashboard_creation->deleteCreation($this->request->post['creation_id']);
 			$this->session->data['success'] = $this->language->get('text_success');
 			$url = '';
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('dashboard/collection', '' . $url, true));
+			$this->response->redirect($this->url->link('dashboard/creation', '' . $url, true));
 		}
 
 		$this->getList();
@@ -275,8 +291,12 @@ class ControllerDashboardCollection extends Controller {
 
 	protected function validateForm() {
 
-		if ((utf8_strlen($this->request->post['collection_name']) < 2) || (utf8_strlen($this->request->post['collection_name']) > 32)) {
-			$this->error['collection_name'] = $this->language->get('error_collection_name');
+		if ((utf8_strlen($this->request->post['creation_name']) < 2) || (utf8_strlen($this->request->post['creation_name']) > 32)) {
+			$this->error['creation_name'] = $this->language->get('error_creation_name');
+		}
+
+		if (utf8_strlen($this->request->post['creation_name']) !=  6) {
+			$this->error['creation_color'] = $this->language->get('error_creation_color');
 		}
 
 		return !$this->error;

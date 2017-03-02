@@ -35,21 +35,21 @@
             <table class="table table-bordered table-hover">
               <thead>
                 <tr>
-                  <td class="text-center"><?php echo $column_collection_img; ?></td>
-                  <td class="text-center"><?php echo $column_collection_name; ?></td>
-                  <td class="text-center"><?php echo $column_rank; ?></td>
+                  <td class="text-center"><?php echo $column_creation_img; ?></td>
+                  <td class="text-center"><?php echo $column_creation_name; ?></td>
+                  <td class="text-center"><?php echo $column_creation_description; ?></td>
                   <td class="text-center"></td>
                 </tr>
               </thead>
               <tbody>
-                <?php if ($collections) { ?>
-                <?php foreach ($collections as $collection) { ?>
+                <?php if ($creations) { ?>
+                <?php foreach ($creations as $creation) { ?>
                 <tr>
-                    <td class="text-center"><img src="<?php echo $collection['collection_url_full']; ?>" width="60" height="60"/></td>
-                  <td class="text-center"><?php echo $collection['collection_name']; ?></td>
-                  <td class="text-center"><?php echo $collection['rank']; ?></td>
-                  <td class="text-center"><a href="<?php echo $collection['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                    <button type="button" data-toggle="tooltip" title="<?php echo $button_delete; ?>" class="btn btn-danger" onclick="$('#delete_id').val('<?php echo $collection["collection_id"]; ?>');confirm('<?php echo $text_confirm; ?>') ? ($('#form-delete').submit()) : false;"><i class="fa fa-trash-o"></i></button>
+                    <td class="text-center"><img src="<?php echo $creation['creation_url_full']; ?>" width="60" height="60"/></td>
+                  <td class="text-center"><?php echo $creation['creation_name']; ?></td>
+                  <td class="text-center"><?php echo $creation['creation_description']; ?></td>
+                  <td class="text-center"><a href="<?php echo $creation['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                    <button type="button" data-toggle="tooltip" title="<?php echo $button_delete; ?>" class="btn btn-danger" onclick="$('#delete_id').val('<?php echo $creation["creation_id"]; ?>');confirm('<?php echo $text_confirm; ?>') ? ($('#form-delete').submit()) : false;"><i class="fa fa-trash-o"></i></button>
                   </td>
                 </tr>
                 <?php } ?>
@@ -62,7 +62,7 @@
             </table>
           </div>
         <form action="<?php echo $delete; ?>" method="post" id="form-delete">
-          <input type="hidden" value="" id="delete_id" name="collection_id">
+          <input type="hidden" value="" id="delete_id" name="creation_id">
         </form>
         <div class="row">
           <div class="col-sm-6 text-left"><?php echo $pagination; ?></div>

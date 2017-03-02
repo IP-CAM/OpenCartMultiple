@@ -130,3 +130,19 @@ ALTER TABLE `oc_shop` CHANGE `owner_image` `avatar_url` VARCHAR(100) CHARACTER S
 ALTER TABLE `oc_shop` ADD `banner_url` VARCHAR(100) NOT NULL AFTER `avatar_url`;
 
 ALTER TABLE `oc_collection` ADD `collection_url` VARCHAR(100) NOT NULL AFTER `collection_name`;
+
+CREATE TABLE IF NOT EXISTS `oc_creation` (
+  `creation_id` int(11) NOT NULL AUTO_INCREMENT,
+  `shop_id` int(11) NOT NULL,
+  `creation_name` varchar(100) NOT NULL,
+  `creation_description` text NOT NULL,
+  `creation_url_origin` varchar(100) NOT NULL,
+  `creation_url` varchar(100) NOT NULL,
+  `created_time` int(11) NOT NULL,
+  PRIMARY KEY (`creation_id`),
+  KEY `shop_id` (`shop_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+ALTER TABLE `oc_creation` ADD `product_num` TINYINT NOT NULL AFTER `creation_url`;
+
+ALTER TABLE `oc_creation` ADD `creation_color` VARCHAR(10) NOT NULL AFTER `creation_url`;

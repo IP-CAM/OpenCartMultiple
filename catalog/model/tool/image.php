@@ -50,6 +50,13 @@ class ModelToolImage extends Model {
 	}
 
 	/**
+	 * Get Size Picture
+	 */
+	public function getSizeImage($size){
+		return "?imageView2/2/w/".$size."/h/".$size."/q/100";
+	}
+
+	/**
 	 * Fill Color To Transparent PNG
 	 */
 	public function toFillColor($bgColor, $bgSize, $srcUrl){
@@ -72,6 +79,72 @@ class ModelToolImage extends Model {
 
 		imagedestroy($dst);
 		imagedestroy($src);
+		return $dstUrl;
+	}
+
+	/**
+	 * Combine Art Print Image
+	 */
+	public function combineArtPrintImg($srcUrl){
+		$srcUrl = $srcUrl.$this->getSizeImage(400);
+		$src = imagecreatefrompng($srcUrl);
+		$size = 600;
+		$sizeWhite = 22;
+		$sizeImg = 38;
+
+		//创建图像，灰色背景
+
+		$dst = @imagecreatetruecolor($size, $size);
+		$bgColor = imagecolorallocate($dst, 239, 239, 239);
+		imagefill($dst,0,0,$bgColor);
+
+		//获取水印图片的宽高
+		list($src_w, $src_h) = getimagesize($srcUrl);
+
+		//白色背景
+		$bgWhite = imagecolorallocate($dst, 255, 255, 255);
+		imagefilledrectangle($dst,
+				($size - $src_w - $sizeWhite*2 - $sizeImg *2)/2,
+				($size - $src_h - $sizeWhite*2 - $sizeImg *2)/2,
+				$size/2 + $sizeWhite + $src_w/2 + $sizeImg,
+				$size/2 + $sizeWhite + $src_h/2 + $sizeImg,
+				$bgWhite);
+
+		//灰色边
+		$bgGrey = imagecolorallocate($dst, 194, 194, 194);
+		imagefilledrectangle($dst,
+				($size - $src_w - $sizeWhite*2 - $sizeImg *2)/2,
+				$size/2 + $sizeWhite + $src_h/2 + $sizeImg,
+				$size/2 + $sizeWhite + $src_w/2 + $sizeImg,
+				$size/2 + $sizeWhite + $src_h/2 + $sizeImg,
+				$bgGrey);
+
+		imagefilledrectangle($dst,
+				$size/2 + $sizeWhite + $src_w/2 + $sizeImg,
+				($size - $src_h - $sizeWhite*2 - $sizeImg *2)/2,
+				$size/2 + $sizeWhite + $src_w/2 + $sizeImg,
+				$size/2 + $sizeWhite + $src_h/2 + $sizeImg,
+				$bgGrey);
+
+		//图片默认背景
+		$bgImg = imagecolorallocate($dst, 42, 202, 174);
+		imagefilledrectangle($dst,
+				($size - $src_w - $sizeImg *2)/2,
+				($size - $src_h - $sizeImg *2)/2,
+				$size/2 + $src_w/2 + $sizeImg,
+				$size/2 + $src_h/2 + $sizeImg,
+				$bgImg);
+
+		//图片
+		imagecopy($dst, $src, ($size - $src_w)/2, ($size - $src_h)/2 , 0 ,0 ,$src_w, $src_h);
+
+		//输出图片
+		$dstUrl = DIR_IMAGE . 'temp/'.$this->customer->getId().'.png';
+		imagepng($dst,$dstUrl);
+
+		imagedestroy($dst);
+		imagedestroy($src);
+
 		return $dstUrl;
 	}
 

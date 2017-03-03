@@ -148,3 +148,5 @@ ALTER TABLE `oc_creation` ADD `product_num` TINYINT NOT NULL AFTER `creation_url
 ALTER TABLE `oc_creation` ADD `creation_color` VARCHAR(10) NOT NULL AFTER `creation_url`;
 
 ALTER TABLE `oc_creation` CHANGE `creation_url_origin` `creation_url_show` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+
+ALTER TABLE `oc_product` ADD `creation_id` INT NOT NULL AFTER `shop_id`, ADD `type_id` TINYINT NOT NULL AFTER `creation_id`, ADD INDEX (`creation_id`, `type_id`) ;

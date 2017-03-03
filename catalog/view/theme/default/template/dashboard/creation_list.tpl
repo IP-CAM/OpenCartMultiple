@@ -48,7 +48,9 @@
                     <td class="text-center"><img src="<?php echo $creation['creation_url_full']; ?>" width="60" height="60"/></td>
                   <td class="text-center"><?php echo $creation['creation_name']; ?></td>
                   <td class="text-center"><?php echo $creation['creation_description']; ?></td>
-                  <td class="text-center"><a href="<?php echo $creation['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                  <td class="text-center">
+                    <a href="<?php echo $creation['product']; ?>" data-toggle="tooltip" title="<?php echo $button_product; ?>" class="btn btn-info"><i class="fa fa-plus"></i></a>
+                    <a href="<?php echo $creation['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                     <button type="button" data-toggle="tooltip" title="<?php echo $button_delete; ?>" class="btn btn-danger" onclick="$('#delete_id').val('<?php echo $creation["creation_id"]; ?>');confirm('<?php echo $text_confirm; ?>') ? ($('#form-delete').submit()) : false;"><i class="fa fa-trash-o"></i></button>
                   </td>
                 </tr>

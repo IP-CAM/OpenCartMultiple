@@ -55,5 +55,30 @@ class ModelDashboardCreation extends Model {
 		return $query->row['total'];
 	}
 
+	public function addProduct($data){
+		$this->db->query("INSERT INTO " . DB_PREFIX . "product SET
+				 model = '" . $this->db->escape($data['model']) . "',
+		 		 shop_id = '" . (int)$data['shop_id'] . "',
+		 		 quantity = 10000,stock_status_id = 6, date_available = NOW(),
+		 		 shipping = '" . (int)$data['shipping'] . "',
+		 		 price = '" . (float)$data['price'] . "',
+		 		 weight = '" . (float)$data['weight']. "',
+		 		 creation_id = " . (int)$data['creation_id']. ",
+		 		 type_id = " . (int)$data['type_id']. ",
+		 		 status = 1, date_added = NOW()");
+
+		$product_id = $this->db->getLastId();
+
+		if (isset($data['image'])) {
+			$this->db->query("UPDATE " . DB_PREFIX . "product SET image = '" . $this->db->escape($data['image']) . "' WHERE product_id = '" . (int)$product_id . "'");
+		}
+
+		$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET
+				 product_id = '" . (int)$product_id . "',
+				 language_id = 1, name = '" . $this->db->escape($data['name']) . "',
+				 meta_title = '" . $this->db->escape($data['name']) . "'");
+
+		return $product_id;
+	}
 
 }

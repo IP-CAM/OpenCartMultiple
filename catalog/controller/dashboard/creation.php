@@ -60,7 +60,8 @@ class ControllerDashboardCreation extends Controller {
 				'creation_description'      => $result['creation_description'],
                 'creation_url_full'      => $result['creation_url_show'] == ""? $this->model_tool_image->resize('no_image.png', 100, 100):QINIU_BASE.$result['creation_url_show']."!thumb",
 				'edit'          => $this->url->link('dashboard/creation/edit', '' . '&creation_id=' . $result['creation_id'] . $url, true),
-				'delete'          => $this->url->link('dashboard/creation/delete', '' . '&creation_id=' . $result['creation_id'] . $url, true)
+				'delete'          => $this->url->link('dashboard/creation/delete', '' . '&creation_id=' . $result['creation_id'] . $url, true),
+				'product'          => $this->url->link('dashboard/creation/product', '' . '&creation_id=' . $result['creation_id'] . $url, true),
 			);
 		}
 
@@ -78,6 +79,7 @@ class ControllerDashboardCreation extends Controller {
 		$data['button_add'] = $this->language->get('button_add');
 		$data['button_edit'] = $this->language->get('button_edit');
 		$data['button_delete'] = $this->language->get('button_delete');
+		$data['button_product'] = $this->language->get('button_product');
 
 		if (isset($this->session->data['error'])) {
 			$data['error_warning'] = $this->session->data['error'];
@@ -300,7 +302,6 @@ class ControllerDashboardCreation extends Controller {
         // qiniu
         $this->load->model('tool/file');
         $data['qiniu_token'] = $this->model_tool_file->getQiniuToken();
-		//$this->model_tool_file->uploadToQiniu("C:/wamp/www/opencart/image/temp/1.png","0/1/");
 
         $data['img_dir'] = floor($this->customer->getId()/1000)."/".$this->customer->getId()."/";
 
@@ -384,11 +385,74 @@ class ControllerDashboardCreation extends Controller {
 		}
 
 		$data['text_product'] = $this->language->get('text_product');
+		$data['entry_price'] = $this->language->get('entry_price');
+		$data['entry_creation_img'] = $this->language->get('column_creation_img');
+		$data['entry_creation_color'] = $this->language->get('entry_creation_color');
+		$data['entry_creation_color'] = $this->language->get('entry_creation_color');
+
+		//Creation Info
+		$creation_info = $this->model_dashboard_creation->getCreation($this->request->get['creation_id']);
+		$data['creation_url'] = $creation_info['creation_url'];
+		$data['creation_color'] = $creation_info['creation_color'];
+	    $data['creation_url_full'] = QINIU_BASE.$data['creation_url']."!thumb";
+		$data['creation_id'] = $this->request->get['creation_id'];
+
+		//Action
+		$data['action'] = $this->url->link('dashboard/creation/addproduct', '' , true);
+
+		//Tup Info
+		list($src_w, $src_h) = getimagesize(QINIU_BASE.$data['creation_url']."!creation");
+		$data['creation_url_width'] = $src_w/5;
+		$data['creation_url_height'] = $src_h/5;
+
 
 		$data['header'] = $this->load->controller('dashboard/layoutheader');
 		$data['column_left'] = $this->load->controller('dashboard/layoutleft');
 		$data['footer'] = $this->load->controller('dashboard/layoutfooter');
 		$this->response->setOutput($this->load->view('dashboard/creation_product', $data));
+	}
+
+	/**
+	 *  Add Product
+	 */
+	public function addproduct(){
+		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+
+			//Creation Info
+			$this->load->model('dashboard/creation');
+			$creation_info = $this->model_dashboard_creation->getCreation($this->request->post['creation_id']);
+
+			//Product Image Create
+			$this->load->model('tool/image');
+			$combineFile = $this->model_tool_image->combineArtPrintImg(QINIU_BASE.$creation_info['creation_url']);
+
+			//Upload Image
+			$this->load->model('tool/file');
+			$this->model_tool_file->getQiniuToken();
+			$uploadFile = $this->model_tool_file->uploadToQiniu($combineFile,floor($this->customer->getId()/1000)."/".$this->customer->getId()."/");
+
+			if($uploadFile != "fail") {
+				$this->model_tool_file->deleteFile($combineFile);
+
+				//Add to Database
+				$data = array(
+					'image' => $uploadFile,
+					'model' => $this->request->post['type_name'].$creation_info['creation_id'],
+					'name' => $creation_info['creation_name']." -- ".$this->request->post['type_name'],
+					'shop_id' => 1,
+					'price' => $this->request->post['price'],
+					'weight' => $this->request->post['weight'],
+					'creation_id' =>$creation_info['creation_id'],
+					'type_id' => $this->request->post['type_id'],
+				);
+				$this->model_dashboard_creation->addProduct($data);
+				$this->session->data['success'] = $this->language->get('text_success_product');
+
+				$this->response->redirect($this->url->link('dashboard/creation/product', '&creation_id='.$creation_info['creation_id'] , true));
+			}else{
+
+			}
+		}
 	}
 
 }

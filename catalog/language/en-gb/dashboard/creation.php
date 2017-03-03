@@ -8,6 +8,8 @@ $_['text_list']           = 'Design List';
 $_['text_add']            = 'Add Design';
 $_['text_edit']           = 'Edit Design';
 $_['text_product']           = 'Product Manage';
+$_['text_success_product']           = 'Product Add Successfully';
+$_['button_product']           = 'Product Manage';
 
 $_['column_rank']      = 'Sort Order';
 $_['column_creation_name']       = 'Design Name';
@@ -16,7 +18,10 @@ $_['column_creation_description']       = 'Design Description';
 
 $_['entry_creation_color']       = 'Default Background Color';
 
-
 $_['column_rank_help']      = 'Integer';
 $_['error_collection_name']     = 'Design Name must be between 1 and 32 characters!';
 $_['error_creation_color']     = 'Default Background Color must be 6 numbers!';
+
+
+//Product
+$_['entry_price']       = 'Price';

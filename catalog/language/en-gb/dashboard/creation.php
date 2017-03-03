@@ -8,7 +8,7 @@ $_['text_list']           = 'Design List';
 $_['text_add']            = 'Add Design';
 $_['text_edit']           = 'Edit Design';
 $_['text_product']           = 'Product Manage';
-$_['text_success_product']           = 'Product Add Successfully';
+$_['text_success_product']      = 'Product Add Successfully';
 $_['button_product']           = 'Product Manage';
 
 $_['column_rank']      = 'Sort Order';

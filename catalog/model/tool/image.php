@@ -148,5 +148,12 @@ class ModelToolImage extends Model {
 		return $dstUrl;
 	}
 
+	/**
+	 * combine T-shirt
+	 */
+	public function combineTshirt($srcUrl,$width, $height){
+
+	}
+
 
 }

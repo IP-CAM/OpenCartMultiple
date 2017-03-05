@@ -5,6 +5,8 @@ class ModelDashboardCreation extends Model {
 		   creation_name = '" .$this->db->escape($data['creation_name']) ."',
 		   creation_description = '" .$this->db->escape($data['creation_description']) ."',
 		   creation_url = '" .$this->db->escape($data['creation_url']) . "',
+		   creation_url_height = '" .$this->db->escape($data['creation_url_height']) . "',
+		   creation_url_width = '" .$this->db->escape($data['creation_url_width']) . "',
 		   creation_url_show = '" .$this->db->escape($data['creation_url_show']) . "',
 		   creation_color = '" .$this->db->escape($data['creation_color']) . "',
 		   created_time = ".time());
@@ -65,6 +67,7 @@ class ModelDashboardCreation extends Model {
 		 		 weight = '" . (float)$data['weight']. "',
 		 		 creation_id = " . (int)$data['creation_id']. ",
 		 		 type_id = " . (int)$data['type_id']. ",
+		 		 type_img_no = " . (int)$data['type_img_no']. ",
 		 		 status = 1, date_added = NOW()");
 
 		$product_id = $this->db->getLastId();

@@ -131,6 +131,9 @@ class ControllerDashboardCreation extends Controller {
 			$uploadFile = $this->model_tool_file->uploadToQiniu($fillColorImgUrl,floor($this->customer->getId()/1000)."/".$this->customer->getId()."/");
 
 			if($uploadFile != "fail"){
+                list($src_w, $src_h) = getimagesize(QINIU_BASE.$this->request->post['creation_url']);
+                $this->request->post['creation_url_width'] = $src_w;
+                $this->request->post['creation_url_height'] = $src_h;
 				$this->request->post['creation_url_show'] = $uploadFile;
 				$this->model_dashboard_creation->addCreation($this->request->post);
 
@@ -394,7 +397,7 @@ class ControllerDashboardCreation extends Controller {
 		$creation_info = $this->model_dashboard_creation->getCreation($this->request->get['creation_id']);
 		$data['creation_url'] = $creation_info['creation_url'];
 		$data['creation_color'] = $creation_info['creation_color'];
-	    $data['creation_url_full'] = QINIU_BASE.$data['creation_url']."!thumb";
+	    $data['creation_url_full'] = QINIU_BASE.$data['creation_url']."!creation";
 		$data['creation_id'] = $this->request->get['creation_id'];
 
 		//Action
@@ -405,6 +408,14 @@ class ControllerDashboardCreation extends Controller {
 		$data['creation_url_width'] = $src_w/5;
 		$data['creation_url_height'] = $src_h/5;
 
+        //Tshirt Test
+
+//        $this->model_tool_image->combineTshirt(QINIU_BASE.$data['creation_url'],$creation_info['creation_url_width'],
+//            $creation_info['creation_url_height'],DIR_IMAGE."product/tshirt/tshirt_1.png");
+        //Tshirt Test
+        $this->load->model('tool/image');
+        $data['shirt_url'] = $this->config->get('config_url')."image/product/tshirt/tshirt_1.png";
+        $data['tshirt']  = $this->model_tool_image->getParamOfImg($creation_info['creation_url_width'], $creation_info['creation_url_height'], 115,160,300,"");
 
 		$data['header'] = $this->load->controller('dashboard/layoutheader');
 		$data['column_left'] = $this->load->controller('dashboard/layoutleft');
@@ -424,13 +435,21 @@ class ControllerDashboardCreation extends Controller {
 
 			//Product Image Create
 			$this->load->model('tool/image');
-			$combineFile = $this->model_tool_image->combineArtPrintImg(QINIU_BASE.$creation_info['creation_url']);
+            $combineFile = "";
+            switch($this->request->post['type_id']){
+                case "1":
+                    $combineFile = $this->model_tool_image->combineArtPrintImg(QINIU_BASE.$creation_info['creation_url']);
+                    break;
+                case "2":
+                    $combineFile = $this->model_tool_image->combineTshirt(QINIU_BASE.$creation_info['creation_url'],
+                        $creation_info['creation_url_width'], $creation_info['creation_url_height'],DIR_IMAGE."product/2/".$this->request->post['type_img_no'].".png");
+                    break;
+            }
 
 			//Upload Image
 			$this->load->model('tool/file');
 			$this->model_tool_file->getQiniuToken();
-			$uploadFile = $this->model_tool_file->uploadToQiniu($combineFile,floor($this->customer->getId()/1000)."/".$this->customer->getId()."/");
-
+            $uploadFile = $this->model_tool_file->uploadToQiniu($combineFile,floor($this->customer->getId()/1000)."/".$this->customer->getId()."/");
 			if($uploadFile != "fail") {
 				$this->model_tool_file->deleteFile($combineFile);
 
@@ -444,6 +463,7 @@ class ControllerDashboardCreation extends Controller {
 					'weight' => $this->request->post['weight'],
 					'creation_id' =>$creation_info['creation_id'],
 					'type_id' => $this->request->post['type_id'],
+                    'type_img_no' => $this->request->post['type_img_no'],
 				);
 				$this->model_dashboard_creation->addProduct($data);
 				$this->session->data['success'] = $this->language->get('text_success_product');

@@ -150,3 +150,7 @@ ALTER TABLE `oc_creation` ADD `creation_color` VARCHAR(10) NOT NULL AFTER `creat
 ALTER TABLE `oc_creation` CHANGE `creation_url_origin` `creation_url_show` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
 
 ALTER TABLE `oc_product` ADD `creation_id` INT NOT NULL AFTER `shop_id`, ADD `type_id` TINYINT NOT NULL AFTER `creation_id`, ADD INDEX (`creation_id`, `type_id`) ;
+
+ALTER TABLE `oc_creation` ADD `creation_url_width` SMALLINT NOT NULL AFTER `creation_url`, ADD `creation_url_height` SMALLINT NOT NULL AFTER `creation_url_width`;
+
+ALTER TABLE `oc_product` ADD `type_img_no` TINYINT NOT NULL AFTER `type_id`;

@@ -129,11 +129,11 @@ class ModelToolImage extends Model {
 		//图片默认背景
 		$bgImg = imagecolorallocate($dst, 42, 202, 174);
 		imagefilledrectangle($dst,
-				($size - $src_w - $sizeImg *2)/2,
-				($size - $src_h - $sizeImg *2)/2,
-				$size/2 + $src_w/2 + $sizeImg,
-				$size/2 + $src_h/2 + $sizeImg,
-				$bgImg);
+            ($size - $src_w - $sizeImg *2)/2,
+            ($size - $src_h - $sizeImg *2)/2,
+            $size/2 + $src_w/2 + $sizeImg,
+            $size/2 + $src_h/2 + $sizeImg,
+            $bgImg);
 
 		//图片
 		imagecopy($dst, $src, ($size - $src_w)/2, ($size - $src_h)/2 , 0 ,0 ,$src_w, $src_h);
@@ -148,12 +148,63 @@ class ModelToolImage extends Model {
 		return $dstUrl;
 	}
 
-	/**
-	 * combine T-shirt
-	 */
-	public function combineTshirt($srcUrl,$width, $height){
+    /**
+     * combine T-shirt
+     */
+    public function combineTshirt($srcUrl,$srcWidth, $srcHeight,$bgImg){
+        //initialize
+        $dstWidth = 230;
+        $dstHeight = 320;
+        $sizeTotal = 600;
+        $startY = 150;
 
-	}
+        $dataParam = $this->getParamOfImg($srcWidth,$srcHeight,$dstWidth,$dstHeight,$sizeTotal,$srcUrl);
 
+        //创建图片的实例
+        $src = imagecreatefrompng($dataParam['src_path']);
+
+        //获取大图
+        $dst = imagecreatefromstring(file_get_contents($bgImg));
+
+        imagecopy($dst, $src, ($sizeTotal - $dataParam['srcWidth'])/2, $startY, 0, 0, $dataParam['srcWidth'], $dataParam['srcHeight']);
+
+        //输出图片
+        $dstUrl = DIR_IMAGE . 'temp/'.$this->customer->getId().'.png';
+        imagepng($dst,$dstUrl);
+
+        imagedestroy($dst);
+        imagedestroy($src);
+
+        return $dstUrl;
+    }
+
+
+    /**
+     * Caculate the Parameters Of Image
+     */
+    public function getParamOfImg($srcWidth,$srcHeight,$dstWidth,$dstHeight,$sizeTotal,$srcUrl){
+
+        //计算需要图片比例
+        if($dstHeight/$dstWidth > $srcHeight/$srcWidth){
+            //按照宽度
+            $src_path = $srcUrl."?imageView2/2/w/".$dstWidth."/h/".$dstWidth."/q/100";
+            $srcHeight = floor($dstWidth*($srcHeight/$srcWidth));
+            $srcWidth = $dstWidth;
+        }else{
+            //按照高度
+            $src_path = $srcUrl."?imageView2/2/w/".$dstHeight."/h/".$dstHeight."/q/100";
+            $srcWidth = floor($dstHeight*($srcWidth/$srcHeight));
+            $srcHeight = $dstHeight;
+        }
+
+        $data = array(
+            'src_path' => $src_path,
+            'srcHeight' => $srcHeight,
+            'srcWidth' => $srcWidth,
+            'startX' => ($sizeTotal - $srcWidth)/2,
+            'startY' => ($sizeTotal - $srcHeight)/2,
+        );
+        return $data;
+    }
 
 }

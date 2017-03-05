@@ -1,5 +1,11 @@
 <?php
 class ModelDashboardCreation extends Model {
+
+    private $productType = array(
+       '1' => 'artPrint',
+       '2' => 'tShirt',
+    );
+
 	public function addCreation($data) {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "creation` SET shop_id = '" . $this->customer->getId() . "',
 		   creation_name = '" .$this->db->escape($data['creation_name']) ."',
@@ -83,5 +89,15 @@ class ModelDashboardCreation extends Model {
 
 		return $product_id;
 	}
+
+    public function getCreationProduct($creation_id){
+        $sql = "SELECT product_id,type_id,type_img_no,image,price FROM " . DB_PREFIX . "product  WHERE creation_id = " .$creation_id;
+        $query = $this->db->query($sql);
+        $data = array();
+        foreach ($query->rows as $result) {
+            $data[$this->productType[$result['type_id']]] = $result;
+        }
+        return $data;
+    }
 
 }

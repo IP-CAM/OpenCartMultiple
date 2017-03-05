@@ -362,6 +362,7 @@ class ControllerDashboardCreation extends Controller {
 		$this->load->language('dashboard/creation');
 		$this->document->setTitle($this->language->get('heading_title'));
 		$this->load->model('dashboard/creation');
+        $this->load->model('tool/image');
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -393,35 +394,37 @@ class ControllerDashboardCreation extends Controller {
 		$data['entry_creation_color'] = $this->language->get('entry_creation_color');
 		$data['entry_creation_color'] = $this->language->get('entry_creation_color');
 
+        //List
+        $data['product'] = $this->model_dashboard_creation->getCreationProduct($this->request->get['creation_id']);
+
 		//Creation Info
 		$creation_info = $this->model_dashboard_creation->getCreation($this->request->get['creation_id']);
 		$data['creation_url'] = $creation_info['creation_url'];
 		$data['creation_color'] = $creation_info['creation_color'];
-	    $data['creation_url_full'] = QINIU_BASE.$data['creation_url']."!creation";
+	    $data['creation_url_show'] = QINIU_BASE.$data['creation_url']."!creation";
 		$data['creation_id'] = $this->request->get['creation_id'];
 
 		//Action
 		$data['action'] = $this->url->link('dashboard/creation/addproduct', '' , true);
 
-		//Tup Info
-		list($src_w, $src_h) = getimagesize(QINIU_BASE.$data['creation_url']."!creation");
-		$data['creation_url_width'] = $src_w/5;
-		$data['creation_url_height'] = $src_h/5;
+		//ArtPrint Info
+		$data['artPrint'] = $this->model_tool_image->getParamOfImg($creation_info['creation_url_width'], $creation_info['creation_url_height'], 170,170,300,"");
+        $data['artPrint']['startY'] = 125 - $data['artPrint']['srcHeight']/2 - 20;
+        //Tshirt
 
-        //Tshirt Test
-
-//        $this->model_tool_image->combineTshirt(QINIU_BASE.$data['creation_url'],$creation_info['creation_url_width'],
-//            $creation_info['creation_url_height'],DIR_IMAGE."product/tshirt/tshirt_1.png");
-        //Tshirt Test
-        $this->load->model('tool/image');
-        $data['shirt_url'] = $this->config->get('config_url')."image/product/tshirt/tshirt_1.png";
-        $data['tshirt']  = $this->model_tool_image->getParamOfImg($creation_info['creation_url_width'], $creation_info['creation_url_height'], 115,160,300,"");
+        $data['tShirt']  = $this->model_tool_image->getParamOfImg($creation_info['creation_url_width'], $creation_info['creation_url_height'], 115,160,300,"");
+        $data['tShirt']['default_img'] = $this->config->get('config_url')."image/product/2/1.png";
 
 		$data['header'] = $this->load->controller('dashboard/layoutheader');
 		$data['column_left'] = $this->load->controller('dashboard/layoutleft');
 		$data['footer'] = $this->load->controller('dashboard/layoutfooter');
+        //$data['footer_back'] = $this->loadArtPrint();
 		$this->response->setOutput($this->load->view('dashboard/creation_product', $data));
 	}
+
+    protected function loadArtPrint(){
+        //return $this->load->view('dashboard/layout', array('text_version'=>3234));
+    }
 
 	/**
 	 *  Add Product

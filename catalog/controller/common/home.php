@@ -9,14 +9,12 @@ class ControllerCommonHome extends Controller {
 			$this->document->addLink($this->config->get('config_url'), 'canonical');
 		}
 
-		$data['column_left'] = $this->load->controller('common/column_left');
-		$data['column_right'] = $this->load->controller('common/column_right');
-		$data['content_top'] = $this->load->controller('common/content_top');
-		$data['content_bottom'] = $this->load->controller('common/content_bottom');
+        $data['shop_create_link'] = $this->url->link('shop/description');
+
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
-        $data['shop_create_link'] = $this->url->link('shop/create');
+      ;
 		$this->response->setOutput($this->load->view('common/home', $data));
 	}
 }

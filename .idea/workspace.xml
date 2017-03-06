@@ -2,20 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="02665710-9a17-4ff6-90d8-2f13252f83e3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/image/product/3/1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/image/product/3/2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/catalog/view/theme/default/template/fragment/artprint.tpl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/catalog/view/theme/default/template/fragment/phonecase.tpl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/catalog/view/theme/default/template/fragment/tshirt.tpl" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/system/storage/cache/cache.currency.1488726165" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/system/storage/cache/cache.language.1488726165" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/image/product/4/1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/image/product/4/2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/catalog/view/theme/default/template/fragment/pillow.tpl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/20170306.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/controller/dashboard/creation.php" afterPath="$PROJECT_DIR$/catalog/controller/dashboard/creation.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/model/dashboard/creation.php" afterPath="$PROJECT_DIR$/catalog/model/dashboard/creation.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/model/tool/image.php" afterPath="$PROJECT_DIR$/catalog/model/tool/image.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/view/theme/default/template/dashboard/creation_product.tpl" afterPath="$PROJECT_DIR$/catalog/view/theme/default/template/dashboard/creation_product.tpl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.php" afterPath="$PROJECT_DIR$/config.php" />
     </list>
     <ignored path="opencart.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,39 +41,48 @@
       <file leaf-file-name="creation.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/catalog/model/dashboard/creation.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="18.4">
-              <caret line="6" column="25" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="25" />
+            <state vertical-scroll-proportion="19.05">
+              <caret line="7" column="22" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="22" />
               <folding>
-                <marker date="1488788127043" expanded="true" signature="226:889" placeholder="INSERT INTO `${DB_PREFIX}creation`..." />
-                <marker date="1488788127043" expanded="true" signature="1548:1635" placeholder="DELETE FROM ..." />
-                <marker date="1488788127043" expanded="true" signature="1717:1805" placeholder="SELECT * FRO..${DB_PREFIX}creation..." />
-                <marker date="1488788127043" expanded="true" signature="1894:2007" placeholder="SELECT * FRO..${DB_PREFIX}creation..." />
-                <marker date="1488788127043" expanded="true" signature="2376:2449" placeholder="SELECT count..${DB_PREFIX}creation..." />
-                <marker date="1488788127043" expanded="true" signature="2604:3156" placeholder="INSERT INTO ${DB_PREFIX}product..." />
-                <marker date="1488788127043" expanded="true" signature="3416:3648" placeholder="INSERT INTO ${DB_PREFIX}product_description..." />
-                <marker date="1488788127043" expanded="true" signature="3749:3850" placeholder="SELECT produ..${DB_PREFIX}product..." />
+                <marker date="1488794232833" expanded="true" signature="245:908" placeholder="INSERT INTO `${DB_PREFIX}creation`..." />
+                <marker date="1488794232833" expanded="true" signature="1567:1654" placeholder="DELETE FROM ..." />
+                <marker date="1488794232833" expanded="true" signature="1736:1824" placeholder="SELECT * FRO..${DB_PREFIX}creation..." />
+                <marker date="1488794232833" expanded="true" signature="1913:2026" placeholder="SELECT * FRO..${DB_PREFIX}creation..." />
+                <marker date="1488794232833" expanded="true" signature="2395:2468" placeholder="SELECT count..${DB_PREFIX}creation..." />
+                <marker date="1488794232833" expanded="true" signature="2623:3175" placeholder="INSERT INTO ${DB_PREFIX}product..." />
+                <marker date="1488794232833" expanded="true" signature="3435:3667" placeholder="INSERT INTO ${DB_PREFIX}product_description..." />
+                <marker date="1488794232833" expanded="true" signature="3768:3869" placeholder="SELECT produ..${DB_PREFIX}product..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="creation.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="creation.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/catalog/controller/dashboard/creation.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.77964073">
-              <caret line="216" column="9" selection-start-line="216" selection-start-column="9" selection-end-line="216" selection-end-column="9" />
+            <state vertical-scroll-proportion="-85.98333">
+              <caret line="481" column="103" selection-start-line="481" selection-start-column="103" selection-end-line="481" selection-end-column="103" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="phonecase.tpl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/catalog/view/theme/default/template/fragment/phonecase.tpl">
+      <file leaf-file-name="20170306.sql" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/database/20170306.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-40.96875">
-              <caret line="57" column="37" selection-start-line="57" selection-start-column="37" selection-end-line="57" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pillow.tpl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog/view/theme/default/template/fragment/pillow.tpl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-15.8125">
+              <caret line="22" column="93" selection-start-line="22" selection-start-column="93" selection-end-line="22" selection-end-column="93" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#table#0;n#div#2;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
@@ -89,8 +93,8 @@
       <file leaf-file-name="image.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/catalog/model/tool/image.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.9375">
-              <caret line="184" column="23" selection-start-line="184" selection-start-column="20" selection-end-line="184" selection-end-column="23" />
+            <state vertical-scroll-proportion="-1.2666667">
+              <caret line="215" column="21" selection-start-line="215" selection-start-column="21" selection-end-line="215" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -109,8 +113,8 @@
       <file leaf-file-name="creation_product.tpl" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/catalog/view/theme/default/template/dashboard/creation_product.tpl">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.4375">
-              <caret line="43" column="25" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
+            <state vertical-scroll-proportion="-20.5">
+              <caret line="57" column="46" selection-start-line="57" selection-start-column="46" selection-end-line="57" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -127,7 +131,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/catalog/model/dashboard/theme.php" />
         <option value="$PROJECT_DIR$/catalog/model/dashboard/review.php" />
         <option value="$PROJECT_DIR$/catalog/model/dashboard/return.php" />
         <option value="$PROJECT_DIR$/catalog/model/dashboard/recurring.php" />
@@ -173,10 +176,11 @@
         <option value="$PROJECT_DIR$/config.php" />
         <option value="$PROJECT_DIR$/catalog/view/theme/default/template/fragment/artprint.tpl" />
         <option value="$PROJECT_DIR$/catalog/view/theme/default/template/fragment/tshirt.tpl" />
-        <option value="$PROJECT_DIR$/catalog/model/tool/image.php" />
-        <option value="$PROJECT_DIR$/catalog/model/dashboard/creation.php" />
         <option value="$PROJECT_DIR$/catalog/view/theme/default/template/fragment/phonecase.tpl" />
+        <option value="$PROJECT_DIR$/catalog/model/dashboard/creation.php" />
+        <option value="$PROJECT_DIR$/catalog/model/tool/image.php" />
         <option value="$PROJECT_DIR$/catalog/view/theme/default/template/dashboard/creation_product.tpl" />
+        <option value="$PROJECT_DIR$/catalog/view/theme/default/template/fragment/pillow.tpl" />
         <option value="$PROJECT_DIR$/catalog/controller/dashboard/creation.php" />
       </list>
     </option>
@@ -250,24 +254,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="image" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opencart" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="opencart" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="image" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="product" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -482,11 +468,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp\www\opencart\database" />
       <recent name="C:\wamp\www\opencart\catalog\view\theme\default\template\fragment" />
+      <recent name="C:\wamp\www\opencart\image\product\4" />
       <recent name="C:\wamp\www\opencart\image\product\3" />
       <recent name="D:\wamp\www\opencart\database" />
-      <recent name="D:\wamp\www\opencart\catalog\view\theme\default\template\dashboard" />
-      <recent name="D:\wamp\www\opencart\catalog\view\theme\default\template\shop" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp\www\opencart" />
@@ -540,8 +526,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.195629" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -610,13 +596,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/admin/controller/tool/backup.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/catalog/view/theme/default/template/common/filemanager.tpl">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="10.178572">
@@ -922,28 +901,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/view/theme/default/template/dashboard/creation_product.tpl">
+    <entry file="file://$PROJECT_DIR$/catalog/view/theme/default/template/fragment/phonecase.tpl">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.4375">
-          <caret line="43" column="25" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
-          <folding />
+        <state vertical-scroll-proportion="1.5191194">
+          <caret line="57" column="37" selection-start-line="57" selection-start-column="37" selection-end-line="57" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#div#2;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/model/dashboard/creation.php">
+    <entry file="file://$PROJECT_DIR$/catalog/model/tool/image.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="18.4">
-          <caret line="6" column="25" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="25" />
-          <folding>
-            <marker date="1488788127043" expanded="true" signature="226:889" placeholder="INSERT INTO `${DB_PREFIX}creation`..." />
-            <marker date="1488788127043" expanded="true" signature="1548:1635" placeholder="DELETE FROM ..." />
-            <marker date="1488788127043" expanded="true" signature="1717:1805" placeholder="SELECT * FRO..${DB_PREFIX}creation..." />
-            <marker date="1488788127043" expanded="true" signature="1894:2007" placeholder="SELECT * FRO..${DB_PREFIX}creation..." />
-            <marker date="1488788127043" expanded="true" signature="2376:2449" placeholder="SELECT count..${DB_PREFIX}creation..." />
-            <marker date="1488788127043" expanded="true" signature="2604:3156" placeholder="INSERT INTO ${DB_PREFIX}product..." />
-            <marker date="1488788127043" expanded="true" signature="3416:3648" placeholder="INSERT INTO ${DB_PREFIX}product_description..." />
-            <marker date="1488788127043" expanded="true" signature="3749:3850" placeholder="SELECT produ..${DB_PREFIX}product..." />
-          </folding>
+        <state vertical-scroll-proportion="-1.2666667">
+          <caret line="215" column="21" selection-start-line="215" selection-start-column="21" selection-end-line="215" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -955,30 +929,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/model/tool/image.php">
+    <entry file="file://$PROJECT_DIR$/catalog/view/theme/default/template/dashboard/creation_product.tpl">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.9375">
-          <caret line="184" column="23" selection-start-line="184" selection-start-column="20" selection-end-line="184" selection-end-column="23" />
+        <state vertical-scroll-proportion="-20.5">
+          <caret line="57" column="46" selection-start-line="57" selection-start-column="46" selection-end-line="57" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/view/theme/default/template/fragment/phonecase.tpl">
+    <entry file="file://$PROJECT_DIR$/catalog/view/theme/default/template/fragment/pillow.tpl">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-40.96875">
-          <caret line="57" column="37" selection-start-line="57" selection-start-column="37" selection-end-line="57" selection-end-column="37" />
+        <state vertical-scroll-proportion="-15.8125">
+          <caret line="22" column="93" selection-start-line="22" selection-start-column="93" selection-end-line="22" selection-end-column="93" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#table#0;n#div#2;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/catalog/model/dashboard/creation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="19.05">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="22" />
+          <folding>
+            <marker date="1488794232833" expanded="true" signature="245:908" placeholder="INSERT INTO `${DB_PREFIX}creation`..." />
+            <marker date="1488794232833" expanded="true" signature="1567:1654" placeholder="DELETE FROM ..." />
+            <marker date="1488794232833" expanded="true" signature="1736:1824" placeholder="SELECT * FRO..${DB_PREFIX}creation..." />
+            <marker date="1488794232833" expanded="true" signature="1913:2026" placeholder="SELECT * FRO..${DB_PREFIX}creation..." />
+            <marker date="1488794232833" expanded="true" signature="2395:2468" placeholder="SELECT count..${DB_PREFIX}creation..." />
+            <marker date="1488794232833" expanded="true" signature="2623:3175" placeholder="INSERT INTO ${DB_PREFIX}product..." />
+            <marker date="1488794232833" expanded="true" signature="3435:3667" placeholder="INSERT INTO ${DB_PREFIX}product_description..." />
+            <marker date="1488794232833" expanded="true" signature="3768:3869" placeholder="SELECT produ..${DB_PREFIX}product..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/catalog/controller/dashboard/creation.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.77964073">
-          <caret line="216" column="9" selection-start-line="216" selection-start-column="9" selection-end-line="216" selection-end-column="9" />
+        <state vertical-scroll-proportion="-85.98333">
+          <caret line="481" column="103" selection-start-line="481" selection-start-column="103" selection-end-line="481" selection-end-column="103" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/20170306.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>

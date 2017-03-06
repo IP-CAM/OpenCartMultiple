@@ -45,11 +45,17 @@
               </button>
               <?php echo $fragmentView['tShirt'];?>
 
-              <!-- T shirt -->
+              <!-- PhoneCase -->
               <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#phoneCaseModal">
-                 Phone Case
+                  Phone Case
               </button>
               <?php echo $fragmentView['phoneCase'];?>
+
+              <!-- Pillow -->
+              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#pillowModal">
+                  Pillow
+              </button>
+              <?php echo $fragmentView['pillow'];?>
 
           </div>
 

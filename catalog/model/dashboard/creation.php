@@ -5,6 +5,7 @@ class ModelDashboardCreation extends Model {
         '1' => 'artPrint',
         '2' => 'tShirt',
 		'3' => 'phoneCase',
+		'4' => 'pillow',
     );
 
 	public function addCreation($data) {

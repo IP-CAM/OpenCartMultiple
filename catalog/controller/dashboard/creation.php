@@ -419,9 +419,14 @@ class ControllerDashboardCreation extends Controller {
 		$data['product']['phoneCase']['default_img'] = $this->config->get('config_url')."image/product/3/1.png";
 		$data['fragmentView']['phoneCase'] = $this->loadPhoneCaseView($data['common'],$data['creation'],$data['product']['phoneCase']);
 
+		//Pillow
+		$data['product']['pillow']['imgParam']  = $this->model_tool_image->getParamOfImg($creation_info['creation_url_width'], $creation_info['creation_url_height'], 185,185,300,"",55);
+		$data['product']['pillow']['default_img'] = $this->config->get('config_url')."image/product/3/1.png";
+		$data['fragmentView']['pillow'] = $this->loadPillowView($data['common'],$data['creation'],$data['product']['pillow']);
+
 		//Test
-//		$this->model_tool_image->combinePhoneCase(QINIU_BASE.$creation_info['creation_url'],
-//				$creation_info['creation_url_width'], $creation_info['creation_url_height'],DIR_IMAGE."product/3/1.png");
+//		$this->model_tool_image->combinePillow(QINIU_BASE.$creation_info['creation_url'],
+//				$creation_info['creation_url_width'], $creation_info['creation_url_height'],DIR_IMAGE."product/4/1.png");
 
 		$data['header'] = $this->load->controller('dashboard/layoutheader');
 		$data['column_left'] = $this->load->controller('dashboard/layoutleft');
@@ -457,6 +462,10 @@ class ControllerDashboardCreation extends Controller {
 					$combineFile = $this->model_tool_image->combinePhoneCase(QINIU_BASE.$creation_info['creation_url'],
 							$creation_info['creation_url_width'], $creation_info['creation_url_height'],DIR_IMAGE."product/3/".$this->request->post['type_img_no'].".png");
 					break;
+				case "4":
+					$combineFile = $this->model_tool_image->combinePillow(QINIU_BASE.$creation_info['creation_url'],
+							$creation_info['creation_url_width'], $creation_info['creation_url_height'],DIR_IMAGE."product/4/".$this->request->post['type_img_no'].".png");
+					break;
             }
 
 			//Upload Image
@@ -470,7 +479,7 @@ class ControllerDashboardCreation extends Controller {
 				$data = array(
 					'image' => $uploadFile,
 					'model' => $this->request->post['type_name'].$creation_info['creation_id'],
-					'name' => $creation_info['creation_name']." -- ".$this->request->post['type_name'],
+					'name' => $creation_info['creation_name']." [".$this->request->post['type_name']."]",
 					'shop_id' => 1,
 					'price' => $this->request->post['price'],
 					'weight' => $this->request->post['weight'],
@@ -506,7 +515,10 @@ class ControllerDashboardCreation extends Controller {
 		return $this->load->view('fragment/phonecase',$data);
 	}
 
-
-
+	protected function loadPillowView($data,$creation,$pillow){
+		$data['creation'] = $creation;
+		$data['pillow'] = $pillow;
+		return $this->load->view('fragment/pillow',$data);
+	}
 
 }

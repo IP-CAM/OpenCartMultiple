@@ -206,6 +206,34 @@ class ModelToolImage extends Model {
 		return $dstUrl;
 	}
 
+	/**
+	 * CombinePhoneCase
+	 */
+	public function combinePillow($srcUrl,$srcWidth, $srcHeight,$bgImg){
+		$dstWidth = 370;
+		$dstHeight = 370;
+		$sizeTotal = 600;
+		$startY = 110;
+
+		$dataParam = $this->getParamOfImg($srcWidth,$srcHeight,$dstWidth,$dstHeight,$sizeTotal,$srcUrl,$startY);
+		//获取SrcPath
+		$src = imagecreatefrompng($dataParam['src_path']);
+
+		//获取大图
+		$dst = imagecreatefromstring(file_get_contents($bgImg));
+
+		imagecopy($dst, $src, $dataParam['startX'], $dataParam['startY'], 0, 0, $dataParam['srcWidth'], $dataParam['srcHeight']);
+
+		//输出图片
+		$dstUrl = DIR_IMAGE . 'temp/'.$this->customer->getId().'.png';
+		imagepng($dst,$dstUrl);
+
+		imagedestroy($dst);
+		imagedestroy($src);
+
+		return $dstUrl;
+	}
+
 
     /**
      * Caculate the Parameters Of Image

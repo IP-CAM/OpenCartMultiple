@@ -2,8 +2,9 @@
 class ModelDashboardCreation extends Model {
 
     private $productType = array(
-       '1' => 'artPrint',
-       '2' => 'tShirt',
+        '1' => 'artPrint',
+        '2' => 'tShirt',
+		'3' => 'phoneCase',
     );
 
 	public function addCreation($data) {

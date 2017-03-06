@@ -158,7 +158,7 @@ class ModelToolImage extends Model {
         $sizeTotal = 600;
         $startY = 150;
 
-        $dataParam = $this->getParamOfImg($srcWidth,$srcHeight,$dstWidth,$dstHeight,$sizeTotal,$srcUrl);
+        $dataParam = $this->getParamOfImg($srcWidth,$srcHeight,$dstWidth,$dstHeight,$sizeTotal,$srcUrl,$startY);
 
         //创建图片的实例
         $src = imagecreatefrompng($dataParam['src_path']);
@@ -178,31 +178,60 @@ class ModelToolImage extends Model {
         return $dstUrl;
     }
 
+	/**
+	 * CombinePhoneCase
+	 */
+	public function combinePhoneCase($srcUrl,$srcWidth, $srcHeight,$bgImg){
+		$dstWidth = 210;
+		$dstHeight = 450;
+		$sizeTotal = 600;
+		$startY = 80;
+
+		$dataParam = $this->getParamOfImg($srcWidth,$srcHeight,$dstWidth,$dstHeight,$sizeTotal,$srcUrl,$startY);
+		//获取SrcPath
+		$src = imagecreatefrompng($dataParam['src_path']);
+
+		//获取大图
+		$dst = imagecreatefromstring(file_get_contents($bgImg));
+
+		imagecopy($dst, $src, $dataParam['startX'], $dataParam['startY'], 0, 0, $dataParam['srcWidth'], $dataParam['srcHeight']);
+
+		//输出图片
+		$dstUrl = DIR_IMAGE . 'temp/'.$this->customer->getId().'.png';
+		imagepng($dst,$dstUrl);
+
+		imagedestroy($dst);
+		imagedestroy($src);
+
+		return $dstUrl;
+	}
+
 
     /**
      * Caculate the Parameters Of Image
      */
-    public function getParamOfImg($srcWidth,$srcHeight,$dstWidth,$dstHeight,$sizeTotal,$srcUrl){
+    public function getParamOfImg($srcWidth,$srcHeight,$dstWidth,$dstHeight,$sizeTotal,$srcUrl,$startY){
 
         //计算需要图片比例
         if($dstHeight/$dstWidth > $srcHeight/$srcWidth){
             //按照宽度
-            $src_path = $srcUrl."?imageView2/2/w/".$dstWidth."/h/".$dstWidth."/q/100";
             $srcHeight = floor($dstWidth*($srcHeight/$srcWidth));
             $srcWidth = $dstWidth;
         }else{
             //按照高度
-            $src_path = $srcUrl."?imageView2/2/w/".$dstHeight."/h/".$dstHeight."/q/100";
             $srcWidth = floor($dstHeight*($srcWidth/$srcHeight));
             $srcHeight = $dstHeight;
         }
+
+		$imgWidth = $srcHeight>$srcWidth?$srcHeight:$srcWidth;
+		$src_path = $srcUrl."?imageView2/2/w/".$imgWidth."/h/".$imgWidth."/q/100";
 
         $data = array(
             'src_path' => $src_path,
             'srcHeight' => $srcHeight,
             'srcWidth' => $srcWidth,
             'startX' => ($sizeTotal - $srcWidth)/2,
-            'startY' => ($sizeTotal - $srcHeight)/2,
+			'startY' => ($dstHeight - $srcHeight)/2 + $startY,
         );
         return $data;
     }

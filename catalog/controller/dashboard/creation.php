@@ -215,7 +215,6 @@ class ControllerDashboardCreation extends Controller {
 		} else {
 			$data['error_creation_color'] = '';
 		}
-
 		$url = '';
 
 		if (isset($this->request->get['page'])) {
@@ -389,42 +388,49 @@ class ControllerDashboardCreation extends Controller {
 		}
 
 		$data['text_product'] = $this->language->get('text_product');
-		$data['entry_price'] = $this->language->get('entry_price');
-		$data['entry_creation_img'] = $this->language->get('column_creation_img');
-		$data['entry_creation_color'] = $this->language->get('entry_creation_color');
-		$data['entry_creation_color'] = $this->language->get('entry_creation_color');
 
-        //List
-        $data['product'] = $this->model_dashboard_creation->getCreationProduct($this->request->get['creation_id']);
+		$data['common']['entry_price'] = $this->language->get('entry_price');
+		$data['common']['entry_creation_img'] = $this->language->get('column_creation_img');
+		$data['common']['entry_creation_color'] = $this->language->get('entry_creation_color');
+		$data['common']['action'] = $this->url->link('dashboard/creation/addproduct', '' , true);
+
+		//List
+		$data['product'] = $this->model_dashboard_creation->getCreationProduct($this->request->get['creation_id']);
 
 		//Creation Info
 		$creation_info = $this->model_dashboard_creation->getCreation($this->request->get['creation_id']);
-		$data['creation_url'] = $creation_info['creation_url'];
-		$data['creation_color'] = $creation_info['creation_color'];
-	    $data['creation_url_show'] = QINIU_BASE.$data['creation_url']."!creation";
-		$data['creation_id'] = $this->request->get['creation_id'];
-
-		//Action
-		$data['action'] = $this->url->link('dashboard/creation/addproduct', '' , true);
+		$data['creation']['creation_url'] = $creation_info['creation_url'];
+		$data['creation']['creation_color'] = $creation_info['creation_color'];
+	    $data['creation']['creation_url_show'] = QINIU_BASE.$creation_info['creation_url']."!creation";
+		$data['creation']['creation_id'] = $this->request->get['creation_id'];
 
 		//ArtPrint Info
-		$data['artPrint'] = $this->model_tool_image->getParamOfImg($creation_info['creation_url_width'], $creation_info['creation_url_height'], 170,170,300,"");
-        $data['artPrint']['startY'] = 125 - $data['artPrint']['srcHeight']/2 - 20;
-        //Tshirt
+		$data['product']['artPrint']['imgParam'] = $this->model_tool_image->getParamOfImg($creation_info['creation_url_width'], $creation_info['creation_url_height'], 170,170,300,"",0);
+        $data['product']['artPrint']['imgParam']['startY'] = 125 - $data['product']['artPrint']['imgParam']['srcHeight']/2 - 20;
+		$data['fragmentView']['artPrint'] = $this->loadArtPrintView($data['common'],$data['creation'],$data['product']['artPrint']);
 
-        $data['tShirt']  = $this->model_tool_image->getParamOfImg($creation_info['creation_url_width'], $creation_info['creation_url_height'], 115,160,300,"");
-        $data['tShirt']['default_img'] = $this->config->get('config_url')."image/product/2/1.png";
+		//Tshirt
+        $data['product']['tShirt']['imgParam']  = $this->model_tool_image->getParamOfImg($creation_info['creation_url_width'], $creation_info['creation_url_height'], 115,160,300,"",0);
+        $data['product']['tShirt']['default_img'] = $this->config->get('config_url')."image/product/2/1.png";
+		$data['fragmentView']['tShirt'] = $this->loadTshirtView($data['common'],$data['creation'],$data['product']['tShirt']);
+
+		//PhoneCase
+		$data['product']['phoneCase']['imgParam']  = $this->model_tool_image->getParamOfImg($creation_info['creation_url_width'], $creation_info['creation_url_height'], 110,225,300,"",40);
+		$data['product']['phoneCase']['default_img'] = $this->config->get('config_url')."image/product/3/1.png";
+		$data['fragmentView']['phoneCase'] = $this->loadPhoneCaseView($data['common'],$data['creation'],$data['product']['phoneCase']);
+
+		//Test
+//		$this->model_tool_image->combinePhoneCase(QINIU_BASE.$creation_info['creation_url'],
+//				$creation_info['creation_url_width'], $creation_info['creation_url_height'],DIR_IMAGE."product/3/1.png");
 
 		$data['header'] = $this->load->controller('dashboard/layoutheader');
 		$data['column_left'] = $this->load->controller('dashboard/layoutleft');
 		$data['footer'] = $this->load->controller('dashboard/layoutfooter');
-        //$data['footer_back'] = $this->loadArtPrint();
+
 		$this->response->setOutput($this->load->view('dashboard/creation_product', $data));
 	}
 
-    protected function loadArtPrint(){
-        //return $this->load->view('dashboard/layout', array('text_version'=>3234));
-    }
+
 
 	/**
 	 *  Add Product
@@ -447,6 +453,10 @@ class ControllerDashboardCreation extends Controller {
                     $combineFile = $this->model_tool_image->combineTshirt(QINIU_BASE.$creation_info['creation_url'],
                         $creation_info['creation_url_width'], $creation_info['creation_url_height'],DIR_IMAGE."product/2/".$this->request->post['type_img_no'].".png");
                     break;
+				case "3":
+					$combineFile = $this->model_tool_image->combinePhoneCase(QINIU_BASE.$creation_info['creation_url'],
+							$creation_info['creation_url_width'], $creation_info['creation_url_height'],DIR_IMAGE."product/3/".$this->request->post['type_img_no'].".png");
+					break;
             }
 
 			//Upload Image
@@ -477,5 +487,26 @@ class ControllerDashboardCreation extends Controller {
 			}
 		}
 	}
+
+	protected function loadArtPrintView($data,$creation,$artPrint){
+		$data['creation'] = $creation;
+		$data['artPrint'] = $artPrint;
+		return $this->load->view('fragment/artprint',$data);
+	}
+
+	protected function loadTshirtView($data,$creation,$tShirt){
+		$data['creation'] = $creation;
+		$data['tShirt'] = $tShirt;
+		return $this->load->view('fragment/tshirt',$data);
+	}
+
+	protected function loadPhoneCaseView($data,$creation,$phoneCase){
+		$data['creation'] = $creation;
+		$data['phoneCase'] = $phoneCase;
+		return $this->load->view('fragment/phonecase',$data);
+	}
+
+
+
 
 }

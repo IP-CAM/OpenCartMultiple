@@ -388,6 +388,7 @@ class ControllerDashboardCreation extends Controller {
 		}
 
 		$data['text_product'] = $this->language->get('text_product');
+		$data['base_url'] = QINIU_BASE;
 
 		$data['common']['entry_price'] = $this->language->get('entry_price');
 		$data['common']['entry_creation_img'] = $this->language->get('column_creation_img');
@@ -413,6 +414,7 @@ class ControllerDashboardCreation extends Controller {
         $data['product']['tShirt']['imgParam']  = $this->model_tool_image->getParamOfImg($creation_info['creation_url_width'], $creation_info['creation_url_height'], 115,160,300,"",0);
         $data['product']['tShirt']['default_img'] = $this->config->get('config_url')."image/product/2/1.png";
 		$data['fragmentView']['tShirt'] = $this->loadTshirtView($data['common'],$data['creation'],$data['product']['tShirt']);
+
 
 		//PhoneCase
 		$data['product']['phoneCase']['imgParam']  = $this->model_tool_image->getParamOfImg($creation_info['creation_url_width'], $creation_info['creation_url_height'], 110,225,300,"",40);
@@ -441,59 +443,115 @@ class ControllerDashboardCreation extends Controller {
 	 *  Add Product
 	 */
 	public function addproduct(){
+
 		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
 
-			//Creation Info
 			$this->load->model('dashboard/creation');
 			$creation_info = $this->model_dashboard_creation->getCreation($this->request->post['creation_id']);
 
-			//Product Image Create
-			$this->load->model('tool/image');
-            $combineFile = "";
-            switch($this->request->post['type_id']){
-                case "1":
-                    $combineFile = $this->model_tool_image->combineArtPrintImg(QINIU_BASE.$creation_info['creation_url']);
-                    break;
-                case "2":
-                    $combineFile = $this->model_tool_image->combineTshirt(QINIU_BASE.$creation_info['creation_url'],
-                        $creation_info['creation_url_width'], $creation_info['creation_url_height'],DIR_IMAGE."product/2/".$this->request->post['type_img_no'].".png");
-                    break;
-				case "3":
-					$combineFile = $this->model_tool_image->combinePhoneCase(QINIU_BASE.$creation_info['creation_url'],
-							$creation_info['creation_url_width'], $creation_info['creation_url_height'],DIR_IMAGE."product/3/".$this->request->post['type_img_no'].".png");
-					break;
-				case "4":
-					$combineFile = $this->model_tool_image->combinePillow(QINIU_BASE.$creation_info['creation_url'],
-							$creation_info['creation_url_width'], $creation_info['creation_url_height'],DIR_IMAGE."product/4/".$this->request->post['type_img_no'].".png");
-					break;
-            }
+			if($this->request->post['product_id']){
+				//Edit
+				$isEditable = true;
+				$uploadFile = $this->request->post['image'];
+				if($this->request->post['type_id'] != "1"){
 
-			//Upload Image
-			$this->load->model('tool/file');
-			$this->model_tool_file->getQiniuToken();
-            $uploadFile = $this->model_tool_file->uploadToQiniu($combineFile,floor($this->customer->getId()/1000)."/".$this->customer->getId()."/");
-			if($uploadFile != "fail") {
-				$this->model_tool_file->deleteFile($combineFile);
+					if($this->request->post['type_img_no'] != $this->request->post['type_img_no_old']){
 
-				//Add to Database
-				$data = array(
-					'image' => $uploadFile,
-					'model' => $this->request->post['type_name'].$creation_info['creation_id'],
-					'name' => $creation_info['creation_name']." [".$this->request->post['type_name']."]",
-					'shop_id' => 1,
-					'price' => $this->request->post['price'],
-					'weight' => $this->request->post['weight'],
-					'creation_id' =>$creation_info['creation_id'],
-					'type_id' => $this->request->post['type_id'],
-                    'type_img_no' => $this->request->post['type_img_no'],
-				);
-				$this->model_dashboard_creation->addProduct($data);
-				$this->session->data['success'] = $this->language->get('text_success_product');
+						//Change the Image
+						$this->load->model('tool/image');
+						$combineFile = "";
+						switch($this->request->post['type_id']){
+							case "2":
+								$combineFile = $this->model_tool_image->combineTshirt(QINIU_BASE.$creation_info['creation_url'],
+										$creation_info['creation_url_width'], $creation_info['creation_url_height'],DIR_IMAGE."product/2/".$this->request->post['type_img_no'].".png");
+								break;
+							case "3":
+								$combineFile = $this->model_tool_image->combinePhoneCase(QINIU_BASE.$creation_info['creation_url'],
+										$creation_info['creation_url_width'], $creation_info['creation_url_height'],DIR_IMAGE."product/3/".$this->request->post['type_img_no'].".png");
+								break;
+							case "4":
+								$combineFile = $this->model_tool_image->combinePillow(QINIU_BASE.$creation_info['creation_url'],
+										$creation_info['creation_url_width'], $creation_info['creation_url_height'],DIR_IMAGE."product/4/".$this->request->post['type_img_no'].".png");
+								break;
+						}
 
-				$this->response->redirect($this->url->link('dashboard/creation/product', '&creation_id='.$creation_info['creation_id'] , true));
+						//Upload Image
+						$this->load->model('tool/file');
+						$this->model_tool_file->getQiniuToken();
+						$uploadFile = $this->model_tool_file->uploadToQiniu($combineFile,floor($this->customer->getId()/1000)."/".$this->customer->getId()."/");
+
+						if($uploadFile == "fail"){
+							$isEditable = false;
+						}
+
+					}
+				}
+
+				if($isEditable){
+					$data = array(
+							'image' => $uploadFile,
+							'price' => $this->request->post['price'],
+							'type_img_no' => $this->request->post['type_img_no'],
+					);
+					$this->model_dashboard_creation->editProduct($data,$this->request->post['product_id']);
+					$this->session->data['success'] = $this->language->get('text_success_product_edit');
+					$this->response->redirect($this->url->link('dashboard/creation/product', '&creation_id='.$creation_info['creation_id'] , true));
+				}else{
+
+				}
+
+
 			}else{
 
+				//Product Image Create
+				$this->load->model('tool/image');
+				$combineFile = "";
+				switch($this->request->post['type_id']){
+					case "1":
+						$combineFile = $this->model_tool_image->combineArtPrintImg(QINIU_BASE.$creation_info['creation_url']);
+						break;
+					case "2":
+						$combineFile = $this->model_tool_image->combineTshirt(QINIU_BASE.$creation_info['creation_url'],
+								$creation_info['creation_url_width'], $creation_info['creation_url_height'],DIR_IMAGE."product/2/".$this->request->post['type_img_no'].".png");
+						break;
+					case "3":
+						$combineFile = $this->model_tool_image->combinePhoneCase(QINIU_BASE.$creation_info['creation_url'],
+								$creation_info['creation_url_width'], $creation_info['creation_url_height'],DIR_IMAGE."product/3/".$this->request->post['type_img_no'].".png");
+						break;
+					case "4":
+						$combineFile = $this->model_tool_image->combinePillow(QINIU_BASE.$creation_info['creation_url'],
+								$creation_info['creation_url_width'], $creation_info['creation_url_height'],DIR_IMAGE."product/4/".$this->request->post['type_img_no'].".png");
+						break;
+				}
+
+				//Upload Image
+				$this->load->model('tool/file');
+				$this->model_tool_file->getQiniuToken();
+				$uploadFile = $this->model_tool_file->uploadToQiniu($combineFile,floor($this->customer->getId()/1000)."/".$this->customer->getId()."/");
+				if($uploadFile != "fail") {
+					$this->model_tool_file->deleteFile($combineFile);
+
+					//Add to Database
+					$data = array(
+							'image' => $uploadFile,
+							'model' => $this->request->post['type_name'].$creation_info['creation_id'],
+							'name' => $creation_info['creation_name']." [".$this->request->post['type_name']."]",
+							'shop_id' => 1,
+							'price' => $this->request->post['price'],
+							'weight' => $this->request->post['weight'],
+							'creation_id' =>$creation_info['creation_id'],
+							'type_id' => $this->request->post['type_id'],
+							'type_img_no' => $this->request->post['type_img_no'],
+					);
+					$this->model_dashboard_creation->addProduct($data);
+					$this->session->data['success'] = $this->language->get('text_success_product');
+
+					$this->response->redirect($this->url->link('dashboard/creation/product', '&creation_id='.$creation_info['creation_id'] , true));
+				}else{
+
+				}
 			}
+
 		}
 	}
 

@@ -1,5 +1,9 @@
 <?php echo $header; ?>
 <?php echo $column_left; ?>
+<style>
+    .pro_name{font-size:16px; margin-top:10px}
+    .pro_price{font-size:13px; margin-top:5px;}
+</style>
 <div id="content">
   <div class="page-header">
     <div class="container-fluid">
@@ -32,30 +36,80 @@
       <div class="panel-body">
 
           <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                  <tbody>
+                     <tr>
+                         <!-- Art Print -->
+                         <td class="text-center">
+                             <?php if(isset($product['artPrint']['product_id'])){ ?>
+                                <img src="<?php echo $base_url.$product['artPrint']['image']; ?>" width="200" height="200">
+                                <p class="pro_price">$<?php echo $product['artPrint']['price'];?></p>
+                             <?php }else{ ?>
 
-              <!-- Art Print -->
-              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#artPrintModal">
-                  Art Print
-              </button>
-              <?php echo $fragmentView['artPrint'];?>
+                             <?php }?>
+                             <p class="pro_name">Art Print</p>
+                             <div class="pro_list_btn">
+                                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#artPrintModal">
+                                     Edit
+                                 </button>
+                             </div>
+                             <?php echo $fragmentView['artPrint'];?>
+                         </td>
 
-              <!-- T shirt -->
-              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#tShirtModal">
-                  T-shirt
-              </button>
-              <?php echo $fragmentView['tShirt'];?>
+                         <!-- T shirt -->
+                         <td class="text-center">
+                             <?php if(isset($product['tShirt']['product_id'])){ ?>
+                                <img src="<?php echo $base_url.$product['tShirt']['image']; ?>" width="200" height="200">
+                                <p class="pro_price">$<?php echo $product['tShirt']['price'];?></p>
+                             <?php }else{ ?>
 
-              <!-- PhoneCase -->
-              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#phoneCaseModal">
-                  Phone Case
-              </button>
-              <?php echo $fragmentView['phoneCase'];?>
+                             <?php }?>
+                             <p class="pro_name">T Shirt</p>
+                             <div class="pro_list_btn">
+                                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#tShirtModal">
+                                     Edit
+                                 </button>
+                             </div>
+                             <?php echo $fragmentView['tShirt'];?>
+                         </td>
 
-              <!-- Pillow -->
-              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#pillowModal">
-                  Pillow
-              </button>
-              <?php echo $fragmentView['pillow'];?>
+                         <!-- PhoneCase -->
+                         <td class="text-center">
+                             <?php if(isset($product['phoneCase']['product_id'])){ ?>
+                                <img src="<?php echo $base_url.$product['phoneCase']['image']; ?>" width="200" height="200">
+                                <p class="pro_price">$<?php echo $product['phoneCase']['price'];?></p>
+                             <?php }else{ ?>
+
+                             <?php }?>
+                             <p class="pro_name">Phone Case</p>
+                             <div class="pro_list_btn">
+                                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#phoneCaseModal">
+                                     Edit
+                                 </button>
+                             </div>
+                             <?php echo $fragmentView['phoneCase'];?>
+                         </td>
+
+                         <!-- Pillow -->
+                         <td class="text-center">
+                             <?php if(isset($product['pillow']['product_id'])){ ?>
+                                <img src="<?php echo $base_url.$product['pillow']['image']; ?>" width="200" height="200">
+                                <p class="pro_price">$<?php echo $product['pillow']['price'];?></p>
+                             <?php }else{ ?>
+
+                             <?php }?>
+
+                             <p class="pro_name">Pillow</p>
+                             <div class="pro_list_btn">
+                                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#pillowModal">
+                                     Edit
+                                 </button>
+                             </div>
+                             <?php echo $fragmentView['pillow'];?>
+                         </td>
+                     </tr>
+                  </tbody>
+              </table>
 
           </div>
 

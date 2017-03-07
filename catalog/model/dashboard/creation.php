@@ -102,4 +102,12 @@ class ModelDashboardCreation extends Model {
         return $data;
     }
 
+	public function editProduct($data,$product_id){
+		$this->db->query("UPDATE `" . DB_PREFIX . "product` SET
+			image = '" . $this->db->escape($data['image']) ."',
+			price = '" . $this->db->escape($data['price']) . "',
+			type_img_no = '" . $this->db->escape($data['type_img_no']) . "'
+			WHERE product_id = '" . (int)$product_id . "'");
+	}
+
 }

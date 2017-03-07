@@ -8,19 +8,20 @@ define('HTTPS_SERVER', 'http://localhost/opencart/');
 define('HTTPS_CATALOG', 'http://localhost/opencart/');
 
 // DIR
-define('DIR_APPLICATION', 'C:/wamp/www/opencart/catalog/');
-define('DIR_SYSTEM', 'C:/wamp/www/opencart/system/');
-define('DIR_LIBRARY', 'C:/wamp/www/opencart/library/');
-define('DIR_IMAGE', 'C:/wamp/www/opencart/image/');
-define('DIR_IMAGE_USER', 'C:/wamp/www/opencart/image/user/');
-define('DIR_LANGUAGE', 'C:/wamp/www/opencart/catalog/language/');
-define('DIR_TEMPLATE', 'C:/wamp/www/opencart/catalog/view/theme/');
-define('DIR_CONFIG', 'C:/wamp/www/opencart/system/config/');
-define('DIR_CACHE', 'C:/wamp/www/opencart/system/storage/cache/');
-define('DIR_DOWNLOAD', 'C:/wamp/www/opencart/system/storage/download/');
-define('DIR_LOGS', 'C:/wamp/www/opencart/system/storage/logs/');
-define('DIR_MODIFICATION', 'C:/wamp/www/opencart/system/storage/modification/');
-define('DIR_UPLOAD', 'C:/wamp/www/opencart/system/storage/upload/');
+$basedir = dirname(__FILE__);
+define('DIR_APPLICATION', $basedir.'/catalog/');
+define('DIR_SYSTEM', $basedir.'/system/');
+define('DIR_LIBRARY', $basedir.'/library/');
+define('DIR_IMAGE', $basedir.'/image/');
+define('DIR_IMAGE_USER',$basedir. '/image/user/');
+define('DIR_LANGUAGE',$basedir. '/catalog/language/');
+define('DIR_TEMPLATE', $basedir.'/catalog/view/theme/');
+define('DIR_CONFIG', $basedir.'/system/config/');
+define('DIR_CACHE', $basedir.'/system/storage/cache/');
+define('DIR_DOWNLOAD',$basedir. '/system/storage/download/');
+define('DIR_LOGS',$basedir. '/system/storage/logs/');
+define('DIR_MODIFICATION', $basedir.'/system/storage/modification/');
+define('DIR_UPLOAD',$basedir. '/system/storage/upload/');
 
 // DB
 define('DB_DRIVER', 'mysqli');

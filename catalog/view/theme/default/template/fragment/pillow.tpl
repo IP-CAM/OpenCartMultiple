@@ -13,17 +13,17 @@
           <div class="form-group required">
             <label class="col-sm-3 control-label" for="input-author"><?php echo $entry_price; ?></label>
             <div class="col-sm-6">
-              <input type="text" name="price" value="" id="input-price" class="form-control" />
+              <input type="text" name="price" value="<?php if(isset($pillow['price'])){echo $pillow['price'];}else{ echo "";}?>" id="input-price" class="form-control" />
             </div>
           </div>
 
           <div class="form-group">
             <label class="col-sm-3 control-label" for="input-image"><?php echo $entry_creation_img; ?></label>
             <div class="col-sm-9">
-              <div style="height: 300px; width: 300px;background-image:url('./image/product/4/1.png');
+              <div style="height: 300px; width: 300px;background-image:url('./image/product/4/<?php if(isset($pillow['type_img_no'])){echo $pillow['type_img_no'];}else{echo "1";} ?>.png');
 background-repeat:no-repeat;background-size:300px; " id="pillow_wrap">
                 <img src="<?php echo $creation['creation_url_show'];?>" width="<?php echo $pillow['imgParam']['srcWidth'];?>" height="<?php echo $pillow['imgParam']['srcHeight'];?>"
-                     style="margin-left: <?php echo $pillow['imgParam']['startX']; ?>px; margin-top: <?php echo $pillow['imgParam']['startY']; ?>px" >
+                     style="margin-top: <?php echo $pillow['imgParam']['startY']; ?>px" >
               </div>
             </div>
           </div>
@@ -38,9 +38,16 @@ background-repeat:no-repeat;background-size:300px; " id="pillow_wrap">
           </div>
 
         </div>
+
+        <?php if(isset($pillow['product_id'])){ ?>
+          <input type="hidden" name="product_id" value="<?php echo $pillow['product_id'];?>">
+          <input type="hidden" name="image" value="<?php echo $pillow['image'];?>">
+          <input type="hidden" name="type_img_no_old" value="<?php echo $pillow['type_img_no'];?>">
+        <?php } ?>
+
         <input type="hidden" name="type_name" value="Pillow">
         <input type="hidden" name="type_id" value="4">
-        <input type="hidden" name="type_img_no" value="1" id="pillow_type_img_no">
+        <input type="hidden" name="type_img_no" value="<?php if(isset($pillow['type_img_no'])){echo $pillow['type_img_no'];}else{echo "1";}?>" id="pillow_type_img_no">
         <input type="hidden" name="creation_id" value="<?php echo $creation['creation_id']?>">
         <input type="hidden" name="weight" value="0.2">
 

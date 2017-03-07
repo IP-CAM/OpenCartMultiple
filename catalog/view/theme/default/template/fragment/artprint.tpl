@@ -12,7 +12,7 @@
           <div class="form-group required">
             <label class="col-sm-3 control-label" for="input-author"><?php echo $entry_price; ?></label>
             <div class="col-sm-6">
-              <input type="text" name="price" value="" id="input-price" class="form-control" />
+              <input type="text" name="price" value="<?php if(isset($artPrint['price'])){echo $artPrint['price'];}else{ echo "";}?>" id="input-price" class="form-control" />
             </div>
           </div>
 
@@ -30,11 +30,16 @@
           </div>
 
         </div>
+        <?php if(isset($artPrint['product_id'])){ ?>
+          <input type="hidden" name="product_id" value="<?php echo $artPrint['product_id'];?>">
+          <input type="hidden" name="image" value="<?php echo $artPrint['image'];?>">
+          <input type="hidden" name="type_img_no_old" value="<?php echo $artPrint['type_img_no'];?>">
+        <?php } ?>
         <input type="hidden" name="type_name" value="Art Print">
         <input type="hidden" name="type_id" value="1">
-        <input type="hidden" name="creation_id" value="<?php echo $$creation['creation_id']?>">
+        <input type="hidden" name="creation_id" value="<?php echo $creation['creation_id']?>">
         <input type="hidden" name="weight" value="0.1">
-        <input type="hidden" name="type_img_no" value="0">
+        <input type="hidden" name="type_img_no" value="<?php if(isset($artPrint['type_img_no'])){echo $artPrint['type_img_no'];}else{echo "1";}?>">
 
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

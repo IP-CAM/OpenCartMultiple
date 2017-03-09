@@ -7,8 +7,8 @@
                 <h1>How it Works</h1>
             </div>
             <p class="how-it-works-intro">
-                <span class="intro-head">TEEPUBLIC IS A DIGITAL STOREFRONT AND FULFILLMENT</span>
-                house for kick ass independent t-shirt designers. We're striving to build a website showcasing the work of the world best designers. What you'll get on TeePublic is your own storefront where you can sell as many designs as you like without having to worry about printing or shipping. From there we guarantee the best prices for your customers, highest quality prints and most professional community of any t-shirt site on the web. That's been our mission from day one!
+                <span class="intro-head">You Make Art,We'll Do The Rest</span>
+                Artist Shops provides the best platform for you to sell your art online for free. Sell to anyone in the world, or create products just for yourself.Set your own prices on your products. The benefits of a fully functional e-commerce store with none of the hassle. We handle the inventory, manufacturing, shipping, and customer care. Completely free to sign up and use today!
             </p>
         </div>
     </div>

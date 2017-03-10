@@ -7,7 +7,10 @@ class ControllerShopCreation extends Controller {
 
         $data['footer'] = $this->load->controller('common/footer');
         $data['header'] = $this->load->controller('common/header');
-        ;
+
+        $data['shop_home'] = $this->url->link('shop/home');
+        $data['shop_creation'] = $this->url->link('shop/creation');
+
         $this->response->setOutput($this->load->view('shop/creation', $data));
     }
 }

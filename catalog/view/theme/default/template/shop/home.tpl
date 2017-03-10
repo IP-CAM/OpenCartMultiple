@@ -1,105 +1,104 @@
 <?php echo $header; ?>
-<div class="container">
-
-  <div class="row"><?php echo $column_left; ?>
-    <?php if ($column_left && $column_right) { ?>
-    <?php $class = 'col-sm-6'; ?>
-    <?php } elseif ($column_left || $column_right) { ?>
-    <?php $class = 'col-sm-9'; ?>
-    <?php } else { ?>
-    <?php $class = 'col-sm-12'; ?>
-    <?php } ?>
-    <div id="content" class="<?php echo $class; ?>"><?php echo $content_top; ?>
-      <h2><?php echo $heading_title; ?></h2>
-      <div id="follow_wrap">
-        <button type="button" id="btn_follow" class="btn btn-primary" <?php if($is_follow != 0){ ?>style="display:none"<?php }?>><?php echo $button_follow;?></button>
-        <button type="button" class="btn btn-warning" id="btn_unfollow" <?php if($is_follow == 0){ ?>style="display:none"<?php }?>><?php echo $button_unfollow;?></button>
-      </div>
-      <?php if ($products) { ?>
-      <div class="row" style="display:none;">
-        <div class="col-md-2 col-sm-6 hidden-xs">
-          <div class="btn-group btn-group-sm">
-            <button type="button" id="list-view" class="btn btn-default" data-toggle="tooltip" title=""><i class="fa fa-th-list"></i></button>
-            <button type="button" id="grid-view" class="btn btn-default" data-toggle="tooltip" title=""><i class="fa fa-th"></i></button>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <?php foreach ($products as $product) { ?>
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
-            <div class="image"><a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" class="img-responsive" /></a></div>
-            <div>
-              <div class="caption">
-                <h4><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></h4>
-                <p><?php echo $product['description']; ?></p>
-                <?php if ($product['price']) { ?>
-                <p class="price">
-                  <?php if (!$product['special']) { ?>
-                  <?php echo $product['price']; ?>
-                  <?php } else { ?>
-                  <span class="price-new"><?php echo $product['special']; ?></span> <span class="price-old"><?php echo $product['price']; ?></span>
-                  <?php } ?>
-
-                </p>
-                <?php } ?>
-                <?php if ($product['rating']) { ?>
-                <div class="rating">
-                  <?php for ($i = 1; $i <= 5; $i++) { ?>
-                  <?php if ($product['rating'] < $i) { ?>
-                  <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-                  <?php } else { ?>
-                  <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                  <?php } ?>
-                  <?php } ?>
-                </div>
-                <?php } ?>
-              </div>
-              <div class="button-group">
-                <button type="button" onclick="cart.add('<?php echo $product['product_id']; ?>', '<?php echo $product['minimum']; ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $button_cart; ?></span></button>
-                <button type="button" data-toggle="tooltip" title="<?php echo $button_wishlist; ?>" onclick="wishlist.add('<?php echo $product['product_id']; ?>');"><i class="fa fa-heart"></i></button>
-                <button type="button" data-toggle="tooltip" title="<?php echo $button_compare; ?>" onclick="compare.add('<?php echo $product['product_id']; ?>');"><i class="fa fa-exchange"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <?php } ?>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 text-left"><?php echo $pagination; ?></div>
-        <div class="col-sm-6 text-right"><?php echo $results; ?></div>
-      </div>
-      <?php } ?>
-      <?php if (!$categories && !$products) { ?>
-      <p><?php echo $text_empty; ?></p>
-      <div class="buttons">
-        <div class="pull-right"><a href="<?php echo $continue; ?>" class="btn btn-primary"><?php echo $button_continue; ?></a></div>
-      </div>
-      <?php } ?>
-      <?php echo $content_bottom; ?></div>
-    <?php echo $column_right; ?></div>
+<div class="container-fluid shop_top">
+  <div class="container photo_name shop_ph">
+    <img src="catalog/view/theme/default/image/artemplate/photo_01.png"  class="img-circle" >
+    <p>Adam Westbrock</p>
+  </div>
 </div>
-<script>
-  $("#btn_follow").click(function(){
+<div class="container-fluid perple_nav">
+  <div class="container">
+    <ul class="p_nav">
+      <li><a href="<?php echo $shop_home;?>">Home</a></li>
+      <li><a href="#design" class="nav_cen">Design</a></li>
+      <li><a href="#theme">Theme</a></li>
+    </ul>
+  </div>
+</div>
+<div class="container perple_inter">
+  <p id="perple_p">Good morning friends! My name
+    is Adam Westbrock . I'm going to introduce myself.I have born and grown up in  and I'm studying  As for my family, I've just brother/sister . My father is a . My mother is a. I am a friendly person, good thinker, flexible to work in any shift. I can work for longer hours without any break, only if I'm interested in that......My life style is very simple.</p>
+</div>
+<div class="container">
+  <ul class="follow_share">
+    <li class="fo_sh_li"><a href="###" class="follow">Follow</a></li>
+    <li class="fo_sh_li"><a href="###" class="share">Share</a></li>
+  </ul>
+</div>
+<div class="container works" id="design">
+  <h2>Recommended Works</h2>
+  <div class="row">
+    <div class="col-lg-4 col-md-4 works_list"><a href="<?php echo $shop_creation;?>">
+        <img src="http://olvhfy18m.bkt.gdipper.com/0/1/051b8b213e2679bdd8e3.png" class="img-responsive" alt="Responsive image" width="100%">
+        <p class="catalog/view/theme/default/image/artemplate">Atomic Fire Born!</p></a>
+    </div>
+    <div class="col-lg-4 col-md-4 works_list" ><a href="<?php echo $shop_creation;?>">
+        <img src="http://olvhfy18m.bkt.gdipper.com/0/1/051b8b213e2679bdd8e3.png" class="img-responsive" alt="Responsive image" width="100%">
+        <p class="w_img_bg">The Dream of The Dancer</p></a>
+    </div>
+    <div class="col-lg-4 col-md-4 works_list" ><a href="<?php echo $shop_creation;?>">
+        <img src="http://olvhfy18m.bkt.gdipper.com/0/1/051b8b213e2679bdd8e3.png" class="img-responsive " alt="Responsive image" width="100%">
+        <p class="w_img_bg">The Dream of The Dancer</p></a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-4 col-md-4 works_list"><a href="<?php echo $shop_creation;?>">
+        <img src="http://olvhfy18m.bkt.gdipper.com/0/1/051b8b213e2679bdd8e3.png" class="img-responsive" alt="Responsive image" width="100%">
+        <p class="w_img_bg">The Dream of The Dancer</p></a>
+    </div>
+    <div class="col-lg-4 col-md-4 works_list" ><a href="<?php echo $shop_creation;?>">
+        <img src="http://olvhfy18m.bkt.gdipper.com/0/1/051b8b213e2679bdd8e3.png" class="img-responsive" alt="Responsive image" width="100%">
+        <p class="w_img_bg">The Dream of The Dancer</p></a>
+    </div>
+    <div class="col-lg-4 col-md-4 works_list" ><a href="<?php echo $shop_creation;?>">
+        <img src="http://olvhfy18m.bkt.gdipper.com/0/1/051b8b213e2679bdd8e3.png" class="img-responsive " alt="Responsive image" width="100%">
+        <p class="w_img_bg">The Dream of The Dancer</p></a>
+    </div>
+  </div>
 
-    $.ajax({
-      url: 'index.php?route=artist/home/follow&shop_id=<?php echo $shop_id;?>' ,
-      dataType: 'json',
-      success: function(json) {
-        $("#btn_follow").css("display","none");
-        $("#btn_unfollow").css("display","block");
-      }
-    });
-  });
-  $("#btn_unfollow").click(function(){
-    $.ajax({
-      url: 'index.php?route=artist/home/unfollow&shop_id=<?php echo $shop_id;?>',
-      dataType: 'json',
-      success: function(json) {
-        $("#btn_follow").css("display","block");
-        $("#btn_unfollow").css("display","none");
-      }
-    });
-  });
-</script>
+
+  <nav aria-label="Page navigation" style="float:right; margin-right:35px;">
+    <ul class="pagination">
+      <li>
+        <a href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">5</a></li>
+      <li>
+        <a href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<div class="container theme" id="theme">
+  <h2>Recommended Themes</h2>
+  &nbsp
+  <div class="row">
+    <ul style="padding-left:0;border:0;margin:0;">
+      <li class="col-lg-6 col-md-6 col-sm-6">
+        <div class="theme_img_02">
+          <a href="###"class="theme_01">Color feeling</a>
+        </div>
+      </li>
+      <li class="col-lg-6 col-md-6 col-sm-6">
+        <div class="theme_img_02">
+          <a href="###"class="theme_02">Art process</a>
+        </div>
+      </li>
+
+
+    </ul>
+  </div>
+</div>
+
+
+
+
+
 <?php echo $footer; ?>

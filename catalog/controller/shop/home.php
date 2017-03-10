@@ -8,7 +8,7 @@ class ControllerShopHome extends Controller {
 		$this->load->model('shop/home');
 
 		$this->load->model('tool/image');
-
+/*
 		if (isset($this->request->get['filter'])) {
 			$filter = $this->request->get['filter'];
 		} else {
@@ -245,7 +245,13 @@ class ControllerShopHome extends Controller {
 			$data['header'] = $this->load->controller('common/header');
 
 			$this->response->setOutput($this->load->view('shop/not_found', $data));
-		}
+		}*/
+		$data['shop_home'] = $this->url->link('shop/home');
+		$data['shop_creation'] = $this->url->link('shop/creation');
+
+		$data['footer'] = $this->load->controller('common/footer');
+		$data['header'] = $this->load->controller('common/header');
+		$this->response->setOutput($this->load->view('shop/home', $data));
 	}
 
 	public function follow(){

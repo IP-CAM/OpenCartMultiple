@@ -280,6 +280,147 @@
 	float:left;
 }
 
+/*shop*/
+
+.shop_top{
+	height:280px;
+	background:url(../image/artemplate/shop_t_bg.png);
+}
+.shop_ph {
+	margin-top:120px;
+}
+
+.shop_ph p{
+	font-size:20px;
+}
+.perple_nav {
+	height:50px;
+	background-color:#eee;
+	border-bottom:solid #ccc;
+	border-bottom-width:3px;
+}
+.p_nav{
+	text-align:center;
+	padding-left:0;
+}
+.p_nav li {
+	display:inline-block;
+	font-size:20px;
+	line-height:50px;
+}
+.nav_cen {
+	margin-left:80px;
+	margin-right:80px;
+}
+.p_nav  a{
+	color:#666;
+}
+.p_nav  a:hover{
+	color:#339966;
+	padding-bottom:9px;
+	border-bottom:3px solid #339966;
+}
+.perple_inter {
+	padding:0;
+}
+.perple_inter p{
+	margin:0 250px 10px 250px;
+	padding:50px 80px 50px 80px;
+	font-size:20px;
+	color:#666;
+	border-bottom:2px solid #ccc;
+	border-left:2px solid #ccc;
+	border-right:2px solid #ccc;
+	line-height:30px;
+	letter-spacing:1px;
+}
+.follow_share{
+	padding-left:0;
+	text-align:center;
+}
+.follow_share li{
+	display:inline-block;
+	line-height:60px;
+	padding:45px;
+}
+.follow{
+	width:180px;
+	height:60px;
+	padding:18px 45px 18px 65px;
+	font-size:20px;
+	color:#666;
+	background:url(../image/artemplate/follow.png) 20px center #eee no-repeat;
+	border-radius:10px;
+}
+.follow:hover{
+	background:url(../image/artemplate/follow_hover.png) 20px center #339966 no-repeat;
+	color:#fff;
+}
+.share{
+	width:180px;
+	height:60px;
+	padding:18px 45px 18px 65px;
+	font-size:20px;
+	color:#666;
+	background:url(../image/artemplate/share.png) 20px center #eee no-repeat;
+	border-radius:10px;
+}
+.share:hover{
+	background:url(../image/artemplate/share_hover.png) 20px center #339966 no-repeat;
+	color:#fff;
+}
+.works h2{
+	font-size:24px;
+	text-align:center;
+	margin-top:45px;
+	color:#333333;
+}
+.works_list{
+	padding:15px 20px 10px 20px;
+}
+
+.w_img_bg {
+	font-size:22px;
+	color:#333;
+	line-height:45px;
+	margin-left:10px;
+}
+.w_img_bg:hover{
+	color:#32b16c;
+}
+.theme h2{
+	font-size:24px;
+	text-align:center;
+	margin-top:45px;
+	color:#333333;
+}
+.theme_img_02 {
+	padding:15px;
+}
+.theme_01 {
+	display:block;
+	text-align:center;
+	line-height:320px;
+	font-size:24px;
+	color:#fff;
+	background:url(../image/artemplate/theme_img.png) center center no-repeat;
+	position:relative;
+}
+.theme_01:hover{
+	color:#99ff99;
+}
+.theme_02 {
+	display:block;
+	text-align:center;
+	line-height:320px;
+	font-size:24px;
+	color:#fff;
+	background:url(../image/artemplate/theme_img2.png) center center no-repeat;
+	position:relative;
+}
+.theme_02:hover{
+	color:#99ff99;
+}
 
 
 

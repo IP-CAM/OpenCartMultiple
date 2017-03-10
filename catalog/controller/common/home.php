@@ -10,6 +10,8 @@ class ControllerCommonHome extends Controller {
 		}
 
         $data['shop_create_link'] = $this->url->link('shop/description');
+		$data['shop_home'] = $this->url->link('shop/home');
+		$data['shop_creation'] = $this->url->link('shop/creation');
 
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');

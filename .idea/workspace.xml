@@ -2,25 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="02665710-9a17-4ff6-90d8-2f13252f83e3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/catalog/view/theme/default/image/artemplate/follow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/catalog/view/theme/default/image/artemplate/follow_hover.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/catalog/view/theme/default/image/artemplate/share.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/catalog/view/theme/default/image/artemplate/share_hover.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/catalog/view/theme/default/image/artemplate/shop_t_bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/catalog/view/theme/default/image/artemplate/theme_img.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/catalog/view/theme/default/image/artemplate/theme_img2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/catalog/view/theme/default/image/artemplate/works_img.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/catalog/view/theme/default/template/shop/home_old.tpl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/view/theme/default/image/artemplate/photo_01.png" afterPath="$PROJECT_DIR$/catalog/view/theme/default/image/artemplate/photo_01.png" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/css/bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/css/bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/css/home.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/fonts/glyphicons-halflings-regular.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/fonts/glyphicons-halflings-regular.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/fonts/glyphicons-halflings-regular.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/fonts/glyphicons-halflings-regular.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/Search.1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/b_01.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/b_02.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/b_03.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/b_04.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/cart.1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/cart.hover.1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/cart.hover.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/cart.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/logo.1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/photo_01.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/search.hover.1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/search.hover.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/search.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/top_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/top_bg_02.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/user.1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/user.hover.1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/user.hover.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/user.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/w_01.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/images/w_02.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/js/bootstrap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/js/bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/js/jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/前端/js/npm.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/controller/common/home.php" afterPath="$PROJECT_DIR$/catalog/controller/common/home.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/controller/shop/creation.php" afterPath="$PROJECT_DIR$/catalog/controller/shop/creation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/controller/shop/home.php" afterPath="$PROJECT_DIR$/catalog/controller/shop/home.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/view/theme/default/stylesheet/artemplate.css" afterPath="$PROJECT_DIR$/catalog/view/theme/default/stylesheet/artemplate.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/view/theme/default/template/common/header.tpl" afterPath="$PROJECT_DIR$/catalog/view/theme/default/template/common/header.tpl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/view/theme/default/template/common/home.tpl" afterPath="$PROJECT_DIR$/catalog/view/theme/default/template/common/home.tpl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/view/theme/default/template/shop/creation.tpl" afterPath="$PROJECT_DIR$/catalog/view/theme/default/template/shop/creation.tpl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/view/theme/default/template/shop/home.tpl" afterPath="$PROJECT_DIR$/catalog/view/theme/default/template/shop/home.tpl" />
     </list>
     <ignored path="opencart.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -633,7 +651,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20628998" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1001,7 +1019,7 @@
         <state vertical-scroll-proportion="0.94491017">
           <caret line="103" column="9" selection-start-line="1" selection-start-column="1" selection-end-line="103" selection-end-column="9" />
           <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -12,6 +12,7 @@ class ControllerDashboardInfo extends Controller {
         }
 
         $data = $this->model_dashboard_shop->getShopInfo($this->customer->getId());
+
         $data['heading_title'] = $this->language->get('heading_title');
         $data['text_form'] =  $this->language->get('text_edit');
         $data['entry_name'] =  $this->language->get('shop_name');
@@ -23,9 +24,10 @@ class ControllerDashboardInfo extends Controller {
         $data['entry_facebook_des'] =  $this->language->get('facebook_link_des');
         $data['entry_twitter'] =  $this->language->get('twitter_link');
         $data['entry_twitter_des'] =  $this->language->get('twitter_link_des');
+        $data['entry_instagram'] =  $this->language->get('instagram_link');
+        $data['entry_instagram_des'] =  $this->language->get('instagram_link_des');
         $data['entry_image'] =  $this->language->get('owner_image');
         $data['button_save'] =  $this->language->get('button_save');
-
 
 
         $data['breadcrumbs'] = array();
@@ -53,16 +55,17 @@ class ControllerDashboardInfo extends Controller {
         //image
         $this->load->model('tool/image');
         $data['action'] = $this->url->link('dashboard/info', '', true);
-        if($data['avatar_url'] == ""){
-            $data['avatar_url_full'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+        if($data['owner_img'] == ""){
+            $data['owner_img_url'] = $this->model_tool_image->resize('no_image.png', 100, 100);
         }else{
-            $data['avatar_url_full'] = QINIU_BASE.$data['avatar_url']."!thumb";
+            $data['owner_img_url'] = QINIU_BASE.$data['owner_img']."!thumb";
         }
-        if($data['banner_url'] == ""){
-            $data['banner_url_full'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+        if($data['banner_img'] == ""){
+            $data['banner_img_url'] = $this->model_tool_image->resize('no_image.png', 100, 100);
         }else{
-            $data['banner_url_full'] = QINIU_BASE.$data['banner_url']."!thumb";
+            $data['banner_img_url'] = QINIU_BASE.$data['banner_img']."!thumb";
         }
+
         // qiniu
         $this->load->model('tool/file');
         $data['qiniu_token'] = $this->model_tool_file->getQiniuToken();

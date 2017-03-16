@@ -16,13 +16,24 @@ class ControllerDashboardLayoutleft extends Controller {
 				'children' => array()
 			);
 
-			// Catalog
+			// Setting
+            $setting[] = array(
+                'name'	   => $this->language->get('text_personal_info'),
+                'href'     => $this->url->link('dashboard/info', '', true),
+                'children' => array()
+            );
+            $setting[] = array(
+                'name'	   => $this->language->get('text_recommend_product'),
+                'href'     => $this->url->link('dashboard/recommend', '', true),
+                'children' => array()
+            );
+
             $data['menus'][] = array(
                 'id'       => 'menu-catalog',
                 'icon'	   => 'fa-tags',
-                'name'	   => $this->language->get('text_catalog'),
-                'href'     => $this->url->link('dashboard/product', '', true),
-                'children' => array()
+                'name'	   => $this->language->get('text_setting'),
+                'href'     => '',
+                'children' => $setting,
             );
 	
 			// Extension

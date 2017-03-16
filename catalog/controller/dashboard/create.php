@@ -1,5 +1,6 @@
 <?php
 class ControllerDashboardCreate extends Controller {
+	private $error = array();
 	public function index() {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/account', '', true);
@@ -13,19 +14,32 @@ class ControllerDashboardCreate extends Controller {
 		$this->load->language('dashboard/create');
 		$this->document->setTitle($this->language->get('heading_title'));
 		$data['heading_title'] = $this->language->get('heading_title');
-		$data['shop_name'] = $this->language->get('shop_name');
+		$data['entry_shop_name'] = $this->language->get('entry_shop_name');
         $data['shop_create_button'] =  $this->language->get('shop_create_button');
 
-        if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
-            // Default Shop
-            $this->load->model('dashboard/shop');
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+
+			// Default Shop
             $requestData['customer_id'] = $this->customer->getId();
             $requestData['shop_name'] = $this->request->post['shop_name'];
             $this->model_dashboard_shop->addShop($requestData);
             $this->customer->setIsOpenShop(1);
+
             //Redirect
             $this->response->redirect($this->url->link('dashboard/home', '', true));
         }
+
+		if (isset($this->error['shop_name'])) {
+			$data['error_shop_name'] = $this->error['shop_name'];
+		} else {
+			$data['error_shop_name'] = '';
+		}
+
+		if (isset($this->request->post['shop_name'])) {
+			$data['shop_name'] = $this->request->post['shop_name'];
+		} else{
+			$data['shop_name'] = '';
+		}
 
 		$data['action'] = $this->url->link('dashboard/create', '', true);
 
@@ -39,29 +53,21 @@ class ControllerDashboardCreate extends Controller {
 		$this->response->setOutput($this->load->view('dashboard/create', $data));
 	}
 
-	public function country() {
-		$json = array();
+	protected function validateForm() {
 
-		$this->load->model('localisation/country');
+		if ((utf8_strlen($this->request->post['shop_name']) < 2) || (utf8_strlen($this->request->post['shop_name']) > 32)) {
 
-		$country_info = $this->model_localisation_country->getCountry($this->request->get['country_id']);
-
-		if ($country_info) {
-			$this->load->model('localisation/zone');
-
-			$json = array(
-				'country_id'        => $country_info['country_id'],
-				'name'              => $country_info['name'],
-				'iso_code_2'        => $country_info['iso_code_2'],
-				'iso_code_3'        => $country_info['iso_code_3'],
-				'address_format'    => $country_info['address_format'],
-				'postcode_required' => $country_info['postcode_required'],
-				'zone'              => $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']),
-				'status'            => $country_info['status']
-			);
+			$this->error['shop_name'] = $this->language->get('error_shop_domain');
+		}else if (strpos($this->request->post['shop_name']," ")) {
+			$this->error['shop_name'] = $this->language->get('error_shop_domain_blank');
+		}else{
+			$this->load->model('dashboard/shop');
+			if($this->model_dashboard_shop->checkIsDomainReg($this->request->post['shop_name'])){
+				$this->error['shop_name'] = $this->language->get('error_shop_domain_used');
+			}
 		}
-
-		$this->response->addHeader('Content-Type: application/json');
-		$this->response->setOutput(json_encode($json));
+		return !$this->error;
 	}
+
+
 }

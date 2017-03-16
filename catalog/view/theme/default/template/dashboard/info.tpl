@@ -30,22 +30,6 @@
       </div>
       <div class="panel-body">
         <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-location" class="form-horizontal">
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-name"><?php echo $entry_name; ?></label>
-            <div class="col-sm-10">
-              <input type="text" name="shop_name" value="<?php echo $shop_name; ?>" id="input-name" class="form-control" />
-              <?php if ($error_name) { ?>
-              <div class="text-danger"><?php echo $error_name; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-geocode"><span data-toggle="tooltip" data-container="#content" title="<?php echo $entry_owner; ?>"><?php echo $entry_owner; ?></span></label>
-            <div class="col-sm-10">
-              <input type="text" name="owner_name" value="<?php echo $owner_name; ?>" placeholder="<?php echo $entry_owner_des; ?>" id="input-geocode" class="form-control" />
-            </div>
-          </div>
 
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-address"><?php echo $entry_about; ?></label>
@@ -58,30 +42,37 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-fax"><?php echo $entry_facebook; ?></label>
             <div class="col-sm-10">
-              <input type="text" name="owner_facebook" value="<?php echo $owner_facebook; ?>" placeholder="<?php echo $entry_facebook_des; ?>" id="input-fax" class="form-control" />
+              <input type="text" name="link_facebook" value="<?php echo $link_facebook; ?>" placeholder="<?php echo $entry_facebook_des; ?>" id="input-fax" class="form-control" />
             </div>
           </div>
 
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-fax"><?php echo $entry_twitter; ?></label>
             <div class="col-sm-10">
-              <input type="text" name="owner_twitter" value="<?php echo $owner_twitter; ?>" placeholder="<?php echo $entry_twitter_des; ?>" id="input-fax" class="form-control" />
+              <input type="text" name="link_twitter" value="<?php echo $link_twitter; ?>" placeholder="<?php echo $entry_twitter_des; ?>" id="input-fax" class="form-control" />
             </div>
           </div>
 
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="input-fax"><?php echo $entry_instagram; ?></label>
+          <div class="col-sm-10">
+            <input type="text" name="link_instagram" value="<?php echo $link_instagram; ?>" placeholder="<?php echo $entry_instagram_des; ?>" id="input-fax" class="form-control" />
+          </div>
+        </div>
+
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_image; ?></label>
-            <div class="col-sm-10"><a href="javascript::void(0)" class="img-upload-single" data-inputid="avatar_url">
-                <img id="img_avatar" src="<?php echo $avatar_url_full; ?>" alt="" width="100" height="100" /></a>
-              <input type="hidden" name="avatar_url" id="avatar_url" value="<?php echo $avatar_url; ?>" />
+            <div class="col-sm-10"><a href="javascript::void(0)" class="img-upload-single" data-inputid="owner_img">
+                <img id="img_avatar" src="<?php echo $owner_img_url; ?>" alt="" width="100" height="100" /></a>
+              <input type="hidden" name="owner_img" id="owner_img" value="<?php echo $owner_img; ?>" />
             </div>
           </div>
 
          <div class="form-group">
             <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_image; ?></label>
             <div class="col-sm-10"><a href="javascript::void(0)" class="img-upload-single" data-inputid="banner_url">
-                <img id="img_banner" src="<?php echo $banner_url_full; ?>" /></a>
-              <input type="hidden" name="banner_url" id="banner_url" value="<?php echo $banner_url; ?>" />
+                <img id="img_banner" src="<?php echo $banner_img_url; ?>" /></a>
+              <input type="hidden" name="banner_img" id="banner_url" value="<?php echo $banner_img; ?>" />
             </div>
          </div>
 

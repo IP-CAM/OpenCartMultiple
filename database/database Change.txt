@@ -154,3 +154,5 @@ ALTER TABLE `oc_product` ADD `creation_id` INT NOT NULL AFTER `shop_id`, ADD `ty
 ALTER TABLE `oc_creation` ADD `creation_url_width` SMALLINT NOT NULL AFTER `creation_url`, ADD `creation_url_height` SMALLINT NOT NULL AFTER `creation_url_width`;
 
 ALTER TABLE `oc_product` ADD `type_img_no` TINYINT NOT NULL AFTER `type_id`;
+
+ALTER TABLE `oc_product` ADD `is_recommend` TINYINT NOT NULL AFTER `status`;

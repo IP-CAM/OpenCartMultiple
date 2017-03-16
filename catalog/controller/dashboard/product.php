@@ -1444,7 +1444,7 @@ class ControllerDashboardProduct extends Controller {
 			if (isset($this->request->get['limit'])) {
 				$limit = $this->request->get['limit'];
 			} else {
-				$limit = 5;
+				$limit = 8;
 			}
 
 			$filter_data = array(

@@ -156,3 +156,5 @@ ALTER TABLE `oc_creation` ADD `creation_url_width` SMALLINT NOT NULL AFTER `crea
 ALTER TABLE `oc_product` ADD `type_img_no` TINYINT NOT NULL AFTER `type_id`;
 
 ALTER TABLE `oc_product` ADD `is_recommend` TINYINT NOT NULL AFTER `status`;
+
+ALTER TABLE `oc_product` ADD `cate` TINYINT NOT NULL COMMENT '0 print 1 painting 2 drawing' AFTER `type_img_no`, ADD INDEX (`category`) ;

@@ -4,6 +4,11 @@ $_['text_setting']                   = 'Settings';
 $_['text_personal_info']             = 'Personal Info';
 $_['text_recommend_product']         = 'Recommend Products';
 
+$_['text_product']                   = 'Products';
+$_['text_digital_print']             = 'Digital Print';
+$_['text_painting_work']             = 'Painting Work';
+$_['text_drawing_service']           = 'Drawing Service';
+
 $_['text_catalog']                   = 'Catalog';
 $_['text_customer']                  = 'Customers';
 $_['text_dashboard']                 = 'Dashboard';

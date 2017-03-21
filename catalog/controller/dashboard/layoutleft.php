@@ -42,16 +42,22 @@ class ControllerDashboardLayoutleft extends Controller {
                 'href'     => $this->url->link('dashboard/creation', '', true),
                 'children' => array()
             );
-            $product[] = array(
-                'name'	   => $this->language->get('text_painting_work'),
-                'href'     => $this->url->link('dashboard/product', 'type=paint', true),
+            $custom[] = array(
+                'name'	   => $this->language->get('text_custom_product_manage'),
+                'href'     => $this->url->link('dashboard/product', '', true),
+                'children' => array()
+            );
+            $custom[] = array(
+                'name'	   => $this->language->get('text_custom_product_cate'),
+                'href'     => $this->url->link('dashboard/cate', '', true),
                 'children' => array()
             );
             $product[] = array(
-                'name'	   => $this->language->get('text_drawing_service'),
-                'href'     => $this->url->link('dashboard/product', 'type=service', true),
-                'children' => array()
+                'name'	   => $this->language->get('text_custom_product'),
+                'href'     => '',
+                'children' => $custom
             );
+
             $data['menus'][] = array(
                 'id'       => 'menu-extension',
                 'icon'	   => 'fa-puzzle-piece',

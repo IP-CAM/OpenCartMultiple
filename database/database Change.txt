@@ -157,4 +157,21 @@ ALTER TABLE `oc_product` ADD `type_img_no` TINYINT NOT NULL AFTER `type_id`;
 
 ALTER TABLE `oc_product` ADD `is_recommend` TINYINT NOT NULL AFTER `status`;
 
-ALTER TABLE `oc_product` ADD `cate` TINYINT NOT NULL COMMENT '0 print 1 painting 2 drawing' AFTER `type_img_no`, ADD INDEX (`category`) ;
+
+
+CREATE TABLE IF NOT EXISTS `oc_cate` (
+  `cate_id` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `shop_id` int(11) NOT NULL,
+  `cate_name` varchar(50) NOT NULL,
+  `cate_description` text NOT NULL,
+  `sort_order` smallint(6) NOT NULL,
+  PRIMARY KEY (`cate_id`),
+  KEY `shop_id` (`shop_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+ALTER TABLE `oc_product` ADD `cate_id` MEDIUMINT NOT NULL AFTER `type_img_no`, ADD INDEX (`cate_id`) ;
+
+
+ALTER TABLE `oc_cate` ADD `product_num` SMALLINT NOT NULL AFTER `cate_description`;
+
+ALTER TABLE `oc_cate` ADD `created_time` INT NOT NULL ;

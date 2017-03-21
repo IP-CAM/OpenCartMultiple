@@ -15,6 +15,7 @@ $(function(){
       $('#input_id').val($(this).data("inputid"));
       $("#cloud_file").click();
   });
+
   $("#cloud_file").change(function() {  // you can ues 'onchange' here to uplpad automatically after select a file
 
     var selectedFile = $userfile.val();

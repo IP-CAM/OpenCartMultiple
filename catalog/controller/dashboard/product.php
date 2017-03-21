@@ -493,20 +493,6 @@ class ControllerDashboardProduct extends Controller {
 			$data['model'] = '';
 		}
 
-
-		$this->load->model('setting/store');
-
-		$data['stores'] = $this->model_setting_store->getStores();
-
-		if (isset($this->request->post['product_store'])) {
-			$data['product_store'] = $this->request->post['product_store'];
-		} elseif (isset($this->request->get['product_id'])) {
-			$data['product_store'] = $this->model_dashboard_product->getProductStores($this->request->get['product_id']);
-		} else {
-			$data['product_store'] = array(0);
-		}
-
-
 		if (isset($this->request->post['shipping'])) {
 			$data['shipping'] = $this->request->post['shipping'];
 		} elseif (!empty($product_info)) {
@@ -641,6 +627,10 @@ class ControllerDashboardProduct extends Controller {
 
 		$data['customer_groups'] = $this->model_dashboard_customer_group->getCustomerGroups();
 
+		// qiniu
+		$this->load->model('tool/file');
+		$data['qiniu_token'] = $this->model_tool_file->getQiniuToken();
+		$data['img_dir'] = floor($this->customer->getId()/1000)."/".$this->customer->getId()."/";
 
 		// Image
 		if (isset($this->request->post['image'])) {
@@ -653,10 +643,10 @@ class ControllerDashboardProduct extends Controller {
 
 		$this->load->model('tool/image');
 
-		if (isset($this->request->post['image']) && is_file(DIR_IMAGE . $this->request->post['image'])) {
-			$data['thumb'] = $this->model_tool_image->resize($this->request->post['image'], 100, 100);
-		} elseif (!empty($product_info) && is_file(DIR_IMAGE . $product_info['image'])) {
-			$data['thumb'] = $this->model_tool_image->resize($product_info['image'], 100, 100);
+		if (isset($this->request->post['image'])) {
+			$data['thumb'] = QINIU_BASE.$this->request->post['image']."!thumb";
+		} elseif (!empty($product_info) && $product_info['image'] != "") {
+			$data['thumb'] =  QINIU_BASE.$product_info['image']."!thumb";
 		} else {
 			$data['thumb'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 		}
@@ -675,17 +665,17 @@ class ControllerDashboardProduct extends Controller {
 		$data['product_images'] = array();
 
 		foreach ($product_images as $product_image) {
-			if (is_file(DIR_IMAGE . $product_image['image'])) {
+			if ($product_image['image']) {
 				$image = $product_image['image'];
-				$thumb = $product_image['image'];
+				$thumb = QINIU_BASE.$product_image['image']."!thumb";
 			} else {
 				$image = '';
-				$thumb = 'no_image.png';
+				$thumb = $this->model_tool_image->resize('no_image.png', 100, 100);
 			}
 
 			$data['product_images'][] = array(
 				'image'      => $image,
-				'thumb'      => $this->model_tool_image->resize($thumb, 100, 100),
+				'thumb'      => $thumb,
 				'sort_order' => $product_image['sort_order']
 			);
 		}

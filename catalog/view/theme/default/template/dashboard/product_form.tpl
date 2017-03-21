@@ -1,4 +1,6 @@
-<?php echo $header; ?><?php echo $column_left; ?>
+<?php echo $header; ?>
+<script src="./admin/view/javascript/qiniu/formdata.js" type="text/javascript"></script>
+<?php echo $column_left; ?>
 <div id="content">
   <div class="page-header">
     <div class="container-fluid">
@@ -403,7 +405,7 @@
                   
                   <tbody>
                     <tr>
-                      <td class="text-left"><a href="" id="thumb-image" data-toggle="image" class="img-thumbnail"><img src="<?php echo $thumb; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a><input type="hidden" name="image" value="<?php echo $image; ?>" id="input-image" /></td>
+                      <td class="text-left"><a href="javascript::void(0)" id="thumb-image" class="img-upload-single" data-inputid="input-image"><img src="<?php echo $thumb; ?>"  id="img_main"  alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a><input type="hidden" name="image" value="<?php echo $image; ?>" id="input-image" /></td>
                   </tr>
                   </tbody>
                 </table>
@@ -421,7 +423,7 @@
                     <?php $image_row = 0; ?>
                     <?php foreach ($product_images as $product_image) { ?>
                     <tr id="image-row<?php echo $image_row; ?>">
-                      <td class="text-left"><a href="" id="thumb-image<?php echo $image_row; ?>" data-toggle="image" class="img-thumbnail"><img src="<?php echo $product_image['thumb']; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a><input type="hidden" name="product_image[<?php echo $image_row; ?>][image]" value="<?php echo $product_image['image']; ?>" id="input-image<?php echo $image_row; ?>" /></td>
+                      <td class="text-left"><a href="javascript::void(0)" id="thumb-image<?php echo $image_row; ?>" class="img-upload-single" data-inputid="input-image<?php echo $image_row; ?>"><img src="<?php echo $product_image['thumb']; ?>" alt="" id="img<?php echo $image_row; ?>" title="" data-placeholder="<?php echo $placeholder; ?>"/></a><input type="hidden" name="product_image[<?php echo $image_row; ?>][image]" value="<?php echo $product_image['image']; ?>" id="input-image<?php echo $image_row; ?>" /></td>
                       <td class="text-right"><input type="text" name="product_image[<?php echo $image_row; ?>][sort_order]" value="<?php echo $product_image['sort_order']; ?>" placeholder="<?php echo $entry_sort_order; ?>" class="form-control" /></td>
                       <td class="text-left"><button type="button" onclick="$('#image-row<?php echo $image_row; ?>').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
                     </tr>
@@ -442,6 +444,21 @@
         </form>
       </div>
     </div>
+  </div>
+  <div class="container">
+    <form id="cloud_upload_form" method="post" enctype="multipart/form-data">
+      <input name="key" id="cloud_file_name" type="hidden" value=""/>
+      <input name="token" type="hidden" value="<?php echo $qiniu_token;?>"/>
+      <input name="file" id="cloud_file" type="file" />
+      <input name="accept" type="hidden" />
+    </form>
+    <input name="img_id" id="img_id" type="hidden" value="">
+    <input name="input_id" id="input_id" type="hidden" value="">
+    <input name="img_dir" id="img_dir" type="hidden" value="<?php echo $img_dir;?>">
+    <div class="progress"></div>
+    <script>
+      var domain = "<?php echo QINIU_BASE;?>";
+    </script>
   </div>
   <script type="text/javascript" src="view/javascript/summernote/summernote.js"></script>
   <link href="view/javascript/summernote/summernote.css" rel="stylesheet" />
@@ -678,9 +695,18 @@ function addOptionValue(option_row) {
   <script type="text/javascript"><!--
 var image_row = <?php echo $image_row; ?>;
 
+function uploadQnImg(image_row){
+  alert(image_row);
+    var image_row_str = image_row+"";
+    $('#img_id').val("img" + image_row_str);
+    $('#input_id').val("input-image" + image_row_str );
+    $("#cloud_file").click();
+}
+
 function addImage() {
 	html  = '<tr id="image-row' + image_row + '">';
-	html += '  <td class="text-left"><a href="" id="thumb-image' + image_row + '"data-toggle="image" class="img-thumbnail"><img src="<?php echo $placeholder; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a><input type="hidden" name="product_image[' + image_row + '][image]" value="" id="input-image' + image_row + '" /></td>';
+	html += '  <td class="text-left"><a href="javascript::void(0)" onclick="uploadQnImg('+image_row+')" id="thumb-image' + image_row + '"><img src="<?php echo $placeholder; ?>" alt="" title="" id="img' + image_row + '" data-placeholder="<?php echo $placeholder; ?>" /></a><input type="hidden" name="product_image[' + image_row + '][image]" value="" id="input-image' + image_row + '" /></td>';
+
 	html += '  <td class="text-right"><input type="text" name="product_image[' + image_row + '][sort_order]" value="" placeholder="<?php echo $entry_sort_order; ?>" class="form-control" /></td>';
 	html += '  <td class="text-left"><button type="button" onclick="$(\'#image-row' + image_row  + '\').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
 	html += '</tr>';

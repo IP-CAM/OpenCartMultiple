@@ -43,9 +43,9 @@
                     <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
                     <?php } ?></td>
                   <td class="text-left"><?php if ($sort == 'p.model') { ?>
-                    <a href="<?php echo $sort_model; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_model; ?></a>
+                    <a href="<?php echo $sort_model; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_category; ?></a>
                     <?php } else { ?>
-                    <a href="<?php echo $sort_model; ?>"><?php echo $column_model; ?></a>
+                    <a href="<?php echo $sort_model; ?>"><?php echo $column_category; ?></a>
                     <?php } ?></td>
                   <td class="text-right"><?php if ($sort == 'p.price') { ?>
                     <a href="<?php echo $sort_price; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_price; ?></a>
@@ -80,7 +80,7 @@
                     <span class="img-thumbnail list"><i class="fa fa-camera fa-2x"></i></span>
                     <?php } ?></td>
                   <td class="text-left"><?php echo $product['name']; ?></td>
-                  <td class="text-left"><?php echo $product['model']; ?></td>
+                  <td class="text-left"><?php echo $product['cate_name']; ?></td>
                   <td class="text-right">
                     <?php echo $product['price']; ?>
                     </td>

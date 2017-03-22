@@ -236,6 +236,10 @@ class ControllerDashboardProduct extends Controller {
 
 		$results = $this->model_dashboard_product->getProducts($filter_data);
 
+		//Category
+		$this->load->model('dashboard/cate');
+		$category = $this->model_dashboard_cate->getCates(array());
+
 		foreach ($results as $result) {
 			if (is_file(DIR_IMAGE . $result['image'])) {
 				$image = $this->model_tool_image->resize($result['image'], 40, 40);
@@ -244,12 +248,11 @@ class ControllerDashboardProduct extends Controller {
 			}
 
 
-
 			$data['products'][] = array(
 				'product_id' => $result['product_id'],
 				'image'      => $image,
+				'cate_name'		=>  $this->getCateName($result['cate_id'],$category),
 				'name'       => $result['name'],
-				'model'      => $result['model'],
 				'price'      => $result['price'],
 				'quantity'   => $result['quantity'],
 				'status'     => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
@@ -267,7 +270,7 @@ class ControllerDashboardProduct extends Controller {
 
 		$data['column_image'] = $this->language->get('column_image');
 		$data['column_name'] = $this->language->get('column_name');
-		$data['column_model'] = $this->language->get('column_model');
+		$data['column_category'] = $this->language->get('column_category');
 		$data['column_price'] = $this->language->get('column_price');
 		$data['column_quantity'] = $this->language->get('column_quantity');
 		$data['column_status'] = $this->language->get('column_status');
@@ -355,6 +358,15 @@ class ControllerDashboardProduct extends Controller {
 		$this->response->setOutput($this->load->view('dashboard/product_list', $data));
 	}
 
+	private function getCateName($cate_id, $category){
+		foreach($category as $cate){
+			if($cate['cate_id'] == $cate_id){
+				return $cate['cate_name'];
+			}
+		}
+		return "";
+	}
+
 	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -385,6 +397,7 @@ class ControllerDashboardProduct extends Controller {
 		$data['entry_image'] = $this->language->get('entry_image');
 		$data['entry_additional_image'] = $this->language->get('entry_additional_image');
 
+		$data['entry_category'] = $this->language->get('entry_category');
 		$data['entry_filter'] = $this->language->get('entry_filter');
 		$data['entry_related'] = $this->language->get('entry_related');
 		$data['entry_attribute'] = $this->language->get('entry_attribute');
@@ -499,6 +512,14 @@ class ControllerDashboardProduct extends Controller {
 			$data['shipping'] = $product_info['shipping'];
 		} else {
 			$data['shipping'] = 1;
+		}
+
+		if (isset($this->request->post['cate_id'])) {
+			$data['cate_id'] = $this->request->post['cate_id'];
+		} elseif (!empty($product_info)) {
+			$data['cate_id'] = $product_info['cate_id'];
+		} else {
+			$data['cate_id'] = 0;
 		}
 
 		if (isset($this->request->post['price'])) {
@@ -623,9 +644,9 @@ class ControllerDashboardProduct extends Controller {
 			}
 		}
 
-		$this->load->model('dashboard/customer_group');
-
-		$data['customer_groups'] = $this->model_dashboard_customer_group->getCustomerGroups();
+		//Category
+		$this->load->model('dashboard/cate');
+		$data['category'] = $this->model_dashboard_cate->getCates(array());
 
 		// qiniu
 		$this->load->model('tool/file');

@@ -19,7 +19,7 @@ $_['tab_collection']           = 'Collection';
 
 // Column
 $_['column_name']            = 'Product Name';
-$_['column_model']           = 'Model';
+$_['column_category']           = 'Gategory';
 $_['column_image']           = 'Image';
 $_['column_price']           = 'Price';
 $_['column_quantity']        = 'Quantity';
@@ -30,7 +30,7 @@ $_['column_action']          = 'Action';
 $_['entry_name']             = 'Product Name';
 $_['entry_description']      = 'Description';
 $_['entry_meta_title'] 	     = 'Meta Tag Title';
-$_['entry_model']            = 'Model';
+$_['entry_category']         = 'Category';
 $_['entry_shipping']         = 'Requires Shipping';
 $_['entry_quantity']         = 'Quantity';
 $_['entry_price']            = 'Price';

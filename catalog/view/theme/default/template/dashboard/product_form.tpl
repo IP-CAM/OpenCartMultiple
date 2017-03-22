@@ -15,6 +15,7 @@
       </ul>
     </div>
   </div>
+
   <div class="container-fluid">
     <?php if ($error_warning) { ?>
     <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> <?php echo $error_warning; ?>
@@ -71,6 +72,7 @@
                   </div>
 
 
+
                 </div>
                 <?php } ?>
               </div>
@@ -85,7 +87,6 @@
                   <?php } ?>
                 </div>
               </div>
-
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-price"><?php echo $entry_price; ?></label>
                 <div class="col-sm-10">
@@ -100,6 +101,17 @@
                 </div>
               </div>
 
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-quantity"><?php echo $entry_category; ?></label>
+                <div class="col-sm-10">
+                  <select class="form-control" name="cate_id">
+                    <option value="0">Please Select</option>
+                    <?php foreach($category as $cate){ ?>
+                      <option value="<?php echo $cate['cate_id']?>" <?php if($cate['cate_id'] == $cate_id){ ?> selected ="selected"<?php }?>><?php echo $cate['cate_name']?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label"><?php echo $entry_shipping; ?></label>

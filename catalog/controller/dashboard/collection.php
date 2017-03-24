@@ -125,10 +125,8 @@ class ControllerDashboardCollection extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
 			$this->response->redirect($this->url->link('dashboard/collection', '' . $url, true));
 		}
-
 		$this->getForm();
 	}
 

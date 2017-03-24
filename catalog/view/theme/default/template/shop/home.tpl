@@ -1,19 +1,5 @@
 <?php echo $header; ?>
-<div class="container-fluid shop_top">
-  <div class="container photo_name shop_ph">
-    <img src="catalog/view/theme/default/image/artemplate/photo_01.png"  class="img-circle" >
-    <p>Adam Westbrock</p>
-  </div>
-</div>
-<div class="container-fluid perple_nav">
-  <div class="container">
-    <ul class="p_nav">
-      <li><a href="<?php echo $shop_home;?>">Home</a></li>
-      <li><a href="#design" class="nav_cen">Design</a></li>
-      <li><a href="#theme">Theme</a></li>
-    </ul>
-  </div>
-</div>
+<?php echo $header_shop; ?>
 <div class="container perple_inter">
   <p id="perple_p">Good morning friends! My name
     is Adam Westbrock . I'm going to introduce myself.I have born and grown up in  and I'm studying  As for my family, I've just brother/sister . My father is a . My mother is a. I am a friendly person, good thinker, flexible to work in any shift. I can work for longer hours without any break, only if I'm interested in that......My life style is very simple.</p>

@@ -3,12 +3,9 @@ class ControllerShopHome extends Controller {
 	public function index() {
 		$this->load->language('shop/home');
 
-		$this->load->model('catalog/category');
-
 		$this->load->model('shop/home');
-
 		$this->load->model('tool/image');
-/*
+		/*
 		if (isset($this->request->get['filter'])) {
 			$filter = $this->request->get['filter'];
 		} else {
@@ -251,6 +248,7 @@ class ControllerShopHome extends Controller {
 
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
+		$data['header_shop'] = $this->load->controller('common/header_shop');
 		$this->response->setOutput($this->load->view('shop/home', $data));
 	}
 

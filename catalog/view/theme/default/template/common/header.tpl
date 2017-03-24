@@ -43,8 +43,8 @@
     <div class="container">
         <div class="col-xs-1 col-md-1 col-lg-4">
             <a class="navbar-brand logo" href="<?php echo $home; ?>">
-                <img id="xs_logo" alt="Brand" src="catalog/view/theme/default/image/artemplate/logo.png">
-                <img id="xs_logo_1" alt="Brand" src="catalog/view/theme/default/image/artemplate/logo.1.png">
+                <img id="xs_logo" alt="Brand" src="image/logo.png">
+                <img id="xs_logo_1" alt="Brand" src="image/logo.1.png">
             </a>
         </div>
         <div class="col-xs-11 col-md-11 col-lg-8">
@@ -56,7 +56,6 @@
                     <button href="#" class="search_a">search</button>
                 </li>
                 <li class="user"><a href="<?php echo $account; ?>" class="user_a" >user</a></li>
-
                 <li class="cart"><a href="<?php echo $shopping_cart; ?>" class="cart_a">cart</a></li>
             </ul>
         </div>
@@ -141,11 +140,12 @@
     </nav>
 </div>
 <?php } ?>-->
+
 <script>
     $(function(){
-        if($(window).width() < 800){
+        if($(window).width() <= 650){
             $("#xs_logo").css("display","none");
-            $("#xs_logo_1").css("marginTop","22px").css("float","left").css("display","block");
+            $("#xs_logo_1").css("marginTop","12px").css("float","left").css("display","block");
             $(".navbar-right").css("marginLeft","0").css("padding-left","0").css("float","right");
             $(".search_frame").css("opacity","1");
             $(".form-control").css("width","150px");
@@ -153,17 +153,14 @@
             $(".search_a").css("height","").css("width","").css("padding","5px");
             $(".navbar-brand,.col-md-4,.col-lg-4").css("padding","0");
             $(".col-xs-11,.col-md-11,.col-lg-8").css("padding","0");
-            $(".search_a").css("backgroundImage","url(catalog/view/theme/default/image/artemplate/search.1.png)");
+            $(".search_a").css("backgroundImage","url(./images/search.1.png)");
             $(".user").css("marginLeft","0");
-            $(".user_a").css("backgroundImage","url(catalog/view/theme/default/image/artemplate/user.1.png)").css("background-repeat","no-repeat");
+            $(".user_a").css("backgroundImage","url(./images/user.1.png)").css("background-repeat","no-repeat");
             $(".cart").css("marginLeft","0");
-            $(".cart_a").css("backgroundImage","url(catalog/view/theme/default/image/artemplate/cart.1.png)").css("background-repeat","no-repeat");
-            $(".top").css("height","").css("backgroundSize","100%");
+            $(".cart_a").css("backgroundImage","url(./images/cart.1.png)").css("background-repeat","no-repeat");
+            $(".top").css("height",""),css("backgroundSize","100%");
             $(".top_h1").css("marginTop","0").css("font-size","25px").css("marginTop","10px");
-            $("#b_img").css("width","50px");
-            $("#perple_p").css("marginLeft","20px").css("marginRight","20px").css("font-size","20px").css("paddingLeft","20px").css("paddingRight","20px");
-            $(".nav_cen").css("marginLeft","20px").css("marginRight","20px");
-            $(".fo_sh_li").css("paddingBottom","20px").css("paddingTop","20px");
+            $("#b_img").css("width","50px").css("","").css("","");
         }
     });
 </script>

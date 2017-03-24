@@ -175,3 +175,13 @@ ALTER TABLE `oc_product` ADD `cate_id` MEDIUMINT NOT NULL AFTER `type_img_no`, A
 ALTER TABLE `oc_cate` ADD `product_num` SMALLINT NOT NULL AFTER `cate_description`;
 
 ALTER TABLE `oc_cate` ADD `created_time` INT NOT NULL ;
+
+CREATE TABLE IF NOT EXISTS `oc_site_front` (
+  `front_id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` tinyint(4) NOT NULL COMMENT '1 首页推荐',
+  `shop_id` int(11) NOT NULL,
+  `created_time` int(11) NOT NULL,
+  PRIMARY KEY (`front_id`),
+  KEY `type` (`type`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+

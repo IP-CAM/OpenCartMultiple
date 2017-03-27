@@ -10,6 +10,8 @@ class ControllerCommonHeaderShop extends Controller {
 
 		//Get shop_id
 		$shop_id = $this->request->get['shop_id'];
+		$data['home_link'] = $this->url->link("shop/home",array('shop_id'=>$shop_id));
+		$data['print_link'] = $this->url->link("shop/creation",array('shop_id'=>$shop_id));
 
 		//Text
 		$data['text_follow'] = $this->language->get('follow');
@@ -32,16 +34,52 @@ class ControllerCommonHeaderShop extends Controller {
 		//Category
 		$data['cates'] = $this->model_shop_cate->getShopCates($shop_id);
 		foreach($data['cates'] as &$cate){
-			$data['cates']['link'] = $this->url->link('shop/category',array('cate_id'=>$cate['cate_id']));
+			$cate['link'] = $this->url->link('shop/category',array('cate_id'=>$cate['cate_id']));
 		}
 
 		//Follow
 		$data['is_follow'] = 0;
-		if(isset($this->customer)){
+		if($this->customer->isLogged()){
 			$data['is_follow'] = $this->model_shop_follow->getIsFollow($shop_id);
 		}
 
-
+		$data['shop_id'] = $shop_id;
 		return $this->load->view('common/header_shop', $data);
+	}
+
+
+	public function follow(){
+		$json = array();
+
+		if($this->customer->isLogged()){
+			if(isset($this->request->get['shop_id'])){
+				$this->load->model('shop/follow');
+				$this->model_shop_follow->follow($this->request->get['shop_id']);
+				$json['code'] = 1;
+			}
+		}else{
+			$json['code'] = 0;
+			$json['message'] = 'Please Login';
+		}
+
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));
+	}
+
+	public function unfollow(){
+		$json = array();
+		if($this->customer->isLogged()){
+			if(isset($this->request->get['shop_id'])){
+				$this->load->model('shop/follow');
+				$this->model_shop_follow->unfollow($this->request->get['shop_id']);
+				$json['code'] = 1;
+			}
+		}else{
+			$json['code'] = 0;
+			$json['message'] = 'Please Login';
+		}
+
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));
 	}
 }

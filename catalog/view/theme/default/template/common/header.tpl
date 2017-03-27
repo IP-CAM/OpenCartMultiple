@@ -143,7 +143,7 @@
 
 <script>
     $(function(){
-        if($(window).width() <= 650){
+        if($(window).width() < 800){
             $("#xs_logo").css("display","none");
             $("#xs_logo_1").css("marginTop","12px").css("float","left").css("display","block");
             $(".navbar-right").css("marginLeft","0").css("padding-left","0").css("float","right");
@@ -153,14 +153,12 @@
             $(".search_a").css("height","").css("width","").css("padding","5px");
             $(".navbar-brand,.col-md-4,.col-lg-4").css("padding","0");
             $(".col-xs-11,.col-md-11,.col-lg-8").css("padding","0");
-            $(".search_a").css("backgroundImage","url(./images/search.1.png)");
+            $(".search_a").css("backgroundImage","url(image/search.1.png)");
             $(".user").css("marginLeft","0");
-            $(".user_a").css("backgroundImage","url(./images/user.1.png)").css("background-repeat","no-repeat");
+            $(".user_a").css("backgroundImage","url(image/user.1.png)").css("background-repeat","no-repeat");
             $(".cart").css("marginLeft","0");
-            $(".cart_a").css("backgroundImage","url(./images/cart.1.png)").css("background-repeat","no-repeat");
-            $(".top").css("height",""),css("backgroundSize","100%");
-            $(".top_h1").css("marginTop","0").css("font-size","25px").css("marginTop","10px");
-            $("#b_img").css("width","50px").css("","").css("","");
+            $(".cart_a").css("backgroundImage","url(image/cart.1.png)").css("background-repeat","no-repeat");
         }
     });
+
 </script>

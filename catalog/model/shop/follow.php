@@ -1,7 +1,7 @@
 <?php
 class ModelShopFollow extends Model {
 
-	public function followArtist($shop_id){
+	public function follow($shop_id){
 		//查询是否已经有
 		$theme = $this->db->query("SELECT *  FROM " . DB_PREFIX . "shop_follow WHERE shop_id = ".$shop_id." and customer_id = ".$this->customer->getId());
 
@@ -14,7 +14,7 @@ class ModelShopFollow extends Model {
 		}
 	}
 
-	public function unfollowArtist($shop_id){
+	public function unfollow($shop_id){
 		//查询是否已经有
 		$query = $this->db->query("SELECT *  FROM " . DB_PREFIX . "shop_follow WHERE shop_id = ".$shop_id." and customer_id = ".$this->customer->getId());
 		if($query->num_rows == 1){
@@ -24,8 +24,8 @@ class ModelShopFollow extends Model {
 	}
 
 	public function getIsFollow($shop_id){
-		$theme = $this->db->query("SELECT *  FROM " . DB_PREFIX . "shop_follow WHERE shop_id = ".$shop_id." and customer_id = ".$this->customer->getId());
-		return $theme->num_rows;
+		$query = $this->db->query("SELECT *  FROM " . DB_PREFIX . "shop_follow WHERE shop_id = ".$shop_id." and customer_id = ".$this->customer->getId());
+		return $query->num_rows;
 	}
 
 

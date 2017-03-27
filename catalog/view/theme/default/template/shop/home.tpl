@@ -36,7 +36,7 @@
           <u class="price">$<?php echo $product['price']?></u></a>
       </div>
 
-      <?php if($i%4 == 3){ ?>  </div> <?php } ?>
+    <?php if($i%4 == 3 || ($i == count($product_list)-1)){ ?>  </div> <?php } ?>
     <?php $i++;} ?>
 
   <?php } ?>

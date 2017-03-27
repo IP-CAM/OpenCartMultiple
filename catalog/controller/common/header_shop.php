@@ -9,7 +9,13 @@ class ControllerCommonHeaderShop extends Controller {
 		$this->load->model('shop/follow');
 
 		//Get shop_id
-		$shop_id = $this->request->get['shop_id'];
+		if(isset($this->request->get['shop_id'])){
+			$shop_id = $this->request->get['shop_id'];
+		}else if($this->request->get['cate_id']){
+			$cate_info = $this->model_shop_cate->getShopCate($this->request->get['cate_id']);
+			$shop_id = $cate_info['shop_id'];
+		}
+
 		$data['home_link'] = $this->url->link("shop/home",array('shop_id'=>$shop_id));
 		$data['print_link'] = $this->url->link("shop/creation",array('shop_id'=>$shop_id));
 
@@ -34,7 +40,7 @@ class ControllerCommonHeaderShop extends Controller {
 		//Category
 		$data['cates'] = $this->model_shop_cate->getShopCates($shop_id);
 		foreach($data['cates'] as &$cate){
-			$cate['link'] = $this->url->link('shop/category',array('cate_id'=>$cate['cate_id']));
+			$cate['link'] = $this->url->link('shop/cate',array('cate_id'=>$cate['cate_id']));
 		}
 
 		//Follow

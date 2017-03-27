@@ -4,61 +4,8 @@ class ControllerShopCreation extends Controller {
 		$this->load->language('shop/home');
 		$this->load->model('shop/home');
 		/*
-		if (isset($this->request->get['filter'])) {
-			$filter = $this->request->get['filter'];
-		} else {
-			$filter = '';
-		}
-
-		if (isset($this->request->get['sort'])) {
-			$sort = $this->request->get['sort'];
-		} else {
-			$sort = 'p.sort_order';
-		}
-
-		if (isset($this->request->get['order'])) {
-			$order = $this->request->get['order'];
-		} else {
-			$order = 'ASC';
-		}
-
-		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
-		} else {
-			$page = 1;
-		}
-		$limit = $this->config->get($this->config->get('config_theme') . '_product_limit');
-		$data['breadcrumbs'] = array();
-
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/home')
-		);
-
-		$shop_id = $this->request->get['shop_id'];
-		if (isset($this->request->get['path'])) {
-			
-			$path = '';
-
-			$parts = explode('_', (string)$this->request->get['path']);
-
-			$category_id = (int)array_pop($parts);
-
-			foreach ($parts as $path_id) {
-				if (!$path) {
-					$path = (int)$path_id;
-				} else {
-					$path .= '_' . (int)$path_id;
-				}
-			}
-		} else {
-			$category_id = 0;
-		}
-
-		$category_info = $this->model_catalog_category->getCategory($category_id);
 
 		if ($category_info) {
-
 
 		} else {
 			$url = '';
@@ -173,5 +120,24 @@ class ControllerShopCreation extends Controller {
 		$this->response->setOutput($this->load->view('shop/creation', $data));
 	}
 
+	public function detail(){
+		$this->load->language('shop/creation');
+		$this->load->model('shop/creation');
+
+		$creation_id = $this->request->get['creation_id'];
+		$data['creation_info'] = $this->model_shop_creation->getCreation($creation_id);
+
+		$data['creation_info']['img_url'] = QINIU_BASE.$data['creation_info']['creation_url_show'];
+		$data['product_list'] = $this->model_shop_creation->getCreationRelatedProducts($creation_id);
+		foreach($data['product_list'] as &$product){
+			$product['link'] = $this->url->link('shop/product',array('pid'=>$product['product_id']));
+			$product['img_url'] = QINIU_BASE.$product['image'];
+		}
+
+		$data['footer'] = $this->load->controller('common/footer');
+		$data['header'] = $this->load->controller('common/header');
+		$data['header_shop'] = $this->load->controller('common/header_shop');
+		$this->response->setOutput($this->load->view('shop/creation_detail', $data));
+	}
 
 }

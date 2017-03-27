@@ -11,9 +11,12 @@ class ControllerCommonHeaderShop extends Controller {
 		//Get shop_id
 		if(isset($this->request->get['shop_id'])){
 			$shop_id = $this->request->get['shop_id'];
-		}else if($this->request->get['cate_id']){
+		}else if(isset($this->request->get['cate_id'])){
 			$cate_info = $this->model_shop_cate->getShopCate($this->request->get['cate_id']);
 			$shop_id = $cate_info['shop_id'];
+		}else if(isset($this->request->get['creation_id'])){
+			$creation_info = $this->model_shop_creation->getCreation($this->request->get['creation_id']);
+			$shop_id = $creation_info['shop_id'];
 		}
 
 		$data['home_link'] = $this->url->link("shop/home",array('shop_id'=>$shop_id));

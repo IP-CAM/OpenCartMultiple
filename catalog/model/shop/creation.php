@@ -9,6 +9,18 @@ class ModelShopCreation extends Model {
 		return $query->rows;
 	}
 
+	public function getCreation($creation_id){
+		$query = $this->db->query("SELECT * FROM ". DB_PREFIX . "creation WHERE creation_id = " .$creation_id);
+		return $query->row;
+	}
+
+	public function getCreationRelatedProducts($creation_id){
+		$sql = "SELECT p.product_id, p.price, p.creation_id,p.image,pd.name FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE
+		 p.creation_id = " .$creation_id . " and pd.language_id = '" . (int)$this->config->get('config_language_id') . "' order by p.product_id desc";
+		$query = $this->db->query($sql);
+		return $query->rows;
+	}
+
 	public function getCreationTotal($shop_id){
 		$query = $this->db->query("SELECT COUNT(creation_id) AS total FROM ". DB_PREFIX . "creation WHERE shop_id = " .$shop_id);
 		return $query->row['total'];

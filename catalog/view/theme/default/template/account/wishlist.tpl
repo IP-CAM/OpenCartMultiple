@@ -1,10 +1,6 @@
 <?php echo $header; ?>
-<div class="container">
-  <ul class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
-    <?php } ?>
-  </ul>
+<div class="container" style="margin-top: 30px">
+
   <?php if ($success) { ?>
   <div class="alert alert-success"><i class="fa fa-check-circle"></i> <?php echo $success; ?>
     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -27,7 +23,6 @@
             <tr>
               <td class="text-center"><?php echo $column_image; ?></td>
               <td class="text-left"><?php echo $column_name; ?></td>
-              <td class="text-left"><?php echo $column_model; ?></td>
               <td class="text-right"><?php echo $column_stock; ?></td>
               <td class="text-right"><?php echo $column_price; ?></td>
               <td class="text-right"><?php echo $column_action; ?></td>
@@ -37,10 +32,9 @@
             <?php foreach ($products as $product) { ?>
             <tr>
               <td class="text-center"><?php if ($product['thumb']) { ?>
-                <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /></a>
+                <a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" width="60" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" /></a>
                 <?php } ?></td>
               <td class="text-left"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></td>
-              <td class="text-left"><?php echo $product['model']; ?></td>
               <td class="text-right"><?php echo $product['stock']; ?></td>
               <td class="text-right"><?php if ($product['price']) { ?>
                 <div class="price">
@@ -61,9 +55,7 @@
       <?php } else { ?>
       <p><?php echo $text_empty; ?></p>
       <?php } ?>
-      <div class="buttons clearfix">
-        <div class="pull-right"><a href="<?php echo $continue; ?>" class="btn btn-primary"><?php echo $button_continue; ?></a></div>
-      </div>
+
       <?php echo $content_bottom; ?></div>
     <?php echo $column_right; ?></div>
 </div>

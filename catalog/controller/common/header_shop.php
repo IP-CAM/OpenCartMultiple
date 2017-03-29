@@ -17,6 +17,9 @@ class ControllerCommonHeaderShop extends Controller {
 		}else if(isset($this->request->get['creation_id'])){
 			$creation_info = $this->model_shop_creation->getCreation($this->request->get['creation_id']);
 			$shop_id = $creation_info['shop_id'];
+		}else if(isset($this->request->get['product_id'])){
+			$product_info = $this->model_shop_home->getProductInfo($this->request->get['product_id']);
+			$shop_id = $product_info['shop_id'];
 		}
 
 		$data['home_link'] = $this->url->link("shop/home",array('shop_id'=>$shop_id));

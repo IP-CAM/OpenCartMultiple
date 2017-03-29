@@ -13,6 +13,10 @@ class ModelShopHome extends Model {
 		return $query->rows;
 	}
 
+	public function getProductInfo($product_id){
+		$query = $this->db->query("SELECT *  FROM " . DB_PREFIX . "product WHERE product_id = ".$product_id);
+		return $query->row;
+	}
 
 
 	public function getProduct($product_id) {

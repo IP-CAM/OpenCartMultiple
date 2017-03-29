@@ -62,7 +62,7 @@ class ControllerShopCate extends Controller {
 		//Product
 		$data['product_list'] = $this->model_shop_cate->getCateProducts($shop_id,$cate_id,$page,$limit);
 		foreach($data['product_list'] as &$product){
-			$product['link'] = $this->url->link('shop/product',array('pid'=>$product['product_id']));
+			$product['link'] = $this->url->link('product/product',array('product_id'=>$product['product_id']));
 			$product['img_url'] = QINIU_BASE.$product['image'];
 		}
 

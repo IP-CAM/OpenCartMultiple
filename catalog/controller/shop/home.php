@@ -14,10 +14,12 @@ class ControllerShopHome extends Controller {
 		//Latest Product
 		$product_list = $this->model_shop_home->getHomeProducts($shop_id);
 
-		for($i = 0; $i<8; $i++){
-			$product_list[$i]['link'] = $this->url->link('product/detail',array('pid'=>$product_list[$i]['product_id']));
-			$product_list[$i]['img_url'] = QINIU_BASE.$product_list[$i]['image'];
-			$data['product_list'][$i] = $product_list[$i];
+		for($i = 0; $i<count($product_list); $i++){
+			if($i<8) {
+				$product_list[$i]['link'] = $this->url->link('product/product', array('product_id' => $product_list[$i]['product_id']));
+				$product_list[$i]['img_url'] = QINIU_BASE . $product_list[$i]['image'];
+				$data['product_list'][$i] = $product_list[$i];
+			}
 		}
 
 		$data['footer'] = $this->load->controller('common/footer');

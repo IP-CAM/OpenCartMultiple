@@ -23,7 +23,7 @@
 
 <div class="container works">
   <h2>Latest Products</h2>
-  <?php if($product_list){
+  <?php if(isset($product_list)){
       $i=0;
      ?>
     <?php  foreach($product_list as $product){ ?>

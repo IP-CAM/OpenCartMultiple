@@ -130,7 +130,7 @@ class ControllerShopCreation extends Controller {
 		$data['creation_info']['img_url'] = QINIU_BASE.$data['creation_info']['creation_url_show'];
 		$data['product_list'] = $this->model_shop_creation->getCreationRelatedProducts($creation_id);
 		foreach($data['product_list'] as &$product){
-			$product['link'] = $this->url->link('shop/product',array('pid'=>$product['product_id']));
+			$product['link'] = $this->url->link('product/product',array('product_id'=>$product['product_id']));
 			$product['img_url'] = QINIU_BASE.$product['image'];
 		}
 

@@ -1,7 +1,7 @@
 <?php
 class ModelDashboardProduct extends Model {
 	public function addProduct($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', shop_id = '" . (int)$data['shop_id'] . "', quantity = '" . (int)$data['quantity'] . "', shipping = '" . (int)$data['shipping'] . "', cate_id = '" . (int)$data['cate_id'] . "', price = '" . (float)$data['price'] . "',  weight = '" . (float)$data['weight'] . "', status = '" . (int)$data['status'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW()");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "product SET model = '" . rand(1000,1000000) . "', shop_id = '" . (int)$data['shop_id'] . "', quantity = '" . (int)$data['quantity'] . "', shipping = '" . (int)$data['shipping'] . "', cate_id = '" . (int)$data['cate_id'] . "', price = '" . (float)$data['price'] . "', status = '" . (int)$data['status'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW()");
 
 		$product_id = $this->db->getLastId();
 
@@ -10,9 +10,10 @@ class ModelDashboardProduct extends Model {
 		}
 
 		foreach ($data['product_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', meta_title = '" . $this->db->escape($value['name']) . "'");
 		}
 
+		$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_store SET product_id = '" . (int)$product_id . "', store_id = 0");
 
 		if (isset($data['product_attribute'])) {
 			foreach ($data['product_attribute'] as $product_attribute) {
@@ -59,7 +60,7 @@ class ModelDashboardProduct extends Model {
 	}
 
 	public function editProduct($product_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', weight = '" . (float)$data['weight'] . "', cate_id = " . (int)$data['cate_id'] . ", status = '" . (int)$data['status'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "product SET quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', cate_id = " . (int)$data['cate_id'] . ", status = '" . (int)$data['status'] . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "'");
 
 		if (isset($data['image'])) {
 			$this->db->query("UPDATE " . DB_PREFIX . "product SET image = '" . $this->db->escape($data['image']) . "' WHERE product_id = '" . (int)$product_id . "'");
@@ -68,7 +69,7 @@ class ModelDashboardProduct extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_description WHERE product_id = '" . (int)$product_id . "'");
 
 		foreach ($data['product_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', meta_title = '" . $this->db->escape($value['name']) . "'");
 		}
 
 

@@ -75,7 +75,7 @@
                     <input type="checkbox" name="selected[]" value="<?php echo $product['product_id']; ?>" />
                     <?php } ?></td>
                   <td class="text-center"><?php if ($product['image']) { ?>
-                    <img src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>" class="img-thumbnail" />
+                    <img src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>" width="50" class="img-thumbnail" />
                     <?php } else { ?>
                     <span class="img-thumbnail list"><i class="fa fa-camera fa-2x"></i></span>
                     <?php } ?></td>

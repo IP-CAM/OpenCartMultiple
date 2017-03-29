@@ -31,21 +31,6 @@ class ControllerDashboardProduct extends Controller {
 				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 			}
 
-			if (isset($this->request->get['filter_model'])) {
-				$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
-			}
-
-			if (isset($this->request->get['filter_price'])) {
-				$url .= '&filter_price=' . $this->request->get['filter_price'];
-			}
-
-			if (isset($this->request->get['filter_quantity'])) {
-				$url .= '&filter_quantity=' . $this->request->get['filter_quantity'];
-			}
-
-			if (isset($this->request->get['filter_status'])) {
-				$url .= '&filter_status=' . $this->request->get['filter_status'];
-			}
 
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
@@ -241,8 +226,8 @@ class ControllerDashboardProduct extends Controller {
 		$category = $this->model_dashboard_cate->getCates(array());
 
 		foreach ($results as $result) {
-			if (is_file(DIR_IMAGE . $result['image'])) {
-				$image = $this->model_tool_image->resize($result['image'], 40, 40);
+			if ( $result['image'] != "") {
+				$image = QINIU_BASE.$result['image']."!thumb";
 			} else {
 				$image = $this->model_tool_image->resize('no_image.png', 40, 40);
 			}
@@ -388,12 +373,10 @@ class ControllerDashboardProduct extends Controller {
 		$data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_description'] = $this->language->get('entry_description');
 		$data['entry_meta_title'] = $this->language->get('entry_meta_title');
-		$data['entry_model'] = $this->language->get('entry_model');
 		$data['entry_shipping'] = $this->language->get('entry_shipping');
 		$data['entry_quantity'] = $this->language->get('entry_quantity');
 		$data['entry_price'] = $this->language->get('entry_price');
 		$data['entry_option_points'] = $this->language->get('entry_option_points');
-		$data['entry_weight'] = $this->language->get('entry_weight');
 		$data['entry_image'] = $this->language->get('entry_image');
 		$data['entry_additional_image'] = $this->language->get('entry_additional_image');
 
@@ -442,13 +425,6 @@ class ControllerDashboardProduct extends Controller {
 			$data['error_meta_title'] = array();
 		}
 
-		if (isset($this->error['model'])) {
-			$data['error_model'] = $this->error['model'];
-		} else {
-			$data['error_model'] = '';
-		}
-
-
 		$url = '';
 
 		if (isset($this->request->get['sort'])) {
@@ -496,14 +472,6 @@ class ControllerDashboardProduct extends Controller {
 			$data['product_description'] = $this->model_dashboard_product->getProductDescriptions($this->request->get['product_id']);
 		} else {
 			$data['product_description'] = array();
-		}
-
-		if (isset($this->request->post['model'])) {
-			$data['model'] = $this->request->post['model'];
-		} elseif (!empty($product_info)) {
-			$data['model'] = $product_info['model'];
-		} else {
-			$data['model'] = '';
 		}
 
 		if (isset($this->request->post['shipping'])) {
@@ -555,15 +523,6 @@ class ControllerDashboardProduct extends Controller {
 		} else {
 			$data['status'] = true;
 		}
-
-		if (isset($this->request->post['weight'])) {
-			$data['weight'] = $this->request->post['weight'];
-		} elseif (!empty($product_info)) {
-			$data['weight'] = $product_info['weight'];
-		} else {
-			$data['weight'] = '';
-		}
-
 
 		// Attributes
 		$this->load->model('dashboard/attribute');
@@ -715,15 +674,7 @@ class ControllerDashboardProduct extends Controller {
 				$this->error['name'][$language_id] = $this->language->get('error_name');
 			}
 
-			if ((utf8_strlen($value['meta_title']) < 3) || (utf8_strlen($value['meta_title']) > 255)) {
-				$this->error['meta_title'][$language_id] = $this->language->get('error_meta_title');
-			}
 		}
-
-		if ((utf8_strlen($this->request->post['model']) < 1) || (utf8_strlen($this->request->post['model']) > 64)) {
-			$this->error['model'] = $this->language->get('error_model');
-		}
-
 
 		if ($this->error && !isset($this->error['warning'])) {
 			$this->error['warning'] = $this->language->get('error_warning');

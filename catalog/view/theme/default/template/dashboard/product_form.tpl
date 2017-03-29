@@ -30,15 +30,15 @@
         <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-product" class="form-horizontal">
           <ul class="nav nav-tabs">
             <li class="active"><a href="#tab-general" data-toggle="tab"><?php echo $tab_general; ?></a></li>
-            <li><a href="#tab-data" data-toggle="tab"><?php echo $tab_data; ?></a></li>
-            <li><a href="#tab-attribute" data-toggle="tab"><?php echo $tab_attribute; ?></a></li>
+            <li><a href="#tab-image" data-toggle="tab">Detail</a></li>
+            <li style="display: none;"><a href="#tab-attribute" data-toggle="tab"><?php echo $tab_attribute; ?></a></li>
             <li><a href="#tab-option" data-toggle="tab"><?php echo $tab_option; ?></a></li>
-            <li><a href="#tab-image" data-toggle="tab"><?php echo $tab_image; ?></a></li>
+
 
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab-general">
-              <ul class="nav nav-tabs" id="language">
+              <ul class="nav nav-tabs" id="language" style="display: none">
                 <?php foreach ($languages as $language) { ?>
                 <li><a href="#language<?php echo $language['language_id']; ?>" data-toggle="tab"><img src="catalog/language/<?php echo $language['code']; ?>/<?php echo $language['code']; ?>.png" title="<?php echo $language['name']; ?>" /> <?php echo $language['name']; ?></a></li>
                 <?php } ?>
@@ -55,116 +55,86 @@
                       <?php } ?>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label" for="input-description<?php echo $language['language_id']; ?>"><?php echo $entry_description; ?></label>
-                    <div class="col-sm-10">
-                      <textarea name="product_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>" class="form-control summernote"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group required">
-                    <label class="col-sm-2 control-label" for="input-meta-title<?php echo $language['language_id']; ?>"><?php echo $entry_meta_title; ?></label>
-                    <div class="col-sm-10">
-                      <input type="text" name="product_description[<?php echo $language['language_id']; ?>][meta_title]" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_title'] : ''; ?>" placeholder="<?php echo $entry_meta_title; ?>" id="input-meta-title<?php echo $language['language_id']; ?>" class="form-control" />
-                      <?php if (isset($error_meta_title[$language['language_id']])) { ?>
-                      <div class="text-danger"><?php echo $error_meta_title[$language['language_id']]; ?></div>
-                      <?php } ?>
-                    </div>
-                  </div>
-
 
 
                 </div>
                 <?php } ?>
-              </div>
-            </div>
-            <div class="tab-pane" id="tab-data">
-              <div class="form-group required">
-                <label class="col-sm-2 control-label" for="input-model"><?php echo $entry_model; ?></label>
-                <div class="col-sm-10">
-                  <input type="text" name="model" value="<?php echo $model; ?>" placeholder="<?php echo $entry_model; ?>" id="input-model" class="form-control" />
-                  <?php if ($error_model) { ?>
-                  <div class="text-danger"><?php echo $error_model; ?></div>
-                  <?php } ?>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-price"><?php echo $entry_price; ?></label>
-                <div class="col-sm-10">
-                  <input type="text" name="price" value="<?php echo $price; ?>" placeholder="<?php echo $entry_price; ?>" id="input-price" class="form-control" />
-                </div>
-              </div>
 
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-quantity"><?php echo $entry_quantity; ?></label>
-                <div class="col-sm-10">
-                  <input type="text" name="quantity" value="<?php echo $quantity; ?>" placeholder="<?php echo $entry_quantity; ?>" id="input-quantity" class="form-control" />
-                </div>
-              </div>
 
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-quantity"><?php echo $entry_category; ?></label>
-                <div class="col-sm-10">
-                  <select class="form-control" name="cate_id">
-                    <option value="0">Please Select</option>
-                    <?php foreach($category as $cate){ ?>
+                <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-price"><?php echo $entry_price; ?></label>
+                  <div class="col-sm-10">
+                    <input type="text" name="price" value="<?php echo $price; ?>" placeholder="<?php echo $entry_price; ?>" id="input-price" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-quantity"><?php echo $entry_quantity; ?></label>
+                  <div class="col-sm-10">
+                    <input type="text" name="quantity" value="<?php echo $quantity; ?>" placeholder="<?php echo $entry_quantity; ?>" id="input-quantity" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-quantity"><?php echo $entry_category; ?></label>
+                  <div class="col-sm-10">
+                    <select class="form-control" name="cate_id">
+                      <option value="0">Please Select</option>
+                      <?php foreach($category as $cate){ ?>
                       <option value="<?php echo $cate['cate_id']?>" <?php if($cate['cate_id'] == $cate_id){ ?> selected ="selected"<?php }?>><?php echo $cate['cate_name']?></option>
-                    <?php } ?>
-                  </select>
+                      <?php } ?>
+                    </select>
+                  </div>
                 </div>
-              </div>
 
-              <div class="form-group">
-                <label class="col-sm-2 control-label"><?php echo $entry_shipping; ?></label>
-                <div class="col-sm-10">
-                  <label class="radio-inline">
-                    <?php if ($shipping) { ?>
-                    <input type="radio" name="shipping" value="1" checked="checked" />
-                    <?php echo $text_yes; ?>
-                    <?php } else { ?>
-                    <input type="radio" name="shipping" value="1" />
-                    <?php echo $text_yes; ?>
-                    <?php } ?>
-                  </label>
-                  <label class="radio-inline">
-                    <?php if (!$shipping) { ?>
-                    <input type="radio" name="shipping" value="0" checked="checked" />
-                    <?php echo $text_no; ?>
-                    <?php } else { ?>
-                    <input type="radio" name="shipping" value="0" />
-                    <?php echo $text_no; ?>
-                    <?php } ?>
-                  </label>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label"><?php echo $entry_shipping; ?></label>
+                  <div class="col-sm-10">
+                    <label class="radio-inline">
+                      <?php if ($shipping) { ?>
+                      <input type="radio" name="shipping" value="1" checked="checked" />
+                      <?php echo $text_yes; ?>
+                      <?php } else { ?>
+                      <input type="radio" name="shipping" value="1" />
+                      <?php echo $text_yes; ?>
+                      <?php } ?>
+                    </label>
+                    <label class="radio-inline">
+                      <?php if (!$shipping) { ?>
+                      <input type="radio" name="shipping" value="0" checked="checked" />
+                      <?php echo $text_no; ?>
+                      <?php } else { ?>
+                      <input type="radio" name="shipping" value="0" />
+                      <?php echo $text_no; ?>
+                      <?php } ?>
+                    </label>
+                  </div>
                 </div>
-              </div>
 
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-weight"><?php echo $entry_weight; ?></label>
-                <div class="col-sm-10">
-                  <input type="text" name="weight" value="<?php echo $weight; ?>" placeholder="<?php echo $entry_weight; ?>" id="input-weight" class="form-control" />
-                </div>
-              </div>
 
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_status; ?></label>
-                <div class="col-sm-10">
-                  <select name="status" id="input-status" class="form-control">
-                    <?php if ($status) { ?>
-                    <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
-                    <option value="0"><?php echo $text_disabled; ?></option>
-                    <?php } else { ?>
-                    <option value="1"><?php echo $text_enabled; ?></option>
-                    <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
-                    <?php } ?>
-                  </select>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_status; ?></label>
+                  <div class="col-sm-10">
+                    <select name="status" id="input-status" class="form-control">
+                      <?php if ($status) { ?>
+                      <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+                      <option value="0"><?php echo $text_disabled; ?></option>
+                      <?php } else { ?>
+                      <option value="1"><?php echo $text_enabled; ?></option>
+                      <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+                      <?php } ?>
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-sort-order"><?php echo $entry_sort_order; ?></label>
-                <div class="col-sm-10">
-                  <input type="text" name="sort_order" value="<?php echo $sort_order; ?>" placeholder="<?php echo $entry_sort_order; ?>" id="input-sort-order" class="form-control" />
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-sort-order"><?php echo $entry_sort_order; ?></label>
+                  <div class="col-sm-10">
+                    <input type="text" name="sort_order" value="<?php echo $sort_order; ?>" placeholder="<?php echo $entry_sort_order; ?>" id="input-sort-order" class="form-control" />
+                  </div>
                 </div>
               </div>
             </div>
+
 
             <div class="tab-pane" id="tab-attribute">
               <div class="table-responsive">
@@ -201,6 +171,64 @@
                 </table>
               </div>
             </div>
+
+
+            <div class="tab-pane" id="tab-image">
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <td class="text-left"><?php echo $entry_image; ?></td>
+                  </tr>
+                  </thead>
+
+                  <tbody>
+                  <tr>
+                    <td class="text-left"><a href="javascript::void(0)" id="thumb-image" class="img-upload-single" data-inputid="input-image"><img src="<?php echo $thumb; ?>"  id="img_main"  alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a><input type="hidden" name="image" value="<?php echo $image; ?>" id="input-image" /></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <?php foreach ($languages as $language) { ?>
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <textarea name="product_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>" class="form-control summernote"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>
+                  </div>
+                </div>
+              <?php } ?>
+
+              <div class="table-responsive">
+                <table id="images" class="table table-striped table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <td class="text-left"><?php echo $entry_additional_image; ?></td>
+                    <td class="text-right"><?php echo $entry_sort_order; ?></td>
+                    <td></td>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <?php $image_row = 0; ?>
+                  <?php foreach ($product_images as $product_image) { ?>
+                  <tr id="image-row<?php echo $image_row; ?>">
+                    <td class="text-left"><a href="javascript::void(0)" id="thumb-image<?php echo $image_row; ?>" class="img-upload-single" data-inputid="input-image<?php echo $image_row; ?>"><img src="<?php echo $product_image['thumb']; ?>" alt="" id="img<?php echo $image_row; ?>" title="" data-placeholder="<?php echo $placeholder; ?>"/></a><input type="hidden" name="product_image[<?php echo $image_row; ?>][image]" value="<?php echo $product_image['image']; ?>" id="input-image<?php echo $image_row; ?>" /></td>
+                    <td class="text-right"><input type="text" name="product_image[<?php echo $image_row; ?>][sort_order]" value="<?php echo $product_image['sort_order']; ?>" placeholder="<?php echo $entry_sort_order; ?>" class="form-control" /></td>
+                    <td class="text-left"><button type="button" onclick="$('#image-row<?php echo $image_row; ?>').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+                  </tr>
+                  <?php $image_row++; ?>
+                  <?php } ?>
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <td colspan="2"></td>
+                    <td class="text-left"><button type="button" onclick="addImage();" data-toggle="tooltip" title="<?php echo $button_image_add; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+
+
             <div class="tab-pane" id="tab-option">
               <div class="row">
                 <div class="col-sm-2">
@@ -406,58 +434,14 @@
               </div>
             </div>
 
-            <div class="tab-pane" id="tab-image">
-              <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <td class="text-left"><?php echo $entry_image; ?></td>
-                    </tr>
-                  </thead>
-                  
-                  <tbody>
-                    <tr>
-                      <td class="text-left"><a href="javascript::void(0)" id="thumb-image" class="img-upload-single" data-inputid="input-image"><img src="<?php echo $thumb; ?>"  id="img_main"  alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a><input type="hidden" name="image" value="<?php echo $image; ?>" id="input-image" /></td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="table-responsive">
-                <table id="images" class="table table-striped table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <td class="text-left"><?php echo $entry_additional_image; ?></td>
-                      <td class="text-right"><?php echo $entry_sort_order; ?></td>
-                      <td></td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php $image_row = 0; ?>
-                    <?php foreach ($product_images as $product_image) { ?>
-                    <tr id="image-row<?php echo $image_row; ?>">
-                      <td class="text-left"><a href="javascript::void(0)" id="thumb-image<?php echo $image_row; ?>" class="img-upload-single" data-inputid="input-image<?php echo $image_row; ?>"><img src="<?php echo $product_image['thumb']; ?>" alt="" id="img<?php echo $image_row; ?>" title="" data-placeholder="<?php echo $placeholder; ?>"/></a><input type="hidden" name="product_image[<?php echo $image_row; ?>][image]" value="<?php echo $product_image['image']; ?>" id="input-image<?php echo $image_row; ?>" /></td>
-                      <td class="text-right"><input type="text" name="product_image[<?php echo $image_row; ?>][sort_order]" value="<?php echo $product_image['sort_order']; ?>" placeholder="<?php echo $entry_sort_order; ?>" class="form-control" /></td>
-                      <td class="text-left"><button type="button" onclick="$('#image-row<?php echo $image_row; ?>').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
-                    </tr>
-                    <?php $image_row++; ?>
-                    <?php } ?>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colspan="2"></td>
-                      <td class="text-left"><button type="button" onclick="addImage();" data-toggle="tooltip" title="<?php echo $button_image_add; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
-            </div>
+
 
           </div>
         </form>
       </div>
     </div>
   </div>
-  <div class="container">
+  <div class="container" style="display: none;">
     <form id="cloud_upload_form" method="post" enctype="multipart/form-data">
       <input name="key" id="cloud_file_name" type="hidden" value=""/>
       <input name="token" type="hidden" value="<?php echo $qiniu_token;?>"/>
@@ -472,9 +456,9 @@
       var domain = "<?php echo QINIU_BASE;?>";
     </script>
   </div>
-  <script type="text/javascript" src="view/javascript/summernote/summernote.js"></script>
-  <link href="view/javascript/summernote/summernote.css" rel="stylesheet" />
-  <script type="text/javascript" src="view/javascript/summernote/opencart.js"></script>
+  <script type="text/javascript" src="admin/view/javascript/summernote/summernote.js"></script>
+  <link href="admin/view/javascript/summernote/summernote.css" rel="stylesheet" />
+  <script type="text/javascript" src="admin/view/javascript/summernote/opencart.js"></script>
 
   <script type="text/javascript"><!--
 var attribute_row = <?php echo $attribute_row; ?>;
